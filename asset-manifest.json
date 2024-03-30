@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/product-manager-portfolio/static/css/main.7ba84975.css",
-    "main.js": "/product-manager-portfolio/static/js/main.9655af6d.js",
-    "static/js/453.b2e988a6.chunk.js": "/product-manager-portfolio/static/js/453.b2e988a6.chunk.js",
-    "static/media/my_recording.mp3": "/product-manager-portfolio/static/media/my_recording.54b9775ae7f82bcf7973.mp3",
-    "static/media/linkedin-profile.png": "/product-manager-portfolio/static/media/linkedin-profile.85e68da9c1506e93a172.png",
-    "static/media/oz-pm.PNG": "/product-manager-portfolio/static/media/oz-pm.70e911686dac64c95237.PNG",
-    "static/media/battlefield-2042.png": "/product-manager-portfolio/static/media/battlefield-2042.4469980b89fcd1fd852b.png",
-    "static/media/battlefield-mobile.png": "/product-manager-portfolio/static/media/battlefield-mobile.40def2e0e5d42def467c.png",
-    "static/media/oz.png": "/product-manager-portfolio/static/media/oz.fc344f7785f41d79e46f.png",
-    "static/media/sims.png": "/product-manager-portfolio/static/media/sims.cb8504c8d142ae2aab64.png",
-    "index.html": "/product-manager-portfolio/index.html",
-    "main.7ba84975.css.map": "/product-manager-portfolio/static/css/main.7ba84975.css.map",
-    "main.9655af6d.js.map": "/product-manager-portfolio/static/js/main.9655af6d.js.map",
-    "453.b2e988a6.chunk.js.map": "/product-manager-portfolio/static/js/453.b2e988a6.chunk.js.map"
+    "main.css": "/static/css/main.7ba84975.css",
+    "main.js": "/static/js/main.e6360978.js",
+    "static/js/453.b2e988a6.chunk.js": "/static/js/453.b2e988a6.chunk.js",
+    "static/media/my_recording.mp3": "/static/media/my_recording.54b9775ae7f82bcf7973.mp3",
+    "static/media/linkedin-profile.png": "/static/media/linkedin-profile.85e68da9c1506e93a172.png",
+    "static/media/oz-pm.PNG": "/static/media/oz-pm.70e911686dac64c95237.PNG",
+    "static/media/battlefield-2042.png": "/static/media/battlefield-2042.4469980b89fcd1fd852b.png",
+    "static/media/battlefield-mobile.png": "/static/media/battlefield-mobile.40def2e0e5d42def467c.png",
+    "static/media/oz.png": "/static/media/oz.fc344f7785f41d79e46f.png",
+    "static/media/sims.png": "/static/media/sims.cb8504c8d142ae2aab64.png",
+    "index.html": "/index.html",
+    "main.7ba84975.css.map": "/static/css/main.7ba84975.css.map",
+    "main.e6360978.js.map": "/static/js/main.e6360978.js.map",
+    "453.b2e988a6.chunk.js.map": "/static/js/453.b2e988a6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7ba84975.css",
-    "static/js/main.9655af6d.js"
+    "static/js/main.e6360978.js"
   ]
 }
