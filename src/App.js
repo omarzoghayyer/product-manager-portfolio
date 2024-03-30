@@ -41,6 +41,7 @@ function App() {
         </nav>
       </header>
       <div className="content">
+        <p>The website is currently in development. If you have any suggestions or feedback, kindly report them through the bug submission section of my repository at https://github.com/omarzoghayyer/product-manager-portfolio.</p>
         <div ref={aboutRef}>
           <ProfileInfo />
           <Photo />
