@@ -9,7 +9,7 @@ function Recording() {
     <div>
       {/* Right side for the audio player */}
       <div className="audio-player">
-        <h3>Listen to my recording:</h3>
+        <h3>Listen to my recording: [ In progress ] </h3>
         <audio id="audio" controls>
           <source src={recording} type="audio/mpeg" />
           Your browser does not support the audio element.
