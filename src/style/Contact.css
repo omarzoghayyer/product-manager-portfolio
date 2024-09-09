@@ -9,8 +9,7 @@
 .contact-container h1 {
   font-size: 54px;
   margin-bottom: 5px;
-  font-family:sans-serif;
-
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .contact-options {
@@ -29,8 +28,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  font-family:sans-serif;
-
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .linkedin-button:hover {
@@ -39,8 +37,7 @@
 
 .linkedin-button span {
   font-size: 26px; /* Adjust font size */
-  font-family:sans-serif;
-
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .contact-text {

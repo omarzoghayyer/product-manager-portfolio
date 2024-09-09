@@ -13,8 +13,9 @@ function Summary() {
               Extensive product ownership experience in gaming and tech. Record
               of delivering strong results by collaborating, applying data to
               address issues, and fostering innovation. Unintimidated by new
-              ideas. Excels in leading teams. Below are some of the recent products I worked on: 
+              ideas. Excels in leading teams. 
             </p>
+            <span> Below are some of the recent products I worked on: </span>
           </div>
       </div>
     </div>

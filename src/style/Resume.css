@@ -25,8 +25,7 @@
   border: none;
   outline: none;
   background: transparent;
-  font-family: monospace;
-  font-size: 16px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  font-size: 16px;
   color: white;
   caret-color: white;
 }

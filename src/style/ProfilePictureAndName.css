@@ -3,10 +3,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  font-family:sans-serif;
-  margin: 50px auto; 
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  margin: 50px auto; 
   max-width: 75%;
-  font-size: 25px;
+  font-size: 35px;
 }
 
 .left-side {

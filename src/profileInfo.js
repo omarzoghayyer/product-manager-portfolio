@@ -33,7 +33,7 @@ function ProfileInfo() {
             <a href="https://github.com/">
               <img src={githubLogo} alt="GitHub" className="social-logo" />
             </a>
-            <a href="https://x.com/">
+            <a href="https://x.com/OZoghayyer">
               <img src={xLogo} alt="x" className="social-logo" />
             </a>
           </div>

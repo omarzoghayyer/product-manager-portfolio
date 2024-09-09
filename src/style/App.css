@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   font-size: 25px;
-  font-family:sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -132,7 +132,7 @@ body {
 header nav {
   display: flex;
   justify-content: center; /* Align items to the right */
-  font-family:sans-serif;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 }
 

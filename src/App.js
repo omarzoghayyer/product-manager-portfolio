@@ -41,15 +41,15 @@ function App() {
         </nav>
       </header>
       <div className="content">
-        <p className="construction">The website is currently in development. If you have any suggestions or feedback, kindly report them through the bug submission section of my repository at https://github.com/omarzoghayyer/product-manager-portfolio.</p>
+       { /*<p className="construction">The website is currently in development. If you have any suggestions or feedback, kindly report them through the bug submission section of my repository at https://github.com/omarzoghayyer/product-manager-portfolio.</p>*/}
         <div ref={aboutRef}>
           <ProfileInfo />
           <Photo />
-          <Recording />
+          {/* <Recording /> */}
           <Summary />
         </div>
 
-        <section id="projects" style={{ minHeight: "50vh" }}>
+        <section id="projects" style={{ minHeight: "20vh" }}>
           <Projects />
         </section>
 
@@ -61,6 +61,7 @@ function App() {
           <Contact />
         </section>
       </div>
+      <footer style={{ fontSize:  "15px" }}>© 2024 OJZ. All Rights Reserved.</footer>
     </div>
   );
 }
