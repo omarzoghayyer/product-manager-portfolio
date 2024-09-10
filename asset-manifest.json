@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.abc0cb17.css",
-    "main.js": "/static/js/main.7576ce4a.js",
+    "main.css": "/static/css/main.adf5d863.css",
+    "main.js": "/static/js/main.ab1d304d.js",
     "static/js/453.b2e988a6.chunk.js": "/static/js/453.b2e988a6.chunk.js",
     "static/media/my_recording.mp3": "/static/media/my_recording.54b9775ae7f82bcf7973.mp3",
     "static/media/linkedin-profile.png": "/static/media/linkedin-profile.85e68da9c1506e93a172.png",
@@ -10,12 +10,12 @@
     "static/media/battlefield-mobile.png": "/static/media/battlefield-mobile.40def2e0e5d42def467c.png",
     "static/media/sims.png": "/static/media/sims.cb8504c8d142ae2aab64.png",
     "index.html": "/index.html",
-    "main.abc0cb17.css.map": "/static/css/main.abc0cb17.css.map",
-    "main.7576ce4a.js.map": "/static/js/main.7576ce4a.js.map",
+    "main.adf5d863.css.map": "/static/css/main.adf5d863.css.map",
+    "main.ab1d304d.js.map": "/static/js/main.ab1d304d.js.map",
     "453.b2e988a6.chunk.js.map": "/static/js/453.b2e988a6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.abc0cb17.css",
-    "static/js/main.7576ce4a.js"
+    "static/css/main.adf5d863.css",
+    "static/js/main.ab1d304d.js"
   ]
 }
