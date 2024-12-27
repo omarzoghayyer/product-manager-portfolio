@@ -19,7 +19,7 @@ function ProfileInfo() {
           <hr className="horizontal-line" />
           <div className="keywords">
             <span>
-              Product Management & Strategy - Team Building - Tech & Analytics -
+             Technical Product Management - Team Building - Data Analytics - Mobile Development
               Quality Design{" "}
             </span>
           </div>
@@ -30,12 +30,12 @@ function ProfileInfo() {
             <a href="mailto:sfzoghayyer@gmail.com" className="email-link">
               <img src={emailLogo} alt="Email" className="social-logo" />
             </a>
-            <a href="https://github.com/">
+            {/* <a href="https://github.com/">
               <img src={githubLogo} alt="GitHub" className="social-logo" />
             </a>
             <a href="https://x.com/OZoghayyer">
               <img src={xLogo} alt="x" className="social-logo" />
-            </a>
+            </a> */}
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@
 .linkedin-button {
   margin-top: 10px; /* Adjust the margin as needed */
   padding: 10px 20px;
-  background-color: #112f50;
+  background-color: #1b7409;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -32,7 +32,7 @@
 }
 
 .linkedin-button:hover {
-  background-color: #1553b1;
+  background-color: #15b122;
 }
 
 .linkedin-button span {

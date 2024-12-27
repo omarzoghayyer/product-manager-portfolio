@@ -61,7 +61,7 @@ function App() {
           <Contact />
         </section>
       </div>
-      <footer style={{ fontSize:  "15px" }}>© 2024 OJZ. All Rights Reserved.</footer>
+      <footer style={{ fontSize:  "15px" }}>© 2025 Zoghayyer. Free To Copy.</footer>
     </div>
   );
 }
