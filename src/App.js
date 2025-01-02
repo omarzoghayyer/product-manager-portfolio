@@ -7,6 +7,7 @@ import Photo from "./photo.js";
 import Summary from "./summary.js";
 import Contact from "./contact.js";
 import Recording from "./recording.js";
+// import Writings from "./writings.js";
 
 function App() {
   const aboutRef = useRef(null);
@@ -37,6 +38,9 @@ function App() {
             <li>
               <a href="#contact"className="highlighted" >Contact</a>
             </li>
+            <li>
+              <a href="#Writings"className="highlighted" >Writings (coming soon)</a>
+            </li>
           </ul>
         </nav>
       </header>
@@ -60,6 +64,7 @@ function App() {
         <section id="contact" style={{ minHeight: "50vh" }}>
           <Contact />
         </section>
+       
       </div>
       <footer style={{ fontSize:  "15px" }}>© 2025 Zoghayyer. Free To Copy.</footer>
     </div>

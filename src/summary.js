@@ -10,10 +10,7 @@ function Summary() {
         <div className="professional-summary">
           <div className="professional-summary-box">
             <p className="paragraph-box">
-              <spam className='tpmSummary'>Technical Product Manager </spam>with extensive product ownership experience in gaming and tech. Record
-              of delivering strong results by collaborating, applying data to
-              address issues, and fostering innovation. Unintimidated by new
-              ideas. Excels in leading teams. 
+              <spam className='tpmSummary'>I'm a Technical Product Manager</spam> with a background in product ownership across the tech and gaming sectors.  I have over five years of experience in both development and product management. I enjoy tackling complex challenges and am particularly focused on improving device performance. My areas of interest include Mobile Development, AI and Cloud Security.
             </p>
             <span> Below are some of the recent products I worked on: </span>
           </div>
