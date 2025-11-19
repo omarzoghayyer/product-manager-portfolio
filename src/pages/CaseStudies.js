@@ -20,7 +20,6 @@ const INDUSTRIES = [
   "Energy",
   "Healthcare",
   "Finance",
-  "Retail",
 ];
 
 const SECTORS = [
@@ -81,7 +80,7 @@ print("2030 log-linear:", np.exp(loglin.predict([[2030]])))`,
   {
     id: "demo-003",
     title: "Starlink Swarm – Live Orbit Map",
-    company: "Personal Project",
+    company: "Personal Project On Starlink",
     industry: "Space & Data",
     sector: "Open Data & Astronomy",
     problem_statement:
@@ -142,11 +141,21 @@ export default function CaseStudies() {
     );
 
     try {
-      await zog.entities.CaseStudy.update(caseStudyId, { likes: newLikes });
-      queryClient.invalidateQueries(["case-studies"]);
+      // Use server-side increment when available. Expect response like { likes: number } or the updated resource.
+      const res = await zog.entities.CaseStudy.increment(caseStudyId);
+      // If server returns an object with likes, use it; otherwise, if it returns the updated resource, try to read .likes
+      const serverLikes =
+        typeof res === "number" ? res : res?.likes ?? newLikes;
+
+      queryClient.setQueryData(["case-studies"], (old) =>
+        (old || []).map((c) =>
+          c.id === caseStudyId ? { ...c, likes: serverLikes } : c
+        )
+      );
     } catch (err) {
+      // Backend may be unavailable (demo mode). Keep the optimistic local increment.
       console.warn(
-        "Like update failed (likely demo mode). Keeping local state.",
+        "Like increment failed (backend unreachable). Keeping optimistic count.",
         err
       );
     }
@@ -224,7 +233,7 @@ export default function CaseStudies() {
                       selectedIndustry === industry ? "default" : "outline"
                     }
                     className={`cursor-pointer whitespace-nowrap ${selectedIndustry === industry
-                      ? "bg-[var(--primary)] hover:bg-[var(--primary-light)]"
+                      ? "bg-[var(--primary)] hover:bg-[var(--primary-light)] text-white"
                       : "hover:bg-gray-100"
                       }`}
                     onClick={() => setSelectedIndustry(industry)}
@@ -245,7 +254,7 @@ export default function CaseStudies() {
                   key={sector}
                   variant={selectedSector === sector ? "default" : "outline"}
                   className={`cursor-pointer whitespace-nowrap ${selectedSector === sector
-                    ? "bg-[var(--primary)] hover:bg-[var(--primary-light)]"
+                    ? "bg-[var(--primary)] hover:bg-[var(--primary-light)] text-white"
                     : "hover:bg-gray-100"
                     }`}
                   onClick={() => setSelectedSector(sector)}

@@ -15,7 +15,7 @@ import { Skeleton } from "../components/ui/skeleton";
 const demoCases = [
   {
     id: "demo-001",
-    title: "Satellites in Orbit by 2030 – Baseline Forecast",
+    title: "Satellites in Orbit by 2030 - Baseline Forecast",
     company: "Independent",
     industry: "Space & Data",
     sector: "Forecasting & Analytics",
@@ -222,7 +222,10 @@ export default function CaseStudyDetail() {
                 <span className="text-sm font-medium text-gray-600">{caseStudy.company}</span>
               </div>
             </div>
-
+            {/* Author line */}
+            <div className="text-sm text-gray-500 mb-4">
+              By {caseStudy.author || "Omar Zoghayyer"}
+            </div>
             <div className="flex items-start justify-between gap-6 mb-6">
               <h1 className="text-4xl md:text-5xl font-bold flex-1">{caseStudy.title}</h1>
               <LikeButton itemId={caseStudy.id} section="case-studies" initialLikes={caseStudy.likes || 0} onLike={handleLike} size="large" />

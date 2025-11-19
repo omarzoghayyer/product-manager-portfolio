@@ -248,6 +248,31 @@ export const zog = {
         return item;
       },
     },
+    CaseStudy: {
+      async list(order = "-created_date") {
+        // Attempt to fetch from backend, but let callers fallback if unavailable
+        try {
+          return await fetchJSON("case-studies?order=" + encodeURIComponent(order));
+        } catch (e) {
+          throw e;
+        }
+      },
+      async update(id, patch = {}) {
+        try {
+          return await fetchJSON(`case-studies/${id}`, { method: "PATCH", body: patch });
+        } catch (e) {
+          throw e;
+        }
+      },
+      async increment(id) {
+        try {
+          // Expected to return { likes: number } or the updated resource
+          return await fetchJSON(`case-studies/${id}/like`, { method: "POST" });
+        } catch (e) {
+          throw e;
+        }
+      },
+    },
   },
 };
 
