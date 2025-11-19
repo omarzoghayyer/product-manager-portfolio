@@ -1,8 +1,4 @@
-.App {
-  text-align: center;
-  font-size: 25px;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+
 
 body {
   background-color: #e7eff0;
@@ -23,17 +19,32 @@ body {
 }
 
 
-.App-header {
-  background-color: #282c34;
+
+.App {
+  /* Remove text-align and large font-size from here */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 100vh;
+  background-color: #e7eff0;
+}
+
+.main-centered-container {
+  margin-left: 15vw;
+  margin-right: 15vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family:sans-serif;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
+
+.content {
+  width: 100%;
+  /* Optional: add max-width for even better centering on large screens */
+  max-width: 900px;
+}
+
+header, .App-header {
+  text-align: center;
+}
+
 .navigation {
   margin-bottom: 10px;
   font-size: 20px;

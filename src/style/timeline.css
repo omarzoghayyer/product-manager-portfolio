@@ -1,0 +1,168 @@
+
+
+.timeline-title {
+  text-align: center;
+  color: #3a86ff;      /* bright blue */
+  font-size: 2em;
+  margin-bottom: 32px;
+  font-weight: 700;
+}
+
+/* ── The vertical “spine” line ───────────────────────────────────────────── */
+
+/* 
+   Reduced the space reserved for date + gap:
+   → margin-left: 140px  (120px date width + 20px gap to line)
+   → padding-left: 20px  (gap between line and content box)
+*/
+.timeline {
+  position: relative;
+  margin-left: 140px;   /* 120px (date) + 20px (gap to line) */
+  padding-left: 20px;   /* gap between the blue line and the content box */
+  border-left: 3px solid #3a86ff;
+}
+
+/* ── Each timeline item ──────────────────────────────────────────────────── */
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 36px;
+}
+
+/* ── The “date” on the left side of the line ───────────────────────────────── */
+
+/*
+   We push the date 140px to the left of the line (matching margin-left:140px).
+   The date box itself remains 120px wide, so there is a 20px gap between date and line.
+*/
+.timeline-date {
+  position: absolute;
+  left: -190px;         /* push the date box to the left */
+  top: 8px;             /* align it vertically with the dot */
+
+  text-align: right;    /* right-align so it butts up against the line */
+  font-weight: bold;
+  color: #232946;
+  font-size: 1em;
+  line-height: 1.2;
+  transition: background 0.2s, color 0.2s;
+}
+
+/* Hover over the date: turn date text background + text color to mustard */
+.timeline-date:hover {
+  background: #F4CC70;  /* mustard-yellow */
+  color: #232946;       /* keep text dark so it remains legible */
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+/* ── Highlighted (“active”) date ─────────────────────────────────────────── */
+.timeline-item--active .timeline-date {
+  background: #F4CC70;   /* mustard-yellow */
+  color: #0054A6;        /* dark-blue link style text */
+  padding: 4px 8px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* ── When hovering over date, also turn the dot mustard-yellow ───────────── */
+.timeline-date:hover + .timeline-dot {
+  background: #F4CC70;       /* fill circle with mustard */
+  border-color: #F4CC70;     /* circle border also mustard */
+}
+
+/* ── The circular “dot” on the line ────────────────────────────────────────── */
+
+/*
+   The dot’s outer diameter is 18px (circle) + 2×4px border = 26px. Half of 26px is 13px.
+   The vertical line is at “140px” from the container’s left (because margin-left:140px).
+   So the dot’s left edge should be at 140px – 13px = 127px from the container’s left.
+   But inside .timeline (margin-left:140px), our “zero” is already at 140px. Thus we need
+   to push it left by 13px. Also account for padding-left:20px (shifting the line inside .timeline),
+   so total offset = 13px + 20px = 33px → left: -33px.
+*/
+.timeline-dot {
+  position: absolute;
+  left: -33px;           /* center the circle on the line */
+  top: 8px;              /* align vertically with the date text */
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: 4px solid #3a86ff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(58, 134, 255, 0.2);
+  z-index: 2;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+/* If the item is “active,” the dot should also appear mustard-yellow */
+.timeline-item--active .timeline-dot {
+  background: #F4CC70;
+  border-color: #F4CC70;
+}
+
+/* ── The right-side content box ───────────────────────────────────────────── */
+
+.timeline-content {
+  background: #f6f8fa;
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 1px 4px rgba(227, 233, 247, 0.8);
+  position: relative;
+  z-index: 1;
+  /* Width shifted to keep clear of the line + dot */
+  width: calc(100% - 40px); /* (20px padding-left + ~20px breathing room) */
+}
+
+/* ── Title & Description Styles ──────────────────────────────────────────── */
+
+.timeline-item-title {
+  margin: 0 0 4px;
+  font-size: 1.15em;
+  font-weight: 600;
+  color: #232946;
+}
+
+/* If highlighted, title turns dark-blue like a link */
+.timeline-item--active .timeline-item-title {
+  color: #0054A6;
+}
+
+.timeline-description {
+  margin: 0;
+  font-size: 1em;
+  color: #232946;
+}
+
+/* ── Responsive (mobile) tweaks ───────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  .timeline-section {
+    padding: 12px 0;
+    max-width: 98vw;
+  }
+
+  /* On small screens, shrink the date column + gap (80px date + 20px gap = 100px) */
+  .timeline {
+    margin-left: 100px;   /* 80px date + 20px gap */
+    padding-left: 12px;   /* smaller gap between line and content */
+    border-left: 3px solid #3a86ff;
+  }
+
+  .timeline-date {
+    left: -100px;         /* push the date 100px to the left */
+    width: 80px;          /* narrower date column */
+    font-size: 0.9em;
+  }
+
+  /* The dot’s outer diameter is 26px; half is 13px.
+     With margin-left=100px and padding-left=12px, total offset=13+12=25px → left: -25px */
+  .timeline-dot {
+    left: -25px;
+  }
+
+  .timeline-content {
+    padding: 12px 8px;
+    width: calc(100% - 40px);
+  }
+}
