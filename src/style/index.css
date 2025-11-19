@@ -1,11 +1,24 @@
-body {
-  margin: 0;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: bisque;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@plugin "@tailwindcss/typography";
+/* (optional) a couple tiny base tweaks so things don’t look broken even if tailwind didn’t run) */
+html, body {
+  font-family: "InterVariable", Inter, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  text-rendering: geometricPrecision;
+  letter-spacing: -0.01em;      /* subtle terminal-tight look */
+  font-weight: 450;             /* crisper than 400 without bolding */
 }
 
-code {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
+code, pre, .mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Numbers line up vertically (great for tables) */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+

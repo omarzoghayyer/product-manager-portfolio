@@ -1,74 +1,38 @@
-import React, { useRef, useEffect } from "react";
-import "./style/App.css";
-import ProfileInfo from "./profileInfo.js";
-// import Terminal from "./terminal.js";
-import Projects from "./projects.js";
-import Photo from "./photo.js";
-import Summary from "./summary.js";
-import Contact from "./contact.js";
-import Recording from "./recording.js";
-// import Writings from "./writings.js";
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./Layout";
 
-function App() {
-  const aboutRef = useRef(null);
+import Home from "./pages/Home";
+import About from "./pages/About";
+import CaseStudies from "./pages/CaseStudies";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
+import Contact from "./pages/Contact";
 
-  useEffect(() => {
-    // Focus on the About section when the component mounts
-    if (aboutRef.current) {
-      aboutRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, []);
 
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
+
+export default function App() {
   return (
-    <div className="App">
-      <header>
-        <nav className="navigation">
-          <ul>
-            <li>
-              <a href="#profile" className="highlighted">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#projects" className="highlighted" >Projects</a>
-            </li>
-            {/* <li>
-              <a href="#terminal">Terminal</a>
-            </li> */}
-            <li>
-              <a href="#contact"className="highlighted" >Contact</a>
-            </li>
-            <li>
-              <a href="#Writings"className="highlighted" >Writings (coming soon)</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <div className="content">
-       { /*<p className="construction">The website is currently in development. If you have any suggestions or feedback, kindly report them through the bug submission section of my repository at https://github.com/omarzoghayyer/product-manager-portfolio.</p>*/}
-        <div ref={aboutRef}>
-          <ProfileInfo />
-          <Photo />
-          {/* <Recording /> */}
-          <Summary />
-        </div>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter basename={process.env.PUBLIC_URL || "/"}>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
 
-        <section id="projects" style={{ minHeight: "20vh" }}>
-          <Projects />
-        </section>
+            <Route path="/case-studies" element={<CaseStudies />} />
+            <Route path="/case-study" element={<CaseStudyDetail />} />
 
-        {/* <section id="terminal" style={{ minHeight: "50vh" }}>
-          <Terminal />
-        </section>
-         */}
-        <section id="contact" style={{ minHeight: "50vh" }}>
-          <Contact />
-        </section>
-       
-      </div>
-      <footer style={{ fontSize:  "15px" }}>© 2025 Zoghayyer. Free To Copy.</footer>
-    </div>
+            <Route path="/contact" element={<Contact />} />
+
+
+            {/* safety net */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
-
-export default App;

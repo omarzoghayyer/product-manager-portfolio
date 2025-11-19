@@ -1,0 +1,94 @@
+{
+  "name": "CaseStudy",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Case study title"
+    },
+    "company": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "company_logo_url": {
+      "type": "string",
+      "description": "URL to company logo"
+    },
+    "industry": {
+      "type": "string",
+      "enum": [
+        "Automotive",
+        "Gaming",
+        "Technology",
+        "Energy",
+        "Healthcare",
+        "Finance",
+        "Retail",
+        "Other"
+      ],
+      "description": "Industry category"
+    },
+    "sector": {
+      "type": "string",
+      "enum": [
+        "AI & Automation",
+        "Data Strategy",
+        "Product Management",
+        "Performance Systems",
+        "Safety & Compliance",
+        "Operations",
+        "Other"
+      ],
+      "description": "Sector focus"
+    },
+    "problem_statement": {
+      "type": "string",
+      "description": "One-line problem summary"
+    },
+    "problem_description": {
+      "type": "string",
+      "description": "Detailed problem description"
+    },
+    "root_cause_analysis": {
+      "type": "string",
+      "description": "Analysis of underlying causes"
+    },
+    "proposed_solution": {
+      "type": "string",
+      "description": "Detailed solution approach"
+    },
+    "expected_impact": {
+      "type": "string",
+      "description": "Expected outcomes and metrics"
+    },
+    "key_learnings": {
+      "type": "string",
+      "description": "Frameworks and insights gained"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "description": "Visual for the case study card"
+    },
+    "url_slug": {
+      "type": "string",
+      "description": "URL-friendly identifier"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether to feature on home page"
+    },
+    "likes": {
+      "type": "number",
+      "default": 0,
+      "description": "Number of likes received"
+    }
+  },
+  "required": [
+    "title",
+    "company",
+    "industry",
+    "sector",
+    "problem_statement"
+  ]
+}

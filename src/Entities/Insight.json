@@ -1,0 +1,56 @@
+[
+  {
+    "id": "economic-view-toolkit",
+    "title": "The Economic View: Faster, Better Decisions",
+    "created_date": "2025-10-27",
+    "read_time_minutes": 3,
+    "likes": 0,
+    "excerpt": "A tiny checklist to weigh real costs/benefits, incentives, and the next unit (the margin).",
+    "content": "**TL;DR:** Better choices come from pricing *all* costs (explicit + opportunity), thinking at the **margin**, and predicting how people respond to **incentives**.\n\n**Use this 1-minute checklist**\n- What's the *real* cost vs. benefit (include time and missed alternatives)?\n- How will incentives change behavior?\n- What changes at the **next** unit (time, money, output)?\n- What constraints bind (budget, capacity, time)?\n- Any ripple effects that move the new equilibrium?\n\n**Tiny example:** Buy a standing desk? If it saves 5 min/day of fatigue + context switching, that’s ~21 hrs/yr—often worth it."
+  },
+  {
+    "id": "automation-roi-quickcut",
+    "title": "Automation ROI: The 3 Numbers That Matter",
+    "created_date": "2025-10-27",
+    "read_time_minutes": 4,
+    "likes": 0,
+    "excerpt": "If you can’t state these three numbers, don’t automate yet.",
+    "content": "**TL;DR:** Ship automation when **time saved × wage** beats **build+run cost**, *and* error rate drops.\n\n**3 numbers**\n1. **Minutes saved per run** × **runs/week**  \n2. **Error rate delta** (before → after)  \n3. **Build + run cost** (incl. maintenance)\n\n**Rule of thumb:** Payback < **90 days** or stack rank lower."
+  },
+  {
+    "id": "perf-telemetry-starter-pack",
+    "title": "Performance Telemetry Starter Pack",
+    "created_date": "2025-10-27",
+    "read_time_minutes": 4,
+    "likes": 0,
+    "excerpt": "Start with player-visible SLOs, not internals. Then add leading indicators.",
+    "content": "**Start here**\n- Define **SLOs** (FPS floor, p95 load time, crash-free %)  \n- Instrument **leading indicators** (draw calls, CPU/GPU %, temp, alloc rate)  \n- Weekly **Ops ritual:** review deltas → open 3 actionables → close the loop next week\n\n**Anti-pattern:** Big dashboards with no owner or decision."
+  },
+  {
+    "id": "market-impact-card-explainer",
+    "title": "Market Impact Cards: One Metric That Actually Helps",
+    "created_date": "2025-10-27",
+    "read_time_minutes": 3,
+    "likes": 0,
+    "excerpt": "Stop long takes. Show a 10-day median move + confidence and let readers act.",
+    "content": "**Why this works**\n- Readers want the **so-what**: *how much* and *how soon*  \n- A **median % move** + **range** + **confidence** beats vibes  \n- We publish **accuracy receipts** to stay honest\n\n**Standard horizon:** **10 trading days** for comparability."
+  },
+  {
+    "id": "ai-writing-ethics",
+    "title": "AI + Writing: Keep the Voice, Borrow the Structure",
+    "created_date": "2025-10-27",
+    "read_time_minutes": 3,
+    "likes": 0,
+    "excerpt": "Paraphrase, cite, and separate summary from opinion.",
+    "content": "**Simple rules**\n- **Paraphrase** in your voice; always **cite source**  \n- Separate **summary** (facts) from **view** (your take)  \n- Add **assumptions** and **flip risks** so readers know when you'd change your mind"
+  },
+  {
+    "id": "real-estate-vs-cash",
+    "title": "4% Cash vs. Real Estate: The Bottom Line",
+    "created_date": "2025-10-27",
+    "read_time_minutes": 4,
+    "likes": 0,
+    "excerpt": "Cash wins on certainty; RE wins with leverage and disciplined ops.",
+    "content": "**Rules of thumb**\n- If you can’t underwrite **cap rate – cost of debt – OpEx** > **2–3%**, hold cash  \n- **Leverage magnifies execution**: great ops win, sloppy ops bleed  \n- Always stress **vacancy**, **repairs**, and **rate drift** before buying"
+  }
+]
