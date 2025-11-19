@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Mail, Linkedin, CheckCircle, Target, BarChart3, Cog } from "lucide-react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const EMAILJS_SERVICE_ID = "service_0i548of";
 const EMAILJS_TEMPLATE_ID = "template_p5yszrn";
@@ -13,13 +14,26 @@ const EMAILJS_PUBLIC_KEY = "GVxmLfLxJ1vfsQIeQ";
 // ✅ Initialize EmailJS with your public key
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
+// 🔐 Your reCAPTCHA site key (public)
+const RECAPTCHA_SITE_KEY = "6LddfxEsAAAAAJPDuJbMu9y_EWvJ1XSrnuGF2ldI";
+
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState(null);
+
+  const recaptchaRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 🚧 Require CAPTCHA before sending
+    if (!captchaToken) {
+      alert("Please verify you're not a robot before sending.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -29,9 +43,10 @@ export default function Contact() {
         email: formData.email,
         message: formData.message,
         time: new Date().toLocaleString(),
+        // Optional: include token if you ever add backend verification
+        "g-recaptcha-response": captchaToken,
       };
 
-      // ✅ Use 3-arg send (serviceId, templateId, params) after init
       const res = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -41,6 +56,12 @@ export default function Contact() {
       console.log("EmailJS success:", res);
       setSubmitted(true);
       setFormData({ name: "", email: "", message: "" });
+
+      // ♻️ Reset CAPTCHA for the next message
+      setCaptchaToken(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
     } catch (err) {
       console.error("Error sending email via EmailJS:", err);
       alert(
@@ -206,6 +227,15 @@ export default function Contact() {
                         setFormData({ ...formData, message: e.target.value })
                       }
                       className="min-h-[160px]"
+                    />
+                  </div>
+
+                  {/* ✅ reCAPTCHA */}
+                  <div className="flex justify-center">
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      sitekey={RECAPTCHA_SITE_KEY}
+                      onChange={(token) => setCaptchaToken(token)}
                     />
                   </div>
 
