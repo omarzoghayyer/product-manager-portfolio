@@ -37,7 +37,7 @@ export default function ReaderNotification({ items, type = "case study" }) {
       const randomItem = items[Math.floor(Math.random() * items.length)];
       const randomLocation = LOCATIONS[Math.floor(Math.random() * LOCATIONS.length)];
       const randomMessage = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
-      
+
       setNotification({
         location: randomLocation,
         message: randomMessage,
@@ -71,7 +71,7 @@ export default function ReaderNotification({ items, type = "case study" }) {
   if (!notification) return null;
 
   const position = scrollY > 300 ? "top-6" : "bottom-6";
-  
+
   const colors = {
     "case study": {
       gradient: "from-violet-500/20 via-purple-500/20 to-fuchsia-500/20",
@@ -98,9 +98,9 @@ export default function ReaderNotification({ items, type = "case study" }) {
           initial={{ opacity: 0, x: 100, y: 20, scale: 0.9 }}
           animate={{ opacity: 1, x: 0, y: 0, scale: 1 }}
           exit={{ opacity: 0, x: 100, y: -20, scale: 0.9 }}
-          transition={{ 
-            type: "spring", 
-            damping: 25, 
+          transition={{
+            type: "spring",
+            damping: 25,
             stiffness: 300,
             opacity: { duration: 0.3 }
           }}
@@ -140,8 +140,8 @@ export default function ReaderNotification({ items, type = "case study" }) {
                 {Array.from({ length: 5 }).map((_, i) => (
                   <motion.div
                     key={i}
-                    initial={{ 
-                      opacity: 0, 
+                    initial={{
+                      opacity: 0,
                       x: Math.random() * 100 - 50,
                       y: Math.random() * 100 - 50,
                       scale: 0
@@ -216,7 +216,7 @@ export default function ReaderNotification({ items, type = "case study" }) {
                         Someone in {notification.location}
                       </span>
                     </motion.p>
-                    
+
                     <motion.p
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -261,3 +261,4 @@ export default function ReaderNotification({ items, type = "case study" }) {
     </AnimatePresence>
   );
 }
+

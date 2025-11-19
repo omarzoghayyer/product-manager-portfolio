@@ -3,9 +3,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const WAVE_STAGES = [
   { emoji: "🌊", label: "Wave sent", threshold: 0, color: "#06b6d4", glow: 1.3, rippleSize: 1 },
-  { emoji: "💫", label: "Making waves", threshold: 5, color: "#3b82f6", glow: 1.45, rippleSize: 1.2 },
-  { emoji: "✨", label: "Rising tide", threshold: 15, color: "#8b5cf6", glow: 1.6, rippleSize: 1.4 },
-  { emoji: "🌟", label: "Legendary", threshold: 30, color: "#a855f7", glow: 1.8, rippleSize: 1.6 },
+  { emoji: "💫", label: "Making waves", threshold: 5, color: "#3b82f6", glow: 1.45, rippleSize: 1 },
+  { emoji: "✨", label: "Rising tide", threshold: 15, color: "#8b5cf6", glow: 1.6, rippleSize: 1 },
+  { emoji: "🌟", label: "Legendary", threshold: 30, color: "#a855f7", glow: 1.8, rippleSize: 1 },
+  { emoji: "🔥", label: "On fire", threshold: 50, color: "#f97316", glow: 2.0, rippleSize: 1 },
+  { emoji: "🚀", label: "Launch mode", threshold: 75, color: "#22c55e", glow: 2.1, rippleSize: 1 },
+  { emoji: "🌈", label: "Signal boost", threshold: 100, color: "#eab308", glow: 2.2, rippleSize: 1 },
+  { emoji: "⚡", label: "Supercharged", threshold: 150, color: "#facc15", glow: 2.3, rippleSize: 1 },
+  { emoji: "🌀", label: "Whirlpool", threshold: 200, color: "#0ea5e9", glow: 2.4, rippleSize: 1 },
+  { emoji: "🌋", label: "Eruption", threshold: 300, color: "#ef4444", glow: 2.5, rippleSize: 1 },
+  { emoji: "🌌", label: "Cosmic swell", threshold: 400, color: "#4f46e5", glow: 2.6, rippleSize: 1 },
+  { emoji: "🏆", label: "Hall of fame", threshold: 500, color: "#f97316", glow: 2.7, rippleSize: 1 },
+  { emoji: "👑", label: "King tide", threshold: 750, color: "#22c55e", glow: 2.8, rippleSize: 1 },
+  { emoji: "∞", label: "Infinity wave", threshold: 1000, color: "#a855f7", glow: 3.0, rippleSize: 1 },
 ];
 
 export default function LikeButton({ itemId, section, initialLikes, onLike, size = "default" }) {
@@ -36,36 +46,43 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
   };
 
   const stage = getCurrentStage(likes);
-  const nextStage = WAVE_STAGES.find(s => s.threshold > likes);
+  const nextStage = WAVE_STAGES.find((s) => s.threshold > likes);
+  const maxThreshold = WAVE_STAGES[WAVE_STAGES.length - 1].threshold;
 
   const handleLike = async (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    if (isLiked) return;
+    console.debug("LikeButton: click", { itemId, section, isLiked });
+
+    if (isLiked) {
+      console.debug("LikeButton: already liked, ignoring");
+      return;
+    }
 
     // Debounce to prevent spam
     if (debounceTimer.current) return;
-    
+
     debounceTimer.current = setTimeout(() => {
       debounceTimer.current = null;
     }, 300);
 
     const newLikes = likes + 1;
     const storageKey = `wave:${section}:${itemId}`;
-    
-    // Optimistically update UI
+
+    // Optimistic UI
     setIsAnimating(true);
     setIsLiked(true);
     setShowFeedback(true);
     setLikes(newLikes);
 
-    // Save to localStorage
+    // Remember on this browser
     localStorage.setItem(storageKey, "true");
 
     try {
-      // Call parent's onLike to update backend
+      console.debug("LikeButton: calling onLike prop");
       await onLike();
+      console.debug("LikeButton: onLike resolved");
     } catch (error) {
       console.error("Error sending wave:", error);
       // Revert on error
@@ -104,16 +121,15 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
       onKeyDown={handleKeyDown}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
-      disabled={isLiked}
+      // don't disable so hover still fires; we block extra likes in handleLike
       role="button"
       aria-pressed={isLiked}
-      aria-label={`Send wave${isLiked ? ' (already sent)' : ''}`}
-      className={`relative inline-flex items-center gap-2 transition-all cursor-pointer group ${
-        isLiked ? "opacity-100" : "opacity-60 hover:opacity-100"
-      }`}
-      style={{ pointerEvents: 'auto' }}
+      aria-label={`Send wave${isLiked ? " (already sent)" : ""}`}
+      className={`relative inline-flex items-center gap-2 transition-all cursor-pointer group ${isLiked ? "opacity-100" : "opacity-60 hover:opacity-100"
+        }`}
+      style={{ pointerEvents: "auto" }}
     >
-      <div 
+      <div
         className="relative flex items-center justify-center"
         style={{ width: dimensions.container, height: dimensions.container }}
       >
@@ -121,12 +137,18 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
         <motion.svg
           viewBox="0 0 24 24"
           style={{ width: dimensions.icon, height: dimensions.icon }}
-          animate={isAnimating ? {
-            x: [-2, 2, -2, 2, 0],
-            scale: [1, 1.2, 1],
-          } : isLiked ? {
-            x: [-1, 1, -1],
-          } : {}}
+          animate={
+            isAnimating
+              ? {
+                x: [-2, 2, -2, 2, 0],
+                scale: [1, 1.2, 1],
+              }
+              : isLiked
+                ? {
+                  x: [-1, 1, -1],
+                }
+                : {}
+          }
           transition={
             isAnimating
               ? { duration: 0.6, ease: "easeOut" }
@@ -139,14 +161,14 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
               <stop offset="100%" stopColor={isLiked ? "#0ea5e9" : "#64748b"} />
             </linearGradient>
             <filter id={`glow-${itemId}`}>
-              <feGaussianBlur stdDeviation={stage.glow * 3} result="coloredBlur"/>
+              <feGaussianBlur stdDeviation={stage.glow * 3} result="coloredBlur" />
               <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
           </defs>
-          
+
           {/* Flowing wave path */}
           <motion.path
             d="M2 12c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3z"
@@ -156,13 +178,17 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
             strokeLinecap="round"
             strokeLinejoin="round"
             filter={isLiked ? `url(#glow-${itemId})` : "none"}
-            animate={isLiked ? {
-              d: [
-                "M2 12c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3z",
-                "M2 10c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 2c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3z",
-                "M2 12c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3z",
-              ]
-            } : {}}
+            animate={
+              isLiked
+                ? {
+                  d: [
+                    "M2 12c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3z",
+                    "M2 10c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 2c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3z",
+                    "M2 12c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3zm7 0c0-1.5 1.5-3 3-3s3 1.5 3 3-1.5 3-3 3-3-1.5-3-3z",
+                  ],
+                }
+                : {}
+            }
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.svg>
@@ -174,11 +200,11 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
               <motion.div
                 initial={{ scale: 0.8, opacity: 0.6 }}
                 animate={{ scale: 2.2 * stage.rippleSize, opacity: 0 }}
-                transition={{ 
-                  duration: 1.5, 
-                  repeat: Infinity, 
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
                   ease: "easeOut",
-                  repeatDelay: 0.3
+                  repeatDelay: 0.3,
                 }}
                 className="absolute inset-0 rounded-full"
                 style={{
@@ -189,12 +215,12 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
               <motion.div
                 initial={{ scale: 0.8, opacity: 0.4 }}
                 animate={{ scale: 2.2 * stage.rippleSize, opacity: 0 }}
-                transition={{ 
-                  duration: 1.5, 
-                  repeat: Infinity, 
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
                   ease: "easeOut",
                   repeatDelay: 0.3,
-                  delay: 0.4
+                  delay: 0.4,
                 }}
                 className="absolute inset-0 rounded-full"
                 style={{
@@ -265,18 +291,24 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
         )}
       </div>
 
-      {/* Numeric tooltip on hover */}
+      {/* Stage + count tooltip on hover */}
       <AnimatePresence>
-        {showTooltip && likes > 0 && (
+        {showTooltip && (
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.9 }}
             transition={{ duration: 0.2 }}
-            className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none z-50"
+            className="absolute -top-12 left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none z-50"
           >
-            <div className="px-3 py-1.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg text-xs font-medium shadow-lg">
-              {likes} {likes === 1 ? 'wave' : 'waves'}
+            <div className="px-3 py-1.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg text-xs font-medium shadow-lg flex items-center gap-2">
+              <span>{stage.emoji}</span>
+              <span>
+                {stage.label}
+                <span className="ml-2 opacity-80">
+                  · {likes} {likes === 1 ? "wave" : "waves"}
+                </span>
+              </span>
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-100" />
           </motion.div>
@@ -302,7 +334,7 @@ export default function LikeButton({ itemId, section, initialLikes, onLike, size
             >
               <span className="mr-1">{stage.emoji}</span>
               {stage.label}
-              {nextStage && likes < 30 && (
+              {nextStage && likes < maxThreshold && (
                 <span className="ml-2 opacity-70 text-[10px]">
                   {nextStage.threshold - likes} to {nextStage.emoji}
                 </span>
