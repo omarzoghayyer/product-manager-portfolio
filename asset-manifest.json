@@ -1,23 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.d23688b6.css",
-    "main.js": "/static/js/main.5b0aa324.js",
-    "static/js/453.b2e988a6.chunk.js": "/static/js/453.b2e988a6.chunk.js",
-    "static/media/my_recording.mp3": "/static/media/my_recording.54b9775ae7f82bcf7973.mp3",
-    "static/media/linkedin-profile.png": "/static/media/linkedin-profile.85e68da9c1506e93a172.png",
-    "static/media/oz-pm.PNG": "/static/media/oz-pm.70e911686dac64c95237.PNG",
-    "static/media/zoox.png": "/static/media/zoox.ca2fb7b1b5b3ca57a6be.png",
-    "static/media/battlefield-2042.png": "/static/media/battlefield-2042.4469980b89fcd1fd852b.png",
-    "static/media/battlefield-mobile.png": "/static/media/battlefield-mobile.40def2e0e5d42def467c.png",
-    "static/media/FightPandemics.png": "/static/media/FightPandemics.2129468050bcc4583449.png",
-    "static/media/sims.PNG": "/static/media/sims.0d9053c981bb6d6e98dc.PNG",
+    "main.css": "/static/css/main.a2a5f299.css",
+    "main.js": "/static/js/main.11073138.js",
     "index.html": "/index.html",
-    "main.d23688b6.css.map": "/static/css/main.d23688b6.css.map",
-    "main.5b0aa324.js.map": "/static/js/main.5b0aa324.js.map",
-    "453.b2e988a6.chunk.js.map": "/static/js/453.b2e988a6.chunk.js.map"
+    "main.a2a5f299.css.map": "/static/css/main.a2a5f299.css.map",
+    "main.11073138.js.map": "/static/js/main.11073138.js.map"
   },
   "entrypoints": [
-    "static/css/main.d23688b6.css",
-    "static/js/main.5b0aa324.js"
+    "static/css/main.a2a5f299.css",
+    "static/js/main.11073138.js"
   ]
 }
