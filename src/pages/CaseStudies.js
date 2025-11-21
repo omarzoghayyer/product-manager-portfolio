@@ -95,7 +95,7 @@ print("2030 log-linear:", np.exp(loglin.predict([[2030]])))`,
       "Give non-specialists—product folks, policy makers, and curious people on X—a concrete mental model for modern LEO constellations. Make it easier to talk about coverage, congestion, and night-sky impact with a single artifact instead of abstract numbers.",
     key_learnings:
       "Open data plus a small, well-structured pipeline can turn something abstract (thousands of satellites in LEO) into an intuitive picture. Good visuals do more than decorate a post—they compress a lot of orbital mechanics into one glance.",
-    thumbnail_url: "/images/thumbs/starlink_sweep_2025-11-13_0510UTC.gif",
+    thumbnail_url: "images/thumbs/starlink_sweep_2025-11-13_0510UTC.gif",
 
     figure_url:
       "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle",
