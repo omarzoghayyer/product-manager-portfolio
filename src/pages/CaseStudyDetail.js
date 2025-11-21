@@ -31,7 +31,7 @@ const demoCases = [
       "Set a transparent baseline for future, more nuanced models\n- Communicate uncertainty with a range vs. single-point hype\n- Create a reproducible artifact (code + chart)",
     key_learnings:
       "Growth is non-linear. Even simple models bracket ~1.3K–3.4K launches/year by 2030; better splits (LEO vs non-LEO, constellation eras) should improve fit.",
-    thumbnail_url: "/Images/thumbs/nxIh2.jpg",
+    thumbnail_url: "/images/thumbs/nxIh2.jpg",
 
     figure_url:
       "https://images.unsplash.com/photo-1447433909565-04bfc496fe5e?auto=format&fit=crop&w=1600&q=60",
@@ -76,7 +76,7 @@ const demoCases = [
     key_learnings:
       "Transparency is a performance accelerator. When definitions become reproducible and telemetry becomes public, debate becomes data, trust rises, and safety iterates faster. The safest car isn’t the one with perfect automation-it’s the one that keeps learning.",
 
-    thumbnail_url: `${process.env.PUBLIC_URL}/Images/thumbs/Tesla.PNG`,
+    thumbnail_url: `${process.env.PUBLIC_URL}/images/thumbs/Tesla.PNG`,
     likes: 1,
   },
   {
@@ -90,7 +90,7 @@ const demoCases = [
       "Most Starlink maps online are renders or static marketing visuals. I wanted a real-time view of the actual Starlink constellation using live orbital data.",
 
     problem_description:
-      "People hear about 'thousands of Starlink satellites' but rarely see the constellation as it exists in the sky. Static images hide density, coverage sweeps, and LEO traffic flow. I built a pipeline that turns raw TLEs into an accurate, timestamped global map.",
+      "People hear about 'thousands of Starlink satellites' but rarely see the constellation as it exists in the sky. Static s hide density, coverage sweeps, and LEO traffic flow. I built a pipeline that turns raw TLEs into an accurate, timestamped global map.",
 
     root_cause_analysis:
       "Public discussions rely on screenshots or coverage claims instead of reproducible orbit data. Raw TLEs exist on Celestrak, but there’s no simple, transparent tool that processes them into a clean, intuitive visualization anyone can understand.",
@@ -105,7 +105,7 @@ const demoCases = [
       "Open orbital data + a simple Python pipeline can compress complex orbital mechanics into a single glance. The live map shows how quickly LEO satellites sweep coverage and why the constellation feels 'everywhere' within minutes.",
 
 
-    thumbnail_url: "/Images/thumbs/starlink_sweep_2025-11-13_0510UTC.gif",
+    thumbnail_url: "/images/thumbs/starlink_sweep_2025-11-13_0510UTC.gif",
     figure_url:
       "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle",
   }
