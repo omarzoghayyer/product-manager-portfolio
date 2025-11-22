@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.a2a5f299.css",
-    "main.js": "/static/js/main.60a05bf8.js",
+    "main.css": "/static/css/main.bb4f502c.css",
+    "main.js": "/static/js/main.110b493c.js",
     "static/media/starlink_sweep_2025-11-13_0510UTC.gif": "/static/media/starlink_sweep_2025-11-13_0510UTC.30c58a21a28adc7128e3.gif",
     "static/media/Tesla.PNG": "/static/media/Tesla.e39fe271f796e68ec470.PNG",
     "static/media/Santa_Clara_U_Seal.svg.png": "/static/media/Santa_Clara_U_Seal.svg.5f8cf67657d23b541866.png",
@@ -12,11 +12,11 @@
     "static/media/Battlefield-6.jpg": "/static/media/Battlefield-6.682280f1395db0a7db5a.jpg",
     "static/media/Battlefield_Mobile_Play_Store_App_Icon.PNG": "/static/media/Battlefield_Mobile_Play_Store_App_Icon.9de0700c279a8721f0f6.PNG",
     "index.html": "/index.html",
-    "main.a2a5f299.css.map": "/static/css/main.a2a5f299.css.map",
-    "main.60a05bf8.js.map": "/static/js/main.60a05bf8.js.map"
+    "main.bb4f502c.css.map": "/static/css/main.bb4f502c.css.map",
+    "main.110b493c.js.map": "/static/js/main.110b493c.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2a5f299.css",
-    "static/js/main.60a05bf8.js"
+    "static/css/main.bb4f502c.css",
+    "static/js/main.110b493c.js"
   ]
 }
