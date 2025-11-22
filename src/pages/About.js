@@ -6,8 +6,8 @@ import { Button } from "../components/ui/button";
 import { Briefcase, GraduationCap, Award, Cpu, Activity, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-// ✅ OPTIONAL: add a hosted image url; leave empty to keep the OZ badge
-const AVATAR_URL = "images/thumbs/oz.png";
+// Use PUBLIC_URL so paths are absolute from the app root
+const AVATAR_URL = process.env.PUBLIC_URL + "/images/thumbs/oz.png";
 
 const timeline = [
   {
@@ -16,7 +16,7 @@ const timeline = [
     organization: "Electronic Arts",
     description:
       "I lead performance systems, telemetry pipelines, and automation tooling that help engineers find issues faster, cut regressions, and ship more stable builds across multiple EA titles.",
-    icon: "images/thumbs/sims.PNG",
+    icon: "/images/thumbs/sims.PNG",
   },
   {
     year: "(Expected 2026)",
@@ -24,7 +24,7 @@ const timeline = [
     organization: "Santa Clara University",
     description:
       "Deepening skills in machine learning, NLP, deep learning, reinforcement learning, and predictive analytics, plus decision science, digital advertising, innovation/IP strategy, and managerial economics to support well-rounded technical product leadership.",
-    icon: "images/thumbs/Santa_Clara_U_Seal.svg.png",
+    icon: "/images/thumbs/Santa_Clara_U_Seal.svg.png",
   },
   {
     year: "2021 – 2024",
@@ -32,7 +32,7 @@ const timeline = [
     organization: "Electronic Arts",
     description:
       "Owned performance and telemetry tooling for Battlefield, including automation pipelines that captured structured screenshots and in-game visuals for ML-based anomaly and visual regression detection. Drove crash/ANR diagnostics, UI stall detection, and stability checks that fed CI/CD gates and improved release quality across platforms.",
-    icon: "/mages/thumbs/Battlefield-6.jpg",
+    icon: "/images/thumbs/Battlefield-6.jpg", // fixed `/mages` -> `/images`
   },
   {
     year: "2020 – 2021",
@@ -40,7 +40,7 @@ const timeline = [
     organization: "Electronic Arts – Industrial Toys",
     description:
       "Worked on the Unreal Engine 4 upgrade, validating systems and updating studio tools. Supported in-house automation and profiling tools and improved front-end workflows for the equipment system while building anti-cheat, profanity, and performance test coverage.",
-    icon: "/mages/thumbs/Battlefield_Mobile_Play_Store_App_Icon.PNG",
+    icon: "/images/thumbs/Battlefield_Mobile_Play_Store_App_Icon.PNG", // fixed `/mages`
   },
   {
     year: "2019 – 2020",
@@ -48,11 +48,9 @@ const timeline = [
     organization: "Zoox",
     description:
       "Part of the first Zoox team to map downtown Seattle for autonomous driving. Supported prediction and planning teams with structured validation, data collection, and test workflows to ensure safe vehicle behavior on newly mapped routes.",
-    icon: "images/thumbs/zoox.png",
+    icon: "/images/thumbs/zoox.png",
   },
 ];
-
-
 
 export default function About() {
   return (
@@ -171,7 +169,7 @@ export default function About() {
                 >
                   <div className="absolute -left-[1.6rem] top-0 w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary)] flex items-center justify-center bg-white">
                     <img
-                      src={item.icon}
+                      src={process.env.PUBLIC_URL + item.icon}
                       alt={item.title}
                       className="w-full h-full object-cover rounded-full"
                     />
