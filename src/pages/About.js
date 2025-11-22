@@ -3,10 +3,18 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
 import { Button } from "../components/ui/button";
 
-import { Briefcase, GraduationCap, Award, Cpu, Activity, ArrowRight } from "lucide-react";
+import { Award, Cpu, Activity, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const AVATAR_URL = "/images/thumbs/oz.png";
+// ✅ Import images from src/assets
+import avatarImg from "../assets/oz.png";
+import simsIcon from "../assets/sims.PNG";
+import scuIcon from "../assets/Santa_Clara_U_Seal.svg.png";
+import bf6Icon from "../assets/Battlefield-6.jpg";
+import bfMobileIcon from "../assets/Battlefield_Mobile_Play_Store_App_Icon.PNG";
+import zooxIcon from "../assets/zoox.png";
+
+const AVATAR_URL = avatarImg;
 
 const timeline = [
   {
@@ -15,7 +23,7 @@ const timeline = [
     organization: "Electronic Arts",
     description:
       "I lead performance systems, telemetry pipelines, and automation tooling that help engineers find issues faster, cut regressions, and ship more stable builds across multiple EA titles.",
-    icon: "/images/thumbs/sims.PNG",
+    icon: simsIcon,
   },
   {
     year: "(Expected 2026)",
@@ -23,7 +31,7 @@ const timeline = [
     organization: "Santa Clara University",
     description:
       "Deepening skills in machine learning, NLP, deep learning, reinforcement learning, and predictive analytics, plus decision science, digital advertising, innovation/IP strategy, and managerial economics to support well-rounded technical product leadership.",
-    icon: "/images/thumbs/Santa_Clara_U_Seal.svg.png",
+    icon: scuIcon,
   },
   {
     year: "2021 – 2024",
@@ -31,7 +39,7 @@ const timeline = [
     organization: "Electronic Arts",
     description:
       "Owned performance and telemetry tooling for Battlefield, including automation pipelines that captured structured screenshots and in-game visuals for ML-based anomaly and visual regression detection. Drove crash/ANR diagnostics, UI stall detection, and stability checks that fed CI/CD gates and improved release quality across platforms.",
-    icon: "/images/thumbs/Battlefield-6.jpg", // fixed `/mages`
+    icon: bf6Icon,
   },
   {
     year: "2020 – 2021",
@@ -39,7 +47,7 @@ const timeline = [
     organization: "Electronic Arts – Industrial Toys",
     description:
       "Worked on the Unreal Engine 4 upgrade, validating systems and updating studio tools. Supported in-house automation and profiling tools and improved front-end workflows for the equipment system while building anti-cheat, profanity, and performance test coverage.",
-    icon: "/images/thumbs/Battlefield_Mobile_Play_Store_App_Icon.PNG",
+    icon: bfMobileIcon,
   },
   {
     year: "2019 – 2020",
@@ -47,7 +55,7 @@ const timeline = [
     organization: "Zoox",
     description:
       "Part of the first Zoox team to map downtown Seattle for autonomous driving. Supported prediction and planning teams with structured validation, data collection, and test workflows to ensure safe vehicle behavior on newly mapped routes.",
-    icon: "/images/thumbs/zoox.png",
+    icon: zooxIcon,
   },
 ];
 
@@ -103,7 +111,13 @@ export default function About() {
 
             <div className="bg-white rounded-2xl border border-gray-100 p-8 md:p-12">
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Start with the signals and workflows: capture the right data, cut the noise, and wire it into CI/CD so quality becomes automatic. Keep the UX simple so teams actually use it. Focus on outcomes, not activity. I also like exploring open datasets on the side-testing different ML models to see what patterns or predictions fall out. It keeps my instincts sharp and feeds back into the systems I build.
+                Start with the signals and workflows: capture the right data,
+                cut the noise, and wire it into CI/CD so quality becomes
+                automatic. Keep the UX simple so teams actually use it. Focus on
+                outcomes, not activity. I also like exploring open datasets on
+                the side—testing different ML models to see what patterns or
+                predictions fall out. It keeps my instincts sharp and feeds back
+                into the systems I build.
               </p>
 
               <div className="grid gap-4 md:grid-cols-3">
@@ -172,7 +186,6 @@ export default function About() {
                       alt={item.title}
                       className="w-full h-full object-cover rounded-full"
                     />
-
                   </div>
 
                   <div className="bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
@@ -182,7 +195,9 @@ export default function About() {
                       </span>
                     </div>
                     <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-                    <p className="text-sm text-gray-500 mb-3">{item.organization}</p>
+                    <p className="text-sm text-gray-500 mb-3">
+                      {item.organization}
+                    </p>
                     <p className="text-gray-700">{item.description}</p>
                   </div>
                 </motion.div>
@@ -201,11 +216,15 @@ export default function About() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-12 text-center">Core Competencies</h2>
+            <h2 className="text-3xl font-bold mb-12 text-center">
+              Core Competencies
+            </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border border-gray-100">
-                <h3 className="text-lg font-semibold mb-3">Product & Strategy</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Product & Strategy
+                </h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Roadmaps & prioritization</li>
                   <li>• Test strategy & metrics</li>
@@ -215,7 +234,9 @@ export default function About() {
               </div>
 
               <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border border-gray-100">
-                <h3 className="text-lg font-semibold mb-3">Telemetry & Performance</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Telemetry & Performance
+                </h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Crash/ANR diagnostics</li>
                   <li>• Baselines & regression detection</li>
@@ -225,7 +246,9 @@ export default function About() {
               </div>
 
               <div className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl border border-gray-100">
-                <h3 className="text-lg font-semibold mb-3">Automation & CI/CD</h3>
+                <h3 className="text-lg font-semibold mb-3">
+                  Automation & CI/CD
+                </h3>
                 <ul className="space-y-2 text-gray-700">
                   <li>• Pipeline validation gates</li>
                   <li>• Visual diffing & asset checks</li>
@@ -261,7 +284,8 @@ export default function About() {
               Always Happy to Chat
             </h2>
             <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-              I help teams ship cleaner builds, stronger telemetry, better signals, and automation baked into the pipeline.
+              I help teams ship cleaner builds, stronger telemetry, better
+              signals, and automation baked into the pipeline.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to={createPageUrl("Contact")}>
