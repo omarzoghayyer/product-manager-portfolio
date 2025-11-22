@@ -6,8 +6,7 @@ import { Button } from "../components/ui/button";
 import { Briefcase, GraduationCap, Award, Cpu, Activity, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Use PUBLIC_URL so paths are absolute from the app root
-const AVATAR_URL = process.env.PUBLIC_URL + "/images/thumbs/oz.png";
+const AVATAR_URL = "/images/thumbs/oz.png";
 
 const timeline = [
   {
@@ -32,7 +31,7 @@ const timeline = [
     organization: "Electronic Arts",
     description:
       "Owned performance and telemetry tooling for Battlefield, including automation pipelines that captured structured screenshots and in-game visuals for ML-based anomaly and visual regression detection. Drove crash/ANR diagnostics, UI stall detection, and stability checks that fed CI/CD gates and improved release quality across platforms.",
-    icon: "/images/thumbs/Battlefield-6.jpg", // fixed `/mages` -> `/images`
+    icon: "/images/thumbs/Battlefield-6.jpg", // fixed `/mages`
   },
   {
     year: "2020 – 2021",
@@ -40,7 +39,7 @@ const timeline = [
     organization: "Electronic Arts – Industrial Toys",
     description:
       "Worked on the Unreal Engine 4 upgrade, validating systems and updating studio tools. Supported in-house automation and profiling tools and improved front-end workflows for the equipment system while building anti-cheat, profanity, and performance test coverage.",
-    icon: "/images/thumbs/Battlefield_Mobile_Play_Store_App_Icon.PNG", // fixed `/mages`
+    icon: "/images/thumbs/Battlefield_Mobile_Play_Store_App_Icon.PNG",
   },
   {
     year: "2019 – 2020",
@@ -169,10 +168,11 @@ export default function About() {
                 >
                   <div className="absolute -left-[1.6rem] top-0 w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary)] flex items-center justify-center bg-white">
                     <img
-                      src={process.env.PUBLIC_URL + item.icon}
+                      src={item.icon}
                       alt={item.title}
                       className="w-full h-full object-cover rounded-full"
                     />
+
                   </div>
 
                   <div className="bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
