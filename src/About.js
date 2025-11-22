@@ -6,7 +6,7 @@ import { Button } from "../components/ui/button";
 import { Award, Cpu, Activity, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-// ✅ Import images from src/assets
+// Import images from src/assets (make sure these files exist)
 import avatarImg from "../assets/oz.png";
 import simsIcon from "../assets/sims.PNG";
 import scuIcon from "../assets/Santa_Clara_U_Seal.svg.png";
@@ -98,7 +98,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* Approach */}
+            {/* My Approach */}
             <section className="py-20">
                 <div className="max-w-4xl mx-auto px-6 lg:px-8">
                     <motion.div
