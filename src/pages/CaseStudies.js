@@ -12,6 +12,13 @@ import ReaderNotification from "../components/shared/ReaderNotification";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Search, Filter, Tag, Zap } from "lucide-react";
 
+// src/data/caseStudies.js
+import nxhl2Thumb from "../assets/nxIh2.jpg";
+import teslaThumb from "../assets/Tesla.PNG";
+import starlinkThumb from "../assets/starlink_sweep_2025-11-13_0510UTC.gif";
+// add more if you have more thumbnails
+
+
 const INDUSTRIES = [
   "All",
   "Automotive",
@@ -44,7 +51,7 @@ const demoCases = [
     sector: "Safety & Compliance",
     problem_statement:
       "High-profile Autopilot incidents and opaque safety data widened the trust gap between what people think Autopilot is and what it actually does. I designed an Open Safety Program—open telemetry, near-miss taxonomy, and public dashboards—to start closing that gap.",
-    thumbnail_url: `${process.env.PUBLIC_URL}/images/thumbs/Tesla.PNG`,
+    thumbnail_url: teslaThumb,
     Post_on_x: "https://x.com/OZoghayyer/status/1984783106818392169",
     created_date: "2025-09-10T09:00:00Z",
     likes: 41,
@@ -57,7 +64,7 @@ const demoCases = [
     sector: "Forecasting & Analytics",
     problem_statement:
       "I ran quick linear and log-linear baselines on UCS satellite data (2000–2022) to estimate how many satellites could be in orbit by 2030.",
-    thumbnail_url: "/images/thumbs/nxIh2.jpg",
+    thumbnail_url: nxhl2Thumb,
     created_date: "2025-11-07T12:00:00Z",
     likes: 1000,
     external_url: "https://x.com/OZoghayyer/status/1986701399888109900",
@@ -95,8 +102,7 @@ print("2030 log-linear:", np.exp(loglin.predict([[2030]])))`,
       "Give non-specialists—product folks, policy makers, and curious people on X—a concrete mental model for modern LEO constellations. Make it easier to talk about coverage, congestion, and night-sky impact with a single artifact instead of abstract numbers.",
     key_learnings:
       "Open data plus a small, well-structured pipeline can turn something abstract (thousands of satellites in LEO) into an intuitive picture. Good visuals do more than decorate a post—they compress a lot of orbital mechanics into one glance.",
-    thumbnail_url: "images/thumbs/starlink_sweep_2025-11-13_0510UTC.gif",
-
+    thumbnail_url: starlinkThumb,
     figure_url:
       "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle",
     likes: 100,
