@@ -1,4 +1,10 @@
 // src/data/caseStudies.js
+// src/data/caseStudies.js
+import nxIh2Thumb from "../assets/nxIh2.jpg";
+import teslaThumb from "../assets/Tesla.PNG";
+
+// ...
+
 export const caseStudies = [
     {
         id: "satellite-forecast-2030",
@@ -7,7 +13,7 @@ export const caseStudies = [
         company_logo_url: "/images/logos/satellite.png",
         industry: "Space & Data",
         sector: "Forecasting & Analytics",
-        thumbnail_url: "/images/thumbs/nxIh2.jpg",
+        thumbnail_url: nxIh2Thumb,
 
         problem_statement:
             "Constellations like Starlink caused a sharp jump in satellites entering orbit between 2019–2020. I wanted to see what baseline models would predict for 2030 using UCS data from 2000–2022.",
@@ -85,7 +91,7 @@ export const caseStudies = [
         company_logo_url: "/images/logos/tesla.png",
         industry: "Automotive",
         sector: "Safety & Compliance",
-        thumbnail_url: `${process.env.PUBLIC_URL}/images/thumbs/Tesla.PNG`,
+        thumbnail_url: teslaThumb,
         problem_statement:
             "Lack of transparent safety data undermines public trust in autonomous vehicle technology",
         problem_description: `

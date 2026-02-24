@@ -12,12 +12,10 @@ import ReaderNotification from "../components/shared/ReaderNotification";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Search, Filter, Tag, Zap } from "lucide-react";
 
-// src/data/caseStudies.js
-import nxhl2Thumb from "../assets/nxIh2.jpg";
+// Local thumbnails for demo cases (from src/assets)
+import nxIh2Thumb from "../assets/nxIh2.jpg";
 import teslaThumb from "../assets/Tesla.PNG";
 import starlinkThumb from "../assets/starlink_sweep_2025-11-13_0510UTC.gif";
-// add more if you have more thumbnails
-
 
 const INDUSTRIES = [
   "All",
@@ -51,6 +49,19 @@ const demoCases = [
     sector: "Safety & Compliance",
     problem_statement:
       "High-profile Autopilot incidents and opaque safety data widened the trust gap between what people think Autopilot is and what it actually does. I designed an Open Safety Program—open telemetry, near-miss taxonomy, and public dashboards—to start closing that gap.",
+
+    // 🔽 add these, copied from CaseStudyDetail.js
+    problem_description:
+      "Autopilot incidents, confusing 'self-driving' messaging, and opaque safety data widened the trust gap between public perception and Autopilot’s actual capabilities.",
+    root_cause_analysis:
+      "Marketing frames Autopilot like autonomy while the real system is still driver assistance. Telemetry is siloed, near-miss taxonomies vary across teams, and there is no publicly accessible dashboard showing performance trends or failure context. This mismatch between perception and reality fuels the Trust Gap.",
+    proposed_solution:
+      "An Open Safety Program that publishes anonymized safety and near-miss data, creates a unified incident taxonomy, and incentivizes external research. This sits alongside a broader safety ecosystem: PROMETHEUS (digital-twin simulations before release), AETHER (human-in-the-loop behavior/adaptiveness), ORION (vehicle-to-cloud hazard network), PERSEUS (LiDAR-assisted training fleet), and a fully open transparency layer that allows the public to track improvements over time.",
+    expected_impact:
+      "Reduce misinformation, align expectations, and provide a reproducible evidence trail for regulators, researchers, and drivers. Modeled impact from the slide deck includes: a +10-point improvement in the Trust Index in 12 months, significantly faster regulatory iteration, and long-term crash reduction based on systemwide hazard sharing.",
+    key_learnings:
+      "Transparency is a performance accelerator. When definitions become reproducible and telemetry becomes public, debate becomes data, trust rises, and safety iterates faster. The safest car isn’t the one with perfect automation- it’s the one that keeps learning.",
+
     thumbnail_url: teslaThumb,
     Post_on_x: "https://x.com/OZoghayyer/status/1984783106818392169",
     created_date: "2025-09-10T09:00:00Z",
@@ -64,25 +75,26 @@ const demoCases = [
     sector: "Forecasting & Analytics",
     problem_statement:
       "I ran quick linear and log-linear baselines on UCS satellite data (2000–2022) to estimate how many satellites could be in orbit by 2030.",
-    thumbnail_url: nxhl2Thumb,
+
+    // 🔽 add these too (based on your CaseStudyDetail demo-001)
+    problem_description:
+      "Satellite counts have been accelerating (Starlink et al.). I wanted a fast, transparent baseline before building richer models or segmenting by LEO/MEO/GEO.",
+    root_cause_analysis:
+      "Most public discussions cite growth loosely; few show calibrated, reproducible baselines with simple model fit and clear assumptions.",
+    proposed_solution:
+      "Fit linear and log-linear regressions to annual totals; report R² and a 2030 point estimate range; flag where segmentation or non-linear models might improve fit.",
+    expected_impact:
+      "Set a transparent baseline for future, more nuanced models\n- Communicate uncertainty with a range vs. single-point hype\n- Create a reproducible artifact (code + chart)",
+    key_learnings:
+      "Growth is non-linear. Even simple models bracket ~1.3K–3.4K launches/year by 2030; better splits (LEO vs non-LEO, constellation eras) should improve fit.",
+
+    thumbnail_url: nxIh2Thumb,
     created_date: "2025-11-07T12:00:00Z",
     likes: 1000,
     external_url: "https://x.com/OZoghayyer/status/1986701399888109900",
     figure_url: "https://github.com/omarzoghayyer/satellite-growth-2030",
     code_snippet: `# quick-and-dirty baseline
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LinearRegression
-
-df = pd.read_csv("ucs_satellites_by_year.csv")
-X = df[['year']].values
-y = df['total'].values
-
-lin = LinearRegression().fit(X, y)
-loglin = LinearRegression().fit(X, np.log(y))
-
-print("2030 linear:", lin.predict([[2030]]))
-print("2030 log-linear:", np.exp(loglin.predict([[2030]])))`,
+    ...`,
   },
   {
     id: "demo-003",
@@ -147,9 +159,7 @@ export default function CaseStudies() {
     );
 
     try {
-      // Use server-side increment when available. Expect response like { likes: number } or the updated resource.
       const res = await zog.entities.CaseStudy.increment(caseStudyId);
-      // If server returns an object with likes, use it; otherwise, if it returns the updated resource, try to read .likes
       const serverLikes =
         typeof res === "number" ? res : res?.likes ?? newLikes;
 
@@ -159,7 +169,6 @@ export default function CaseStudies() {
         )
       );
     } catch (err) {
-      // Backend may be unavailable (demo mode). Keep the optimistic local increment.
       console.warn(
         "Like increment failed (backend unreachable). Keeping optimistic count.",
         err
@@ -321,12 +330,12 @@ export default function CaseStudies() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
               >
-                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 h-full flex flex-col group">
+                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
                   <Link
                     to={`${createPageUrl("CaseStudyDetail")}?id=${caseStudy.id}`}
-                    className="flex-1 flex flex-col"
+                    state={{ caseStudy }}
+                    className="block group"
                   >
-
                     {caseStudy.thumbnail_url ? (
                       <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-50 overflow-hidden">
                         {caseStudy.thumbnail_url
@@ -349,6 +358,7 @@ export default function CaseStudies() {
                         )}
                       </div>
                     ) : (
+
                       <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
                         <Zap className="w-16 h-16 text-blue-300" />
                       </div>
@@ -384,7 +394,6 @@ export default function CaseStudies() {
                             rel="noopener noreferrer"
                             className="underline hover:text-[var(--primary)]"
                             onClick={(e) => {
-                              // Don't trigger the parent <Link> navigation
                               e.stopPropagation();
                             }}
                           >
@@ -401,7 +410,6 @@ export default function CaseStudies() {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 underline hover:text-[var(--primary)]"
                             onClick={(e) => {
-                              // prevent the parent <Link> from hijacking the click
                               e.stopPropagation();
                             }}
                           >
@@ -412,7 +420,6 @@ export default function CaseStudies() {
                           </a>
                         </p>
                       )}
-
                     </div>
                   </Link>
 
