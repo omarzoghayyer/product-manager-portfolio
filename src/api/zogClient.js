@@ -44,13 +44,10 @@ function saveInsights(items) {
      http://127.0.0.1:8000/api/forecast/news
    ──────────────────────────────────────────── */
 
-const RAW_BASE = process.env.REACT_APP_API_URL || "http://127.0.0.1:8000";
+const RAW_BASE = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 const BASE = RAW_BASE.endsWith("/") ? RAW_BASE.slice(0, -1) : RAW_BASE;
 
-const RAW_PREFIX =
-  typeof process !== "undefined"
-    ? process.env.REACT_APP_API_PREFIX ?? "/api"
-    : "/api";
+const RAW_PREFIX = import.meta.env.VITE_API_PREFIX ?? "/api";
 const PREFIX = RAW_PREFIX === "/" ? "" : RAW_PREFIX || "/api";
 const CLEAN_PREFIX = PREFIX.endsWith("/") ? PREFIX.slice(0, -1) : PREFIX;
 
@@ -61,7 +58,7 @@ function join(base, prefix, path) {
 }
 
 async function fetchJSON(path, { method = "GET", body, timeoutMs = 6000 } = {}) {
-  if (!BASE) throw new Error("API not configured (REACT_APP_API_URL missing)");
+  if (!BASE) throw new Error("API not configured (VITE_API_URL missing)");
   const controller = new AbortController();
   const to = setTimeout(() => controller.abort(), timeoutMs);
 

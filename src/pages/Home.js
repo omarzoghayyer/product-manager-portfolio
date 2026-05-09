@@ -58,7 +58,7 @@ export default function Home() {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-700 mb-4 max-w-3xl mx-auto font-light">
-              I’m a technical product lead for platform tools, telemetry, and game infrastructure at EA.
+              Technical product lead for platform tools, telemetry, and game infrastructure at EA.
             </p>
 
             <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
@@ -215,6 +215,9 @@ export default function Home() {
                             src={caseStudy.thumbnail_url}
                             alt={caseStudy.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                            width={640}
+                            height={360}
                           />
                         </div>
                       )}

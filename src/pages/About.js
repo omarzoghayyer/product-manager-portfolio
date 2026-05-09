@@ -18,7 +18,7 @@ const TIMELINE = [
     title: "Maxis (The Sims Lab)",
     organization: "Electronic Arts",
     description:
-      "I lead performance systems, telemetry pipelines, and automation tooling that help engineers find issues faster, cut regressions, and ship more stable builds across multiple EA titles.",
+      "I own the tech and tools for my team and lead the development of performance systems, telemetry pipelines, and automation tooling that engineers across Maxis and other EA studios depend on. Beyond delivery, I drive R&D into how AI — including LLMs — can be responsibly integrated to increase team productivity, accelerating workflows without compromising quality or safety. My work spans tool ownership, cross-studio adoption, and pushing the boundary of what's possible when AI is embedded directly into how teams build and ship.",
     icon: simsIcon,
   },
   {
@@ -59,17 +59,17 @@ const PILLARS = [
   {
     icon: Cpu,
     label: "Performance",
-    body: "Thread stalls, ANRs, crashes, device heat-profile, baseline, and regress automatically.",
+    body: "Crash rates, thread stalls, ANRs, and device heat-profiles — automatically baselined, regressed, and surfaced before they reach players.",
   },
   {
     icon: Activity,
     label: "Telemetry",
-    body: "Unified logs/metrics, visual diffs, anomaly flags; usable dashboards over raw firehose.",
+    body: "Unified signal across logs, metrics, and visual diffs. Actionable dashboards that teams trust — not raw firehoses they ignore.",
   },
   {
     icon: Award,
-    label: "Automation",
-    body: "Guardrails in pipelines, not docs. Ship checks where devs live.",
+    label: "AI & Automation",
+    body: "LLM tooling and ML-driven guardrails embedded in the pipeline. Quality enforced at the source, not documented in a wiki.",
   },
 ];
 
@@ -88,7 +88,7 @@ const SKILLS = [
   },
   {
     title: "AI & Analytics",
-    items: ["ML-assisted anomaly detection", "Risk scoring & early alerts", "BigQuery / SQL pipelines", "MBA Data Science (SCU)"],
+    items: ["LLM tooling — design to deployment", "ML-driven anomaly detection & forecasting", "S&P 500 price prediction (custom LLM)", "BigQuery / SQL pipelines", "MBA Data Science, SCU"],
   },
 ];
 
@@ -116,7 +116,7 @@ function TimelineItem({ item, index }) {
       className="relative pl-12 pb-8 border-l-2 border-gray-200 last:border-l-0 last:pb-0"
     >
       <div className="absolute -left-[1.6rem] top-0 w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary)] flex items-center justify-center bg-white">
-        <img src={item.icon} alt={item.title} className="w-full h-full object-cover rounded-full" />
+        <img src={item.icon} alt={item.title} className="w-full h-full object-cover rounded-full" loading="lazy" width={48} height={48} />
       </div>
 
       <div className="bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">
@@ -173,15 +173,20 @@ export default function About() {
                 src={avatarImg}
                 alt="Omar Zoghayyer"
                 className="w-32 h-32 mx-auto rounded-full object-cover shadow-lg"
+                width={128}
+                height={128}
+                fetchpriority="high"
               />
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About Me</h1>
 
             <p className="text-xl text-gray-600 leading-relaxed">
-              I build developer tooling for performance, telemetry, and automation, systems that shorten
-              time-to-diagnose and raise stability at scale. I partner with engineering, infra, and ops to land
-              tools people actually use. Currently at EA; MBA in Data Science (SCU).
+              I lead performance tooling, telemetry systems, and AI-powered automation that engineering teams
+              across EA depend on to ship stable, high-quality games. My work connects signal to action —
+              from crash diagnostics and regression detection to LLM tooling deployed at the studio level.
+              I partner with engineering, infra, and product leadership to turn complex data into decisions that move fast.
+              Currently at EA; MBA in Data Science (SCU).
             </p>
           </motion.div>
         </div>
@@ -195,11 +200,12 @@ export default function About() {
 
             <div className="bg-white rounded-2xl border border-gray-100 p-8 md:p-12">
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                Start with the signals and workflows: capture the right data, cut the noise, and wire it into
-                CI/CD so quality becomes automatic. Keep the UX simple so teams actually use it. Focus on
-                outcomes, not activity. I also like exploring open datasets on the side—testing different ML
-                models to see what patterns or predictions fall out. It keeps my instincts sharp and feeds back
-                into the systems I build.
+                Define the outcome, then build backward. I focus on getting the right signals into the right
+                hands — wired into CI/CD, surfaced in dashboards engineers actually open, enforced at the
+                gates that matter. At EA, I drive the AI tooling strategy that extends this across studios.
+                I also run independent research applying LLMs to financial markets, including a custom model
+                for S&P 500 price forecasting — it sharpens my judgment on model behavior, signal quality,
+                and the limits of prediction under real-world conditions.
               </p>
 
               <div className="grid gap-4 md:grid-cols-3">
@@ -248,8 +254,7 @@ export default function About() {
           <FadeInSection>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Always Happy to Chat</h2>
             <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-              I help teams ship cleaner builds, stronger telemetry, better signals, and automation baked into
-              the pipeline.
+              I partner with leaders building the infrastructure, tooling, and AI systems that let teams move faster and ship with confidence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to={createPageUrl("Contact")}>

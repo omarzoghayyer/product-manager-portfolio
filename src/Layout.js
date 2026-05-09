@@ -26,32 +26,6 @@ export default function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-[#FAFAF9]">
-      {/* Inline CSS variables (kept from your version) */}
-      <style>{`
-        :root {
-          --primary: #1e3a8a;
-          --primary-light: #3b82f6;
-          --text-primary: #1a1a1a;
-          --text-secondary: #6b7280;
-          --border: #e5e7eb;
-        }
-        .gradient-text {
-          background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        .geometric-pattern {
-          background-image: 
-            linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
-            linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
-            linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
-            linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
-          background-size: 40px 40px;
-          background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
-        }
-      `}</style>
-
       {/* Navbar */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-sm" : "bg-transparent"}`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">

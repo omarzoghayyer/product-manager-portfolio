@@ -9,9 +9,8 @@ const STORAGE_KEYS = {
     themes: "imi.themes.v1",
 };
 
-// Backend base URL (set REACT_APP_API_BASE in .env if you want to override)
-const API_BASE =
-    process.env.REACT_APP_API_BASE || "http://localhost:8000";
+// Backend base URL (set VITE_API_BASE in .env if you want to override)
+const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
 
 function load(key, fallback) {
     try {
