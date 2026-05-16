@@ -8,6 +8,7 @@ const About = lazy(() => import("./pages/About"));
 const CaseStudies = lazy(() => import("./pages/CaseStudies"));
 const CaseStudyDetail = lazy(() => import("./pages/CaseStudyDetail"));
 const Contact = lazy(() => import("./pages/Contact"));
+const TheOS = lazy(() => import("./pages/TheOS"));
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ export default function App() {
               <Route path="/case-studies" element={<CaseStudies />} />
               <Route path="/case-study" element={<CaseStudyDetail />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/the-os" element={<TheOS />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>

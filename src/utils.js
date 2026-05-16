@@ -7,6 +7,7 @@ export function createPageUrl(name) {
     CaseStudies: "/case-studies",
     CaseStudyDetail: "/case-study",
     Contact: "/contact",
+    TheOS: "/the-os",
   };
   return map[name] || "/";
 }
