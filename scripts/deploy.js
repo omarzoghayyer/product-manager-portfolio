@@ -15,6 +15,13 @@ fs.cpSync(dist, docs, { recursive: true });
 console.log("Copied dist/ → docs/");
 
 execSync("git add docs", { stdio: "inherit" });
+
+const status = execSync("git status --porcelain docs").toString().trim();
+if (!status) {
+  console.log("docs/ unchanged — already up to date, nothing to push.");
+  process.exit(0);
+}
+
 execSync('git commit -m "Deploy: update docs from dist"', { stdio: "inherit" });
 execSync("git push origin master", { stdio: "inherit" });
 console.log("Pushed to GitHub Pages (docs/)");
