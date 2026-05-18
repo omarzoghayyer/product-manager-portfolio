@@ -96,13 +96,13 @@ function OrbSparkles() {
 }
 
 const ICON_ACTIONS = [
-  { id: "msg",    Icon: MessageSquare, label: "Message",      demo: "chat" },
-  { id: "call",   Icon: Phone,         label: "Call",         demo: "msgs" },
-  { id: "ig",     Icon: Instagram,     label: "Instagram",    demo: "web"  },
-  { id: "notif",  Icon: Bell,          label: "Alerts",       demo: "notif"},
-  { id: "x",      Icon: XIcon,         label: "X",            demo: "x"    },
-  { id: "sat",    Icon: Satellite,     label: "Satellite",    demo: null   },
-  { id: "cam",    Icon: Camera,        label: "Camera",       demo: null   },
+  { id: "msg",   Icon: MessageSquare, label: "Message",   demo: "chat",  bg: "#1d6fe8",                                                                                   iconColor: "#fff" },
+  { id: "call",  Icon: Phone,         label: "Call",      demo: "msgs",  bg: "#30d158",                                                                                   iconColor: "#fff" },
+  { id: "ig",    Icon: Instagram,     label: "Instagram", demo: "web",   bg: "linear-gradient(135deg, #f9a825 0%, #e8384d 40%, #c92b8a 70%, #8e24cc 100%)",               iconColor: "#fff" },
+  { id: "notif", Icon: Bell,          label: "Alerts",    demo: "notif", bg: "#ff453a",                                                                                   iconColor: "#fff" },
+  { id: "x",     Icon: XIcon,         label: "X",         demo: "x",     bg: "#e7e9ea",                                                                                   iconColor: "#0f1419" },
+  { id: "sat",   Icon: Satellite,     label: "Satellite", demo: null,    bg: "rgba(255,255,255,0.09)",                                                                    iconColor: "rgba(255,255,255,0.55)" },
+  { id: "cam",   Icon: Camera,        label: "Camera",    demo: null,    bg: "rgba(255,255,255,0.09)",                                                                    iconColor: "rgba(255,255,255,0.55)" },
 ];
 
 function OrbScreen({ listening, onChipClick }) {
@@ -196,9 +196,9 @@ function OrbScreen({ listening, onChipClick }) {
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
               >
-                <ChevronUp style={{ width: 16, height: 16, color: "rgba(255,255,255,0.2)" }} />
+                <ChevronUp style={{ width: 16, height: 16, color: "rgba(255,255,255,0.55)" }} />
               </motion.div>
-              <p className="font-mono text-white/20" style={{ fontSize: 9, letterSpacing: "0.05em" }}>
+              <p className="font-mono" style={{ fontSize: 9, letterSpacing: "0.05em", color: "rgba(255,255,255,0.45)" }}>
                 SWIPE UP TO ACCESS APPS
               </p>
             </motion.div>
@@ -239,27 +239,23 @@ function OrbScreen({ listening, onChipClick }) {
 }
 
 function IconButton({ action, flashing, onPress }) {
-  const { Icon, label, demo } = action;
-  const linked = !!demo;
+  const { Icon, label, bg, iconColor } = action;
   return (
     <motion.button
       onClick={() => onPress(action)}
-      whileHover={{ scale: 1.12, y: -2 }}
-      whileTap={{ scale: 0.88 }}
+      whileHover={{ scale: 1.1, y: -2 }}
+      whileTap={{ scale: 0.9 }}
       animate={flashing ? {
-        boxShadow: ["0 0 0px rgba(255,255,255,0)", "0 0 14px rgba(255,255,255,0.3)", "0 0 0px rgba(255,255,255,0)"]
+        boxShadow: ["0 0 0px rgba(255,255,255,0)", "0 0 12px rgba(255,255,255,0.35)", "0 0 0px rgba(255,255,255,0)"]
       } : {}}
-      className="flex flex-col items-center gap-1.5"
+      className="flex flex-col items-center gap-1"
       style={{ outline: "none", background: "none", border: "none", cursor: "pointer" }}
     >
-      <div className="w-11 h-11 rounded-2xl flex items-center justify-center"
-        style={{
-          background: linked ? "rgba(59,130,246,0.15)" : "rgba(255,255,255,0.07)",
-          border: `1px solid ${linked ? "rgba(59,130,246,0.3)" : "rgba(255,255,255,0.1)"}`,
-        }}>
-        <Icon style={{ width: 18, height: 18, color: linked ? "#93c5fd" : "rgba(255,255,255,0.6)" }} />
+      <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+        style={{ background: bg }}>
+        <Icon style={{ width: 15, height: 15, color: iconColor }} />
       </div>
-      <span style={{ fontSize: 9, color: "rgba(255,255,255,0.45)", letterSpacing: "0.02em" }}>{label}</span>
+      <span style={{ fontSize: 8, color: "rgba(255,255,255,0.5)", letterSpacing: "0.02em" }}>{label}</span>
     </motion.button>
   );
 }
