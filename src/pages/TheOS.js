@@ -603,7 +603,7 @@ export default function TheOS() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6 border"
               style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.6)" }}>
               <div className="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse" />
-              In Active Development
+              Open Source
             </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4" style={{
               background: "linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #3b82f6 100%)",
@@ -612,10 +612,10 @@ export default function TheOS() {
               theOS
             </h1>
             <p className="text-base md:text-lg text-gray-300 mb-3 max-w-2xl mx-auto font-light">
-              A from-scratch mobile operating system written in Rust that replaces phone numbers and SIM cards with cryptographic identity.
+              The phone, rebuilt without compromise.
             </p>
             <p className="text-sm text-gray-500 max-w-xl mx-auto mb-8">
-              Phone numbers are a 150-year-old routing artifact from telegraph infrastructure — not a fundamental requirement for communication. theOS removes them entirely.
+              No phone number. No SIM card. No carrier. theOS replaces legacy telephony infrastructure with cryptographic identity, satellite connectivity, and a voice-first AI interface.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               {[{ v: "Rust", l: "Language" }, { v: "AArch64", l: "Architecture" }, { v: "EL1", l: "Privilege level" }, { v: "0", l: "SIM cards" }].map((s) => (
@@ -647,8 +647,8 @@ export default function TheOS() {
       <section id="demo" className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">No buttons. No home screen. Just speak.</h2>
-            <p className="text-gray-400 text-sm max-w-md mx-auto">Click a command to see what theOS renders.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">The interface is your voice.</h2>
+            <p className="text-gray-400 text-sm max-w-md mx-auto">No app grid. No home screen. Just ask.</p>
           </div>
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
             {/* Phone */}
@@ -710,17 +710,16 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">The 150-year-old problem</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">A different foundation.</h2>
             <div className="rounded-xl p-6 md:p-8" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                Most people don't realize that phone numbers are a 150-year-old routing artifact from telegraph infrastructure —
-                not a fundamental requirement for communication. theOS replaces them with{" "}
-                <span className="text-white font-medium">Ed25519 public keys.</span> Your identity is a keypair you own, not a number assigned by a carrier.
+                The phone number is a 150-year-old artifact of telegraph-era infrastructure. It was never designed for security, privacy, or user ownership.
+                Every call you make, every message you send, flows through a network{" "}
+                <span className="text-white font-medium">someone else controls.</span>
               </p>
               <p className="text-gray-500 text-sm leading-relaxed">
-                Every device has a keypair as its identity. Calls and messages are end-to-end encrypted with ChaCha20-Poly1305.
-                Peers are discovered via a custom Kademlia DHT — no central server. Connectivity routes over Starlink satellite —
-                no cellular modem, no SIM slot. No physical ports means no USB, no SIM — eliminating entire categories of hardware attacks.
+                theOS starts over. Your identity is an Ed25519 cryptographic keypair — generated on your device, owned by you, mathematically unforgeable.
+                Connectivity routes over Starlink satellite, not a carrier's towers. End-to-end encryption is not a feature. It is the only mode.
               </p>
             </div>
           </motion.div>
@@ -730,8 +729,8 @@ export default function TheOS() {
       {/* Comparison */}
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Everyone else hardened the existing system.</h2>
-          <p className="text-gray-500 text-sm text-center mb-8">theOS replaces the foundation.</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Others secured the existing system.</h2>
+          <p className="text-gray-500 text-sm text-center mb-8">theOS is built on a different premise entirely.</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -767,14 +766,14 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">How it works</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Engineered differently.</h2>
             <div className="space-y-3">
               {[
-                { label: "Cryptographic identity", body: "Every device has an Ed25519 keypair as its identity. Your public key is your address — not a number assigned by anyone." },
-                { label: "Encrypted transport", body: "All calls and messages are end-to-end encrypted with ChaCha20-Poly1305. Nobody in the path can read or tamper with your traffic." },
-                { label: "Peer discovery", body: "Peers are found via a custom Kademlia DHT. No central server, no directory, no authority that can be shut down or subpoenaed." },
-                { label: "Satellite connectivity", body: "All traffic routes over Starlink satellite — no cellular modem, no SIM slot, no carrier relationship required." },
-                { label: "No physical attack surface", body: "No USB port. No SIM slot. Eliminating the hardware entirely removes entire categories of physical and firmware attacks." },
+                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair generated on your device. It cannot be revoked, reassigned, or taken from you." },
+                { label: "End-to-end encryption", body: "Every call and message is encrypted with ChaCha20-Poly1305. There is no unencrypted mode. There is no fallback." },
+                { label: "Decentralised peer discovery", body: "Devices find each other through a custom Kademlia DHT. No central server. No single point of failure or control." },
+                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink. No cellular modem. No SIM slot. No carrier agreement. Works anywhere Starlink reaches." },
+                { label: "Minimal attack surface", body: "No USB port. No SIM slot. Fewer physical interfaces means fewer vectors for hardware and firmware compromise." },
               ].map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }} viewport={{ once: true }}
@@ -796,12 +795,12 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Current status</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Development</h2>
             <div className="rounded-xl p-6 md:p-8" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                The kernel boots on emulated AArch64 hardware (Google Pixel 7 Pro target) and produces serial output.
-                Written in Rust with{" "}
-                <span className="text-white font-medium">no standard library</span>, running at EL1 on bare metal.
+                The kernel runs on AArch64 bare metal — no operating system beneath it, no standard library, no runtime assumptions.
+                Written entirely in Rust, targeting the Google Pixel 7 Pro.{" "}
+                <span className="text-white font-medium">The foundation is in place.</span>
               </p>
               <div className="grid grid-cols-3 gap-3 mt-6">
                 {[
@@ -820,60 +819,40 @@ export default function TheOS() {
         </div>
       </section>
 
-      {/* Milestone */}
+      {/* Contribute */}
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6">Next milestone</h2>
-            <div className="rounded-xl p-6 md:p-8 mb-8"
-              style={{ background: "rgba(30,58,138,0.12)", border: "1px solid rgba(59,130,246,0.2)" }}>
-              <p className="text-sm text-gray-200 leading-relaxed mb-3">
-                Two devices making an encrypted voice call with
-                <span className="text-white font-semibold"> no SIM cards, no carrier, no phone numbers</span> —
-                identified only by Ed25519 keypairs, routed over Starlink satellite.
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Open to collaboration.</h2>
+            <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto mb-8">
+              theOS is open source. If you work in systems, kernels, cryptography, or distributed networking —
+              or simply believe that communication infrastructure should be owned by no one —
+              the README is the right place to start.
+            </p>
+
+            <div className="rounded-xl p-5 mb-8 text-left"
+              style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
+              <p className="text-white/60 text-xs font-mono mb-1">Access</p>
+              <p className="text-gray-300 text-sm">
+                The repository is currently private. To request access, send an email and introduce yourself.
               </p>
-              <p className="text-gray-500 text-sm">
-                That demo is the entire pitch. Show HN → NLnet grant → YC application → seed funding. Everything follows from a working call.
-              </p>
+              <Link to={createPageUrl("Contact")} className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mt-3">
+                Get in touch <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
-            <div className="flex flex-wrap justify-center gap-3 mb-8">
-              {["Show HN", "NLnet Grant", "YC Application", "Seed Funding"].map((step, i) => (
-                <div key={step} className="flex items-center gap-2">
-                  <div className="px-3 py-1.5 rounded-full text-gray-300 text-xs"
-                    style={{ border: "1px solid rgba(255,255,255,0.12)" }}>{step}</div>
-                  {i < 3 && <ChevronRight className="w-3.5 h-3.5 text-gray-700" />}
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
+
+            <div className="flex flex-wrap justify-center gap-3">
               <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer">
                 <Button className="text-white px-6 py-2 text-sm border-0"
                   style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
                   View on GitHub <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </a>
-              <Link to={createPageUrl("Contact")}>
+              <a href="https://github.com/omarzoghayyer/theOS/blob/main/README.md" target="_blank" rel="noopener noreferrer">
                 <Button className="text-white/70 px-6 py-2 text-sm"
                   style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                  Get in Touch <ChevronRight className="w-4 h-4 ml-1" />
+                  Read the README <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
-              </Link>
-            </div>
-
-            {/* Join the effort */}
-            <div className="rounded-xl p-6 text-left"
-              style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
-              <p className="text-white font-semibold text-sm mb-2">Want to contribute?</p>
-              <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                If you're interested in joining the effort — whether you're a kernel engineer, a Rust developer, or just someone who believes the phone number needs to die — start by reading the README. It covers the architecture, the current state of the codebase, and where help is most needed.
-              </p>
-              <a
-                href="https://github.com/omarzoghayyer/theOS/blob/main/README.md"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors"
-              >
-                Read the README <ChevronRight className="w-3.5 h-3.5" />
               </a>
             </div>
           </motion.div>
