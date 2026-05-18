@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-// src/Layout.js
 import { createPageUrl } from "./utils";
 import { Menu, X } from "lucide-react";
-
+import { analytics, logEvent } from "./firebase";
 import './style/index.css';
 
 const navigationItems = [
@@ -30,6 +29,14 @@ export default function Layout({ children }) {
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Fire a page_view event on every route change
+  useEffect(() => {
+    logEvent(analytics, "page_view", {
+      page_path: location.pathname,
+      page_title: document.title,
+    });
   }, [location.pathname]);
 
   const navScrolledBg = isDark ? "backdrop-blur-md shadow-sm shadow-black/60" : "bg-white/95 backdrop-blur-md shadow-sm";
