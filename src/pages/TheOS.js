@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Globe, MessageSquare, Phone, User, ChevronRight, Bell, ChevronLeft, Video, Mic, Instagram, Satellite, Camera, Clock, X as XIcon, Search } from "lucide-react";
+import { Shield, Globe, MessageSquare, Phone, User, ChevronRight, ChevronUp, Bell, ChevronLeft, Video, Mic, Instagram, Satellite, Camera, Clock, X as XIcon, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
 import { Button } from "../components/ui/button";
@@ -108,6 +108,14 @@ const ICON_ACTIONS = [
 function OrbScreen({ listening, onChipClick }) {
   const [flashedId, setFlashedId] = useState(null);
   const [orbHovered, setOrbHovered] = useState(false);
+  const [showApps, setShowApps] = useState(false);
+  const [dragStartY, setDragStartY] = useState(null);
+
+  const handlePointerDown = (e) => setDragStartY(e.clientY);
+  const handlePointerUp = (e) => {
+    if (dragStartY !== null && e.clientY - dragStartY < -24) setShowApps(true);
+    setDragStartY(null);
+  };
 
   const handleAction = (action) => {
     if (action.demo && onChipClick) {
@@ -119,14 +127,19 @@ function OrbScreen({ listening, onChipClick }) {
   };
 
   return (
-    <div className="flex flex-col h-full relative overflow-hidden" style={{ background: "linear-gradient(180deg, #04060f 0%, #060a18 60%, #04060f 100%)" }}>
+    <div
+      className="flex flex-col h-full relative overflow-hidden select-none"
+      style={{ background: "linear-gradient(180deg, #04060f 0%, #060a18 60%, #04060f 100%)" }}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+    >
       <Stars />
       <StatusBar />
       <div className="flex-1 flex flex-col items-center justify-center relative z-10" style={{ marginTop: -8 }}>
         {/* Orb */}
         <div
-          className="relative flex items-center justify-center mb-5 cursor-pointer"
-          style={{ width: 160, height: 160 }}
+          className="relative flex items-center justify-center cursor-pointer"
+          style={{ width: 160, height: 160, marginBottom: showApps ? 12 : 20 }}
           onMouseEnter={() => setOrbHovered(true)}
           onMouseLeave={() => setOrbHovered(false)}
         >
@@ -157,28 +170,69 @@ function OrbScreen({ listening, onChipClick }) {
           {orbHovered && <OrbSparkles />}
         </div>
 
-        <p className="text-white/80 text-xs font-medium mb-1">What do you want to do?</p>
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full mb-5"
-          style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-          <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-          <span className="text-xs font-mono text-white/40">
-            Hey OS · {listening ? "listening…" : "always listening"} · 5mW
+        <p className="text-white/70 font-medium mb-1.5" style={{ fontSize: 11 }}>What do you want to do?</p>
+
+        {/* Pill — compact, no 5mW */}
+        <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full mb-4"
+          style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
+          <div className="w-1 h-1 rounded-full bg-white/30" />
+          <span className="font-mono text-white/30" style={{ fontSize: 9 }}>
+            Hey OS · {listening ? "listening…" : "always listening"}
           </span>
         </div>
 
-        {/* Icon action grid: 4 + 3 */}
-        <div className="flex flex-col items-center gap-3 px-4 w-full">
-          <div className="flex justify-center gap-4">
-            {ICON_ACTIONS.slice(0, 4).map((a) => (
-              <IconButton key={a.id} action={a} flashing={flashedId === a.id} onPress={handleAction} />
-            ))}
-          </div>
-          <div className="flex justify-center gap-4">
-            {ICON_ACTIONS.slice(4).map((a) => (
-              <IconButton key={a.id} action={a} flashing={flashedId === a.id} onPress={handleAction} />
-            ))}
-          </div>
-        </div>
+        {/* FTUE swipe hint */}
+        <AnimatePresence>
+          {!showApps && (
+            <motion.div
+              key="ftue"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.4 }}
+              className="flex flex-col items-center gap-1 mt-2"
+            >
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              >
+                <ChevronUp style={{ width: 16, height: 16, color: "rgba(255,255,255,0.2)" }} />
+              </motion.div>
+              <p className="font-mono text-white/20" style={{ fontSize: 9, letterSpacing: "0.05em" }}>
+                SWIPE UP TO ACCESS APPS
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* App grid — slides in on swipe */}
+        <AnimatePresence>
+          {showApps && (
+            <motion.div
+              key="apps"
+              initial={{ opacity: 0, y: 48 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 48 }}
+              transition={{ type: "spring", stiffness: 340, damping: 30 }}
+              className="flex flex-col items-center gap-3 px-4 w-full mt-2"
+            >
+              <div className="w-8 h-0.5 rounded-full mb-1" style={{ background: "rgba(255,255,255,0.1)" }} />
+              <div className="flex justify-center gap-4">
+                {ICON_ACTIONS.slice(0, 4).map((a) => (
+                  <IconButton key={a.id} action={a} flashing={flashedId === a.id} onPress={handleAction} />
+                ))}
+              </div>
+              <div className="flex justify-center gap-4">
+                {ICON_ACTIONS.slice(4).map((a) => (
+                  <IconButton key={a.id} action={a} flashing={flashedId === a.id} onPress={handleAction} />
+                ))}
+              </div>
+              <p className="text-white/15 text-center mt-1" style={{ fontSize: 8, letterSpacing: "0.04em" }}>
+                WEB PROXY · NO INSTALL · NO TRACKING
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
