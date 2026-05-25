@@ -149,7 +149,7 @@ export default function Contact() {
                   <span>sfzoghayyer@gmail.com</span>
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/omarzoghayyer"
+                  href="https://www.linkedin.com/in/omarjzoghayyer/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-gray-700 hover:text-[var(--primary)] transition-colors"

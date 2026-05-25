@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
 import { Button } from "../components/ui/button";
 import { Award, Cpu, Activity, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import avatarImg from "../assets/oz.png";
 import simsIcon from "../assets/sims.PNG";
@@ -107,6 +107,8 @@ function FadeInSection({ children, className }) {
 }
 
 function TimelineItem({ item, index }) {
+  const [iconHovered, setIconHovered] = useState(false);
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -115,8 +117,29 @@ function TimelineItem({ item, index }) {
       viewport={{ once: true }}
       className="relative pl-12 pb-8 border-l-2 border-gray-200 last:border-l-0 last:pb-0"
     >
-      <div className="absolute -left-[1.6rem] top-0 w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary)] flex items-center justify-center bg-white">
-        <img src={item.icon} alt={item.title} className="w-full h-full object-cover rounded-full" loading="lazy" width={48} height={48} />
+      <div
+        className="absolute -left-[1.6rem] top-0 z-10"
+        onMouseEnter={() => setIconHovered(true)}
+        onMouseLeave={() => setIconHovered(false)}
+      >
+        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[var(--primary)] bg-white cursor-pointer">
+          <img src={item.icon} alt={item.title} className="w-full h-full object-cover" loading="lazy" width={48} height={48} />
+        </div>
+
+        <AnimatePresence>
+          {iconHovered && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.6, x: -8 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              transition={{ type: "spring", stiffness: 340, damping: 24 }}
+              className="absolute left-14 top-0 z-50 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
+              style={{ width: 160, height: 160 }}
+            >
+              <img src={item.icon} alt={item.title} className="w-full h-full object-contain p-3" />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-shadow">

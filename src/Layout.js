@@ -54,7 +54,7 @@ export default function Layout({ children }) {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <Link to={createPageUrl("Home")} className={`text-xl font-semibold tracking-tight hover:opacity-70 transition-opacity ${logoColor}`}>
-              OZ
+              Zoghayyer
             </Link>
             <div className="hidden md:flex items-center gap-8">
               {navigationItems.map((item) => (
@@ -103,7 +103,7 @@ export default function Layout({ children }) {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
               <p className={`text-sm font-medium ${isDark ? "text-white" : "text-gray-900"}`}>Omar Zoghayyer</p>
-              <p className={`text-sm mt-1 ${isDark ? "text-white/40" : "text-gray-500"}`}>Technical Product & Strategy Professional</p>
+              <p className={`text-sm mt-1 ${isDark ? "text-white/40" : "text-gray-500"}`}>Technical Product Leader</p>
             </div>
             <div className="flex gap-6">
               <a

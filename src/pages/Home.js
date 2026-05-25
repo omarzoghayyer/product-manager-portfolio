@@ -4,13 +4,11 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, Cpu, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 
-import ReaderNotification from "../components/shared/ReaderNotification";
 import { createPageUrl } from "../utils";
 import { Button } from "../components/ui/button";
 
 // ⬇️ local hard-coded content
 import { caseStudies } from "../data/caseStudies";
-import { insights } from "../data/insights";
 
 export default function Home() {
   // featured case studies (max 4). If fewer than 4 are explicitly featured,
@@ -23,21 +21,8 @@ export default function Home() {
     return [...featured, ...others];
   }, []);
 
-  // latest insights (max 3)
-  const latestInsights = useMemo(
-    () =>
-      [...insights]
-        .sort((a, b) => new Date(b.created_date) - new Date(a.created_date))
-        .slice(0, 3),
-    []
-  );
-
-  const allContent = [...featuredCases, ...latestInsights];
-
   return (
     <div className="relative">
-      <ReaderNotification items={allContent} type="case study" />
-
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 geometric-pattern opacity-20" />
@@ -58,7 +43,7 @@ export default function Home() {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-700 mb-4 max-w-3xl mx-auto font-light">
-              Technical product lead for platform tools, telemetry, and game infrastructure at EA.
+              Technical Product Leader for platform tools, telemetry, and game infrastructure at EA.
             </p>
 
             <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">

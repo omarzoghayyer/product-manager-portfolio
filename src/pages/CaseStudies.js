@@ -8,7 +8,6 @@ import { Badge } from "../components/ui/badge";
 import { Skeleton } from "../components/ui/skeleton";
 import { motion } from "framer-motion";
 import LikeButton from "../components/shared/LikeButton";
-import ReaderNotification from "../components/shared/ReaderNotification";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Search, Filter, Tag, Zap } from "lucide-react";
 
@@ -90,7 +89,7 @@ const demoCases = [
 
     thumbnail_url: nxIh2Thumb,
     created_date: "2025-11-07T12:00:00Z",
-    likes: 1000,
+    likes: 12,
     external_url: "https://x.com/OZoghayyer/status/1986701399888109900",
     figure_url: "https://github.com/omarzoghayyer/satellite-growth-2030",
     code_snippet: `# quick-and-dirty baseline
@@ -197,8 +196,6 @@ export default function CaseStudies() {
 
   return (
     <div className="min-h-screen py-20">
-      <ReaderNotification items={caseStudies} type="case study" />
-
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -322,19 +319,20 @@ export default function CaseStudies() {
             </p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
             {filteredCases.map((caseStudy, index) => (
               <motion.div
                 key={caseStudy.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
+                className="h-full"
               >
-                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group h-full flex flex-col">
                   <Link
                     to={`${createPageUrl("CaseStudyDetail")}?id=${caseStudy.id}`}
                     state={{ caseStudy }}
-                    className="block group"
+                    className="flex flex-col flex-1"
                   >
                     {caseStudy.thumbnail_url ? (
                       <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-50 overflow-hidden">
@@ -364,7 +362,7 @@ export default function CaseStudies() {
                       </div>
                     )}
 
-                    <div className="p-6 flex-1 flex flex-col">
+                    <div className="p-6 flex-1 flex flex-col min-h-[220px]">
                       <div className="flex items-center gap-2 mb-3 flex-wrap">
                         <Badge className="bg-blue-50 text-[var(--primary)] border-blue-100">
                           {caseStudy.industry}

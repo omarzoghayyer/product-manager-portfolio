@@ -44,20 +44,14 @@ export const caseStudies = [
 `,
 
         key_learnings: `
-- Growth is highly nonlinear after 2019  
-- Even simple models disagree by more than 2x, so ranges matter  
-- The 2019–2020 Starlink spike introduces structural breaks that should be modeled separately  
-- Publishing the code builds trust and keeps analysis accountable
-`,
-        key_learnings: `
-- Growth is highly nonlinear after 2019  
-- Even simple models disagree by more than 2x, so ranges matter  
-- The 2019–2020 Starlink spike introduces structural breaks that should be modeled separately  
+- Growth is highly nonlinear after 2019
+- Even simple models disagree by more than 2x, so ranges matter
+- The 2019–2020 Starlink spike introduces structural breaks that should be modeled separately
 - Publishing the code builds trust and keeps analysis accountable
 `,
         created_date: "2025-11-07",
         featured: false,
-        likes: 100,
+        likes: 12,
 
         // Optional extras your CaseStudyDetail page will render via ReactMarkdown
         problem_description_extra: `
