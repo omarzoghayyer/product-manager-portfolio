@@ -51,7 +51,7 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to={createPageUrl("TheOS")}>
+              <Link to={createPageUrl("CaseStudies")}>
                 <Button
                   size="lg"
                   className="bg-[var(--primary)] hover:bg-[var(--primary-light)] text-white px-8 py-6 text-base"
