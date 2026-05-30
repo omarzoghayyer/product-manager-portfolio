@@ -5,7 +5,7 @@
     font-family="Georgia, 'Times New Roman', serif"
     font-size="86"
     font-weight="bold"
-    fill="#1d4ed8"
+    fill="#3b82f6"
   >O</text>
   <!-- Z — overlapping, lower right -->
   <text
@@ -13,6 +13,6 @@
     font-family="Georgia, 'Times New Roman', serif"
     font-size="86"
     font-weight="bold"
-    fill="#1d4ed8"
+    fill="#3b82f6"
   >Z</text>
 </svg>

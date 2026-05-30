@@ -9,7 +9,7 @@ const path = require("path");
 const W = 128, H = 128;
 const px = new Uint8Array(W * H * 4); // RGBA, default 0 (transparent)
 
-const BLUE = [29, 78, 216]; // #1d4ed8
+const BLUE = [59, 130, 246]; // #3b82f6
 
 function setPixel(x, y, r, g, b, a = 255) {
   if (x < 0 || x >= W || y < 0 || y >= H) return;

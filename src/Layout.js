@@ -9,6 +9,7 @@ const navigationItems = [
   { title: "Home", url: createPageUrl("Home") },
   { title: "About", url: createPageUrl("About") },
   { title: "Problem Solving", url: createPageUrl("CaseStudies") },
+  { title: "theOS", url: createPageUrl("TheOS") },
   { title: "Contact Me", url: createPageUrl("Contact") },
 ];
 

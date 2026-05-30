@@ -651,9 +651,9 @@ export default function TheOS() {
         <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6 border"
-              style={{ background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.6)" }}>
-              <div className="w-1.5 h-1.5 rounded-full bg-white/50 animate-pulse" />
-              Open Source
+              style={{ background: "rgba(59,130,246,0.08)", borderColor: "rgba(59,130,246,0.25)", color: "rgba(147,197,253,0.9)" }}>
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+              547 tests green · actively building
             </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4" style={{
               background: "linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #3b82f6 100%)",
@@ -668,7 +668,7 @@ export default function TheOS() {
               No phone number. No SIM card. No carrier. theOS replaces legacy telephony infrastructure with cryptographic identity, satellite connectivity, and a voice-first AI interface.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
-              {[{ v: "Rust", l: "Language" }, { v: "AArch64", l: "Architecture" }, { v: "EL1", l: "Privilege level" }, { v: "0", l: "SIM cards" }].map((s) => (
+              {[{ v: "Rust", l: "Language" }, { v: "AArch64", l: "Architecture" }, { v: "EL1", l: "Privilege level" }, { v: "547", l: "Tests green" }].map((s) => (
                 <div key={s.l} className="text-center">
                   <p className="text-2xl font-bold text-white">{s.v}</p>
                   <p className="text-gray-500 text-xs mt-0.5">{s.l}</p>
@@ -819,11 +819,11 @@ export default function TheOS() {
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Engineered differently.</h2>
             <div className="space-y-3">
               {[
-                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair generated on your device. It cannot be revoked, reassigned, or taken from you." },
-                { label: "End-to-end encryption", body: "Every call and message is encrypted with ChaCha20-Poly1305. There is no unencrypted mode. There is no fallback." },
-                { label: "Decentralised peer discovery", body: "Devices find each other through a custom Kademlia DHT. No central server. No single point of failure or control." },
-                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink. No cellular modem. No SIM slot. No carrier agreement. Works anywhere Starlink reaches." },
-                { label: "Minimal attack surface", body: "No USB port. No SIM slot. Fewer physical interfaces means fewer vectors for hardware and firmware compromise." },
+                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair generated on your device. No username, no phone number, no account. It cannot be revoked, reassigned, or taken from you." },
+                { label: "Signal-grade session crypto", body: "X3DH establishes sessions. The Double Ratchet advances per message. ChaCha20-Poly1305 + HKDF encrypts the payload. Skipped-message keys are stashed and rotated. Built, tested, green." },
+                { label: "Decentralised peer discovery", body: "A custom Kademlia DHT maps @handles to Ed25519 keys to peer addresses — verified live against the running bootstrap server. No central directory. No single point of failure." },
+                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink via WiFi. No cellular modem. No SIM slot. No carrier agreement. Works anywhere Starlink reaches." },
+                { label: "Bare-metal Rust kernel", body: "#![no_std], AArch64 EL1, targeting the Google Pixel 7 Pro (Tensor G2). theos-kernel boots in QEMU. Hardware bring-up on real silicon is the next gate." },
               ].map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }} viewport={{ once: true }}
@@ -841,26 +841,84 @@ export default function TheOS() {
         </div>
       </section>
 
-      {/* Current status */}
+      {/* Build status */}
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Development</h2>
-            <div className="rounded-xl p-6 md:p-8" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
-              <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                The kernel runs on AArch64 bare metal — no operating system beneath it, no standard library, no runtime assumptions.
-                Written entirely in Rust, targeting the Google Pixel 7 Pro.{" "}
-                <span className="text-white font-medium">The foundation is in place.</span>
-              </p>
-              <div className="grid grid-cols-3 gap-3 mt-6">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Where it stands.</h2>
+            <p className="text-gray-500 text-sm text-center mb-10">The software thesis is real and largely built. The hardware thesis is gated on silicon.</p>
+
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              {/* Built & tested */}
+              <div className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                  <p className="text-xs font-mono text-emerald-400 font-semibold tracking-wide">BUILT · 547 TESTS GREEN</p>
+                </div>
+                <ul className="space-y-2.5">
+                  {[
+                    "X3DH session establishment",
+                    "Double Ratchet + ChaCha20-Poly1305 + HKDF",
+                    "Skipped-message keys with cross-rotation stashing",
+                    "Kademlia DHT — @handle → key → peer address",
+                    "Bootstrap server (live), NTP sync in daemon",
+                    "Identity-based CallSurface (28 tests, full lifecycle)",
+                    "theos-kernel boots in QEMU (Phase 2 complete)",
+                    "theos-compositor compiles (Smithay / Wayland)",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="text-emerald-400 mt-0.5 flex-shrink-0" style={{ fontSize: 11 }}>✓</span>
+                      <span className="text-gray-300 text-xs leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Skeleton / not yet */}
+              <div className="rounded-xl p-5" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="w-2 h-2 rounded-full bg-amber-400" />
+                  <p className="text-xs font-mono text-amber-400 font-semibold tracking-wide">NEXT GATE · HARDWARE BRING-UP</p>
+                </div>
+                <ul className="space-y-2.5 mb-6">
+                  {[
+                    "UART, GIC, clocks, PMIC, IOMMU — skeleton only",
+                    "Display, touch, audio (Tensor + Cirrus CS35L41)",
+                    "WiFi (Broadcom BCM4389), UFS, Mali-G710 GPU",
+                    "Live call path end-to-end (logic done, last wire)",
+                    "Orb UI shell + cloud LLM client",
+                    "std-providing layer on theos-kernel",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="text-amber-400 mt-0.5 flex-shrink-0" style={{ fontSize: 11 }}>○</span>
+                      <span className="text-gray-400 text-xs leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="rounded-lg px-3 py-2.5" style={{ background: "rgba(251,191,36,0.05)", border: "1px solid rgba(251,191,36,0.12)" }}>
+                  <p className="text-xs text-amber-400/70 leading-relaxed">
+                    Hardware bring-up starts with an OEM-unlocked Pixel 7 Pro in hand — UART first, then the multi-year ladder up to a working UI on real silicon.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Near-term targets */}
+            <div className="rounded-xl p-5" style={{ background: "rgba(59,130,246,0.04)", border: "1px solid rgba(59,130,246,0.15)" }}>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                <p className="text-xs font-mono text-blue-400 font-semibold tracking-wide">NEAR-TERM TARGETS</p>
+              </div>
+              <div className="grid sm:grid-cols-4 gap-3">
                 {[
-                  { label: "Target", value: "Pixel 7 Pro" },
-                  { label: "Execution", value: "Bare metal EL1" },
-                  { label: "Stdlib", value: "#![no_std]" },
-                ].map((s) => (
-                  <div key={s.label} className="text-center px-3 py-3 rounded-lg" style={{ background: "rgba(59,130,246,0.06)", border: "1px solid rgba(59,130,246,0.15)" }}>
-                    <p className="text-white text-xs font-mono font-semibold">{s.value}</p>
-                    <p className="text-gray-600 text-xs mt-1">{s.label}</p>
+                  { n: "01", label: "60-second two-device encrypted call demo" },
+                  { n: "02", label: "Show HN post" },
+                  { n: "03", label: "NLnet grant application" },
+                  { n: "04", label: "YC application" },
+                ].map((t) => (
+                  <div key={t.n} className="flex gap-2.5 items-start">
+                    <span className="font-mono text-blue-400/40 text-xs flex-shrink-0 mt-0.5">{t.n}</span>
+                    <p className="text-gray-300 text-xs leading-relaxed">{t.label}</p>
                   </div>
                 ))}
               </div>
