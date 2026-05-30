@@ -119,6 +119,26 @@ const png = Buffer.concat([
   mkChunk("IEND", Buffer.alloc(0)),
 ]);
 
-const out = path.join(__dirname, "../public/favicon.png");
-fs.writeFileSync(out, png);
+fs.writeFileSync(path.join(__dirname, "../public/favicon.png"), png);
 console.log(`favicon.png written (${png.length} bytes)`);
+
+// Write favicon.ico — ICO format supports embedded PNG since Windows Vista.
+// Structure: 6-byte header + 16-byte dir entry + raw PNG bytes.
+const icoHeader = Buffer.alloc(6);
+icoHeader.writeUInt16LE(0, 0); // reserved
+icoHeader.writeUInt16LE(1, 2); // type: 1 = ICO
+icoHeader.writeUInt16LE(1, 4); // image count: 1
+
+const icoDirEntry = Buffer.alloc(16);
+icoDirEntry[0] = W > 255 ? 0 : W;  // width  (0 means 256)
+icoDirEntry[1] = H > 255 ? 0 : H;  // height (0 means 256)
+icoDirEntry[2] = 0;  // palette size (0 = no palette)
+icoDirEntry[3] = 0;  // reserved
+icoDirEntry.writeUInt16LE(1, 4);           // color planes
+icoDirEntry.writeUInt16LE(32, 6);          // bits per pixel
+icoDirEntry.writeUInt32LE(png.length, 8);  // size of image data
+icoDirEntry.writeUInt32LE(22, 12);         // offset = header(6) + dirEntry(16)
+
+const ico = Buffer.concat([icoHeader, icoDirEntry, png]);
+fs.writeFileSync(path.join(__dirname, "../public/favicon.ico"), ico);
+console.log(`favicon.ico written (${ico.length} bytes)`);
