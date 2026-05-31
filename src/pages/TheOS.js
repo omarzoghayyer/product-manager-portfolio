@@ -653,7 +653,7 @@ export default function TheOS() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6 border"
               style={{ background: "rgba(59,130,246,0.08)", borderColor: "rgba(59,130,246,0.25)", color: "rgba(147,197,253,0.9)" }}>
               <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-              547 tests green · actively building
+              In active development · 547 tests passing
             </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4" style={{
               background: "linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #3b82f6 100%)",
@@ -662,10 +662,10 @@ export default function TheOS() {
               theOS
             </h1>
             <p className="text-base md:text-lg text-gray-300 mb-3 max-w-2xl mx-auto font-light">
-              The phone, rebuilt without compromise.
+              The phone, rebuilt from nothing.
             </p>
             <p className="text-sm text-gray-500 max-w-xl mx-auto mb-8">
-              No phone number. No SIM card. No carrier. theOS replaces legacy telephony infrastructure with cryptographic identity, satellite connectivity, and a voice-first AI interface.
+              No phone number. No SIM. No carrier. Identity is cryptographic. Connectivity is satellite. The interface is AI. Everything else is noise.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
               {[{ v: "Rust", l: "Language" }, { v: "AArch64", l: "Architecture" }, { v: "EL1", l: "Privilege level" }, { v: "547", l: "Tests green" }].map((s) => (
@@ -698,7 +698,7 @@ export default function TheOS() {
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-3xl font-bold mb-2">The interface is your voice.</h2>
-            <p className="text-gray-400 text-sm max-w-md mx-auto">No app grid. No home screen. Just ask.</p>
+            <p className="text-gray-400 text-sm max-w-md mx-auto">No app grid. No home screen. No tapping through menus. Just ask.</p>
           </div>
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
             {/* Phone */}
@@ -760,16 +760,15 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">A different foundation.</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Built on a different premise.</h2>
             <div className="rounded-xl p-6 md:p-8" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                The phone number is a 150-year-old artifact of telegraph-era infrastructure. It was never designed for security, privacy, or user ownership.
-                Every call you make, every message you send, flows through a network{" "}
-                <span className="text-white font-medium">someone else controls.</span>
+                The phone number is 150 years old. It was designed for copper wire — not cryptography. For switching stations — not privacy. Every call you make. Every message you send. Through infrastructure{" "}
+                <span className="text-white font-medium">someone else owns, on terms someone else wrote.</span>
               </p>
               <p className="text-gray-500 text-sm leading-relaxed">
-                theOS starts over. Your identity is an Ed25519 cryptographic keypair — generated on your device, owned by you, mathematically unforgeable.
-                Connectivity routes over Starlink satellite, not a carrier's towers. End-to-end encryption is not a feature. It is the only mode.
+                theOS starts over. Your identity is an Ed25519 keypair — generated on your device, controlled by no one else, mathematically impossible to forge.
+                Calls route over Starlink. Encryption isn't a feature you enable. It's the only mode that exists.
               </p>
             </div>
           </motion.div>
@@ -780,7 +779,7 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Others secured the existing system.</h2>
-          <p className="text-gray-500 text-sm text-center mb-8">theOS is built on a different premise entirely.</p>
+          <p className="text-gray-500 text-sm text-center mb-8">theOS is a different premise entirely.</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -819,11 +818,11 @@ export default function TheOS() {
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Engineered differently.</h2>
             <div className="space-y-3">
               {[
-                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair generated on your device. No username, no phone number, no account. It cannot be revoked, reassigned, or taken from you." },
-                { label: "Signal-grade session crypto", body: "X3DH establishes sessions. The Double Ratchet advances per message. ChaCha20-Poly1305 + HKDF encrypts the payload. Skipped-message keys are stashed and rotated. Built, tested, green." },
-                { label: "Decentralised peer discovery", body: "A custom Kademlia DHT maps @handles to Ed25519 keys to peer addresses — verified live against the running bootstrap server. No central directory. No single point of failure." },
-                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink via WiFi. No cellular modem. No SIM slot. No carrier agreement. Works anywhere Starlink reaches." },
-                { label: "Bare-metal Rust kernel", body: "#![no_std], AArch64 EL1, targeting the Google Pixel 7 Pro (Tensor G2). theos-kernel boots in QEMU. Hardware bring-up on real silicon is the next gate." },
+                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair — generated on device, owned by you. No username. No account. No one can revoke it, reassign it, or take it from you." },
+                { label: "Signal-grade session crypto", body: "X3DH establishes every session. The Double Ratchet advances with every message. ChaCha20-Poly1305 encrypts every payload. 547 tests. All green." },
+                { label: "Decentralised peer discovery", body: "A custom Kademlia DHT resolves @handles to cryptographic keys to peer addresses — live, verified, decentralised. No directory server. No single point of failure or control." },
+                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink. No cellular modem. No SIM. No carrier. No towers. Coverage wherever Starlink reaches — which is most of Earth." },
+                { label: "Bare-metal Rust kernel", body: "Written in Rust. #![no_std]. AArch64 EL1. No operating system underneath — no assumptions, no shortcuts. theos-kernel boots in QEMU today. Real silicon is next." },
               ].map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }} viewport={{ once: true }}
@@ -846,7 +845,7 @@ export default function TheOS() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Where it stands.</h2>
-            <p className="text-gray-500 text-sm text-center mb-10">The software thesis is real and largely built. The hardware thesis is gated on silicon.</p>
+            <p className="text-gray-500 text-sm text-center mb-10">The protocol layer is built and tested. The kernel runs. Hardware bring-up on real silicon is next.</p>
 
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               {/* Built & tested */}
@@ -882,10 +881,10 @@ export default function TheOS() {
                 </div>
                 <ul className="space-y-2.5 mb-6">
                   {[
-                    "UART, GIC, clocks, PMIC, IOMMU — skeleton only",
+                    "UART, GIC, clocks, PMIC, IOMMU — not yet wired",
                     "Display, touch, audio (Tensor + Cirrus CS35L41)",
                     "WiFi (Broadcom BCM4389), UFS, Mali-G710 GPU",
-                    "Live call path end-to-end (logic done, last wire)",
+                    "Live call path — logic complete, final integration pending",
                     "Orb UI shell + cloud LLM client",
                     "std-providing layer on theos-kernel",
                   ].map((item) => (
@@ -897,7 +896,7 @@ export default function TheOS() {
                 </ul>
                 <div className="rounded-lg px-3 py-2.5" style={{ background: "rgba(251,191,36,0.05)", border: "1px solid rgba(251,191,36,0.12)" }}>
                   <p className="text-xs text-amber-400/70 leading-relaxed">
-                    Hardware bring-up starts with an OEM-unlocked Pixel 7 Pro in hand — UART first, then the multi-year ladder up to a working UI on real silicon.
+                    Bring-up starts with an OEM-unlocked Pixel 7 Pro. UART first. Then display. Then touch. Then everything else. The ladder is long. The foundation is real.
                   </p>
                 </div>
               </div>
@@ -931,18 +930,18 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Open to collaboration.</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Built in the open.</h2>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto mb-8">
-              theOS is open source. If you work in systems, kernels, cryptography, or distributed networking —
-              or simply believe that communication infrastructure should be owned by no one —
-              the README is the right place to start.
+              theOS is open source. If you work in systems programming, kernel development, cryptography, or distributed networking —
+              or you simply believe that communication infrastructure should belong to no one —
+              start with the README.
             </p>
 
             <div className="rounded-xl p-5 mb-8 text-left"
               style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <p className="text-white/60 text-xs font-mono mb-1">Access</p>
               <p className="text-gray-300 text-sm">
-                The repository is currently private. To request access, send an email and introduce yourself.
+                The repository is private. Send an email — tell us who you are and what you'd bring.
               </p>
               <Link to={createPageUrl("Contact")} className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mt-3">
                 Get in touch <ChevronRight className="w-3.5 h-3.5" />
