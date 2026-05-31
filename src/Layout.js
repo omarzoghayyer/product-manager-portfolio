@@ -61,9 +61,15 @@ export default function Layout({ children }) {
                 <Link
                   key={item.title}
                   to={item.url}
-                  className={`text-sm font-medium transition-colors ${location.pathname === item.url ? navLinkActive : navLinkDefault}`}
+                  className={`text-sm font-medium transition-colors relative ${location.pathname === item.url ? navLinkActive : navLinkDefault}`}
                 >
                   {item.title}
+                  {item.title === "theOS" && (
+                    <span
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full"
+                      style={{ background: "linear-gradient(90deg, #f59e0b, #f97316)" }}
+                    />
+                  )}
                 </Link>
               ))}
             </div>

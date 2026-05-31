@@ -158,6 +158,81 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Currently Building — theOS */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative rounded-2xl overflow-hidden"
+              style={{ background: "linear-gradient(135deg, #0a0f1e 0%, #0f1a35 50%, #0a0f1e 100%)" }}>
+              {/* Stars */}
+              <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {[...Array(24)].map((_, i) => (
+                  <div key={i} className="absolute rounded-full bg-white"
+                    style={{
+                      left: `${(i * 37 + 11) % 100}%`,
+                      top: `${(i * 53 + 7) % 100}%`,
+                      width: i % 4 === 0 ? 2 : 1,
+                      height: i % 4 === 0 ? 2 : 1,
+                      opacity: 0.15 + (i % 5) * 0.06,
+                    }} />
+                ))}
+              </div>
+
+              <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 px-8 py-10">
+                {/* Orb */}
+                <div className="flex-shrink-0">
+                  <motion.div
+                    animate={{ scale: [1, 1.06, 1], boxShadow: ["0 0 30px rgba(59,130,246,0.4)", "0 0 60px rgba(59,130,246,0.7)", "0 0 30px rgba(59,130,246,0.4)"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="w-16 h-16 rounded-full"
+                    style={{ background: "radial-gradient(circle at 38% 32%, #93c5fd 0%, #3b82f6 35%, #1e3a8a 75%, #060e3a 100%)" }}
+                  >
+                    <div className="w-full h-full rounded-full flex items-center justify-center">
+                      <div className="w-5 h-3 rounded-full bg-white/25" style={{ filter: "blur(3px)", transform: "translate(-4px,-6px)" }} />
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Text */}
+                <div className="flex-1 text-center md:text-left">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-3"
+                    style={{ background: "rgba(59,130,246,0.1)", border: "1px solid rgba(59,130,246,0.25)", color: "#93c5fd" }}>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+                    Currently Building
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">theOS</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
+                    A from-scratch bare-metal Rust OS for mobile — no Android, no SIM, no phone number.
+                    Identity is Ed25519 keys. Comms route over a custom Kademlia DHT. Networking is WiFi-to-Starlink.
+                    <span className="text-gray-300"> 547 tests green.</span>
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <div className="flex-shrink-0">
+                  <Link to={createPageUrl("TheOS")}>
+                    <Button className="text-white px-6 py-2 text-sm border-0 whitespace-nowrap"
+                      style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
+                      See theOS
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Bottom gradient accent */}
+              <div className="absolute bottom-0 left-0 right-0 h-px"
+                style={{ background: "linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent)" }} />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Featured Case Studies */}
       {featuredCases.length > 0 && (
         <section className="py-24">
