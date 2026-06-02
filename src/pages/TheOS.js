@@ -54,7 +54,7 @@ const SPARKS = Array.from({ length: 12 }).map((_, i) => ({
   dist: 50 + (i % 3) * 12,
   size: i % 4 === 0 ? 3 : i % 3 === 0 ? 2.5 : 2,
   delay: i * 0.06,
-  color: i % 3 === 0 ? "#93c5fd" : i % 3 === 1 ? "#ffffff" : "#60a5fa",
+  color: i % 3 === 0 ? "#5eead4" : i % 3 === 1 ? "#ffffff" : "#2dd4bf",
 }));
 
 function OrbSparkles() {
@@ -144,11 +144,11 @@ function OrbScreen({ listening, onChipClick }) {
           onMouseLeave={() => setOrbHovered(false)}
         >
           <motion.div className="absolute rounded-full"
-            style={{ width: 130, height: 130, background: "radial-gradient(circle, rgba(30,100,255,0.12) 0%, transparent 70%)" }}
+            style={{ width: 130, height: 130, background: "radial-gradient(circle, rgba(20,184,166,0.14) 0%, transparent 70%)" }}
             animate={{ scale: orbHovered ? 1.3 : [1, 1.15, 1], opacity: orbHovered ? 0.9 : [0.7, 0.3, 0.7] }}
             transition={{ duration: orbHovered ? 0.3 : 3, repeat: orbHovered ? 0 : Infinity, ease: "easeInOut" }} />
           <motion.div className="absolute rounded-full"
-            style={{ width: 96, height: 96, background: "radial-gradient(circle, rgba(30,100,255,0.18) 0%, transparent 65%)" }}
+            style={{ width: 96, height: 96, background: "radial-gradient(circle, rgba(20,184,166,0.2) 0%, transparent 65%)" }}
             animate={{ scale: orbHovered ? 1.2 : [1, 1.08, 1], opacity: orbHovered ? 1 : [0.8, 0.4, 0.8] }}
             transition={{ duration: orbHovered ? 0.3 : 2.2, repeat: orbHovered ? 0 : Infinity, ease: "easeInOut", delay: 0.4 }} />
           <motion.div
@@ -158,11 +158,11 @@ function OrbScreen({ listening, onChipClick }) {
             style={{
               width: 72, height: 72,
               background: orbHovered
-                ? "radial-gradient(circle at 38% 32%, #93c5fd 0%, #3b82f6 35%, #1e3a8a 75%, #060e3a 100%)"
-                : "radial-gradient(circle at 38% 32%, #5b9bff 0%, #1456f0 40%, #0a2a8a 80%, #060e3a 100%)",
+                ? "radial-gradient(circle at 38% 32%, #5eead4 0%, #0d9488 35%, #042f2e 75%, #011a17 100%)"
+                : "radial-gradient(circle at 38% 32%, #2dd4bf 0%, #0d9488 45%, #065f46 80%, #022c22 100%)",
               boxShadow: orbHovered
-                ? "0 0 60px rgba(59,130,246,0.9), 0 0 100px rgba(30,80,200,0.5), inset 0 2px 8px rgba(255,255,255,0.25)"
-                : "0 0 36px rgba(30,100,255,0.6), 0 0 70px rgba(30,80,200,0.3), inset 0 2px 8px rgba(255,255,255,0.15)",
+                ? "0 0 60px rgba(45,212,191,0.9), 0 0 100px rgba(20,184,166,0.5), inset 0 2px 8px rgba(255,255,255,0.25)"
+                : "0 0 36px rgba(20,184,166,0.6), 0 0 70px rgba(13,148,136,0.3), inset 0 2px 8px rgba(255,255,255,0.15)",
               zIndex: 2,
             }}>
             <div className="absolute w-4 h-2.5 rounded-full bg-white/30 top-2.5 left-3.5" style={{ filter: "blur(3px)" }} />
@@ -772,24 +772,24 @@ export default function TheOS() {
                   <motion.button key={demo.id} onClick={() => handleCommand(demo)} whileHover={{ x: 3 }}
                     className="text-left px-3 py-2.5 rounded-xl border transition-all duration-200 w-full"
                     style={{
-                      background: isActive ? "rgba(30,58,138,0.28)" : "rgba(255,255,255,0.025)",
-                      borderColor: isActive ? "rgba(59,130,246,0.45)" : "rgba(255,255,255,0.07)",
+                      background: isActive ? "rgba(13,148,136,0.2)" : "rgba(255,255,255,0.025)",
+                      borderColor: isActive ? "rgba(45,212,191,0.4)" : "rgba(255,255,255,0.07)",
                     }}>
                     <div className="flex items-center gap-2.5">
                       <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0"
-                        style={{ background: isActive ? "rgba(59,130,246,0.25)" : "rgba(255,255,255,0.05)" }}>
-                        <Icon className="w-3.5 h-3.5" style={{ color: isActive ? "#60a5fa" : "#6b7280" }} />
+                        style={{ background: isActive ? "rgba(20,184,166,0.2)" : "rgba(255,255,255,0.05)" }}>
+                        <Icon className="w-3.5 h-3.5" style={{ color: isActive ? "#2dd4bf" : "#6b7280" }} />
                       </div>
                       <div className="flex-1 min-w-0">
                         {demo.command && (
-                          <p className="font-mono mb-0.5 truncate" style={{ fontSize: 10, color: isActive ? "#93c5fd" : "#374151" }}>
+                          <p className="font-mono mb-0.5 truncate" style={{ fontSize: 10, color: isActive ? "#5eead4" : "#374151" }}>
                             "{demo.command}"
                           </p>
                         )}
                         <p className="text-xs font-medium" style={{ color: isActive ? "#fff" : "#9ca3af" }}>{demo.label}</p>
                         <p className="text-gray-600 truncate" style={{ fontSize: 10, marginTop: 1 }}>{demo.description}</p>
                       </div>
-                      {isActive && <div className="w-1.5 h-1.5 rounded-full bg-blue-400 flex-shrink-0 animate-pulse" />}
+                      {isActive && <div className="w-1.5 h-1.5 rounded-full flex-shrink-0 animate-pulse" style={{ background: "#2dd4bf" }} />}
                     </div>
                   </motion.button>
                 );
