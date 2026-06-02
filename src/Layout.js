@@ -31,6 +31,19 @@ export default function Layout({ children }) {
     setMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Update document title on route change
+  useEffect(() => {
+    const titles = {
+      [createPageUrl("Home")]:         "Omar Zoghayyer",
+      [createPageUrl("About")]:        "About | Omar Zoghayyer",
+      [createPageUrl("CaseStudies")]:  "Problem Solving | Omar Zoghayyer",
+      [createPageUrl("CaseStudyDetail")]: "Case Study | Omar Zoghayyer",
+      [createPageUrl("TheOS")]:        "theOS | Omar Zoghayyer",
+      [createPageUrl("Contact")]:      "Contact | Omar Zoghayyer",
+    };
+    document.title = titles[location.pathname] ?? "Omar Zoghayyer";
+  }, [location.pathname]);
+
   // Fire a page_view event on every route change
   useEffect(() => {
     logEvent(analytics, "page_view", {
