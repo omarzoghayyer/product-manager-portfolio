@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Globe, MessageSquare, Phone, User, ChevronRight, ChevronUp, Bell, ChevronLeft, Video, Mic, Instagram, Satellite, Camera, Clock, X as XIcon, Search } from "lucide-react";
+import { Shield, Globe, MessageSquare, Phone, User, ChevronRight, ChevronUp, Bell, ChevronLeft, Video, Mic, Instagram, Satellite, Camera, Clock, X as XIcon, Search, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "../utils";
 import { Button } from "../components/ui/button";
@@ -682,12 +682,13 @@ export default function TheOS() {
                   See the Demo <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </a>
-              <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer">
+              <Link to={createPageUrl("Contact")}>
                 <Button className="text-white/70 px-6 py-2 text-sm"
                   style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                  View on GitHub <ChevronRight className="w-4 h-4 ml-1" />
+                  <Lock className="w-3.5 h-3.5 mr-1.5 opacity-60" />
+                  Request access <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
-              </a>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -945,13 +946,25 @@ export default function TheOS() {
               </Link>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3">
-              <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer">
-                <Button className="text-white px-6 py-2 text-sm border-0"
-                  style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
-                  View on GitHub <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </a>
+            <div className="rounded-xl p-5 text-left max-w-sm mx-auto"
+              style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <Lock className="w-3.5 h-3.5 text-white/30" />
+                  <span className="text-white text-xs font-mono">omarzoghayyer / theOS</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full text-xs font-medium"
+                  style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.08)" }}>
+                  invite only
+                </span>
+              </div>
+              <p className="text-gray-600 text-xs leading-relaxed mb-4">
+                Source is private during Phase 3 bring-up. Access granted by invite.
+              </p>
+              <Link to={createPageUrl("Contact")}
+                className="inline-flex items-center gap-1 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors">
+                Request access <ChevronRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
           </motion.div>
         </div>
