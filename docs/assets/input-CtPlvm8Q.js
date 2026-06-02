@@ -1,1 +1,0 @@
-import{j as n}from"./index-Bo_wY-rh.js";function e({className:r="",...o}){return n.jsx("input",{...o,className:["w-full h-10 px-3 rounded-md border border-gray-300 bg-white text-sm focus:ring-2 focus:ring-[var(--primary)] focus:border-[var(--primary)] outline-none",r].join(" ")})}export{e as I};
