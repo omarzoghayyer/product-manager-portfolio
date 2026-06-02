@@ -645,45 +645,67 @@ export default function TheOS() {
     <div className="min-h-screen text-white font-dark-page" style={{ background: "#0a0a0a" }}>
 
       {/* Hero */}
-      <section className="relative pt-28 pb-16 overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(30,58,138,0.2) 0%, transparent 60%)" }} />
+      <section className="relative pt-16 pb-20 overflow-hidden">
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(20,184,166,0.07) 0%, transparent 55%)" }} />
         <Stars />
-        <div className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-6 border"
-              style={{ background: "rgba(59,130,246,0.08)", borderColor: "rgba(59,130,246,0.25)", color: "rgba(147,197,253,0.9)" }}>
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-              In active development · 547 tests passing
-            </div>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4" style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #93c5fd 50%, #3b82f6 100%)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-            }}>
-              theOS
-            </h1>
-            <p className="text-base md:text-lg text-gray-300 mb-3 max-w-2xl mx-auto font-light">
-              The phone, rebuilt from nothing.
-            </p>
-            <p className="text-sm text-gray-500 max-w-xl mx-auto mb-8">
-              No phone number. No SIM. No carrier. Identity is cryptographic. Connectivity is satellite. The interface is AI. Everything else is noise.
-            </p>
-            <div className="flex flex-wrap justify-center gap-6 mb-8">
-              {[{ v: "Rust", l: "Language" }, { v: "AArch64", l: "Architecture" }, { v: "Bare metal", l: "Execution" }, { v: "547", l: "Tests green" }].map((s) => (
-                <div key={s.l} className="text-center">
-                  <p className="text-2xl font-bold text-white">{s.v}</p>
-                  <p className="text-gray-500 text-xs mt-0.5">{s.l}</p>
+
+            {/* Teal glass orb */}
+            <div className="flex justify-center mb-10">
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="relative flex items-center justify-center"
+                style={{ width: 96, height: 96 }}
+              >
+                <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(45,212,191,0.25), transparent 70%)", transform: "scale(1.8)", filter: "blur(18px)" }} />
+                <div className="w-24 h-24 rounded-full relative" style={{
+                  background: "radial-gradient(circle at 33% 28%, #5eead4 0%, #0d9488 45%, #042f2e 100%)",
+                  boxShadow: "0 0 50px rgba(20,184,166,0.35), 0 20px 60px rgba(0,0,0,0.6), inset 0 -10px 24px rgba(0,0,0,0.4)"
+                }}>
+                  <div className="absolute rounded-full" style={{ width: 30, height: 18, top: 12, left: 12, background: "rgba(255,255,255,0.3)", filter: "blur(7px)" }} />
                 </div>
-              ))}
+              </motion.div>
             </div>
-            <div className="flex flex-wrap justify-center gap-3">
-              <a href="#demo">
-                <Button className="text-white px-6 py-2 text-sm border-0"
-                  style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
-                  See the Demo <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </a>
+
+            {/* Title */}
+            <h1 className="font-bold tracking-tight mb-6" style={{ fontSize: "clamp(3.5rem, 8vw, 5.5rem)", lineHeight: 1 }}>
+              <span style={{ color: "rgba(255,255,255,0.28)", fontWeight: 300 }}>the</span>
+              <span className="text-white">OS</span>
+              <span style={{ color: "#2dd4bf" }}>.</span>
+            </h1>
+
+            {/* Serif subtitle */}
+            <p className="mb-6" style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: "clamp(1.6rem, 4vw, 2.1rem)", lineHeight: 1.4, color: "rgba(255,255,255,0.88)" }}>
+              A phone with no number, no SIM,<br />
+              no <em style={{ color: "#2dd4bf", fontStyle: "italic" }}>carrier</em>.
+            </p>
+
+            {/* Monospace description */}
+            <p className="mb-8 mx-auto max-w-md leading-loose" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "rgba(255,255,255,0.38)" }}>
+              Identity is a cryptographic key, not a phone number. Calls and messages route over satellite, end-to-end encrypted. A bare-metal OS written from scratch in Rust.
+            </p>
+
+            {/* Status badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-8" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.09)" }}>
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse flex-shrink-0" />
+              <span style={{ fontFamily: "monospace", fontSize: "0.67rem", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>
+                <span style={{ color: "rgba(255,255,255,0.38)" }}>STATUS: </span>
+                <span style={{ color: "#fff", fontWeight: 700 }}>PHASE 2 COMPLETE</span>
+                <span style={{ color: "rgba(255,255,255,0.28)" }}> · PHASE 3 HARDWARE BRING-UP IN PROGRESS</span>
+              </span>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex flex-wrap justify-center gap-3 mb-3">
+              <Link to={createPageUrl("Contact")}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-85"
+                style={{ background: "#2dd4bf", color: "#042f2e" }}>
+                Request access <ChevronRight className="w-4 h-4" />
+              </Link>
               <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all"
                 style={{ background: "#161b22", border: "1px solid #30363d", color: "rgba(255,255,255,0.75)" }}
                 onMouseEnter={e => e.currentTarget.style.background = "#21262d"}
                 onMouseLeave={e => e.currentTarget.style.background = "#161b22"}>
@@ -695,6 +717,21 @@ export default function TheOS() {
                 </span>
               </a>
             </div>
+
+            {/* Source note */}
+            <p className="mb-10" style={{ fontFamily: "monospace", fontSize: "0.68rem", color: "rgba(255,255,255,0.25)" }}>
+              Source is private during Phase 3 bring-up. Access granted by invite.
+            </p>
+
+            {/* Pill tags */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {["NO SIM", "NO PHONE NUMBER", "NO CENTRAL SERVER"].map((tag) => (
+                <span key={tag} style={{ fontFamily: "monospace", fontSize: "0.62rem", letterSpacing: "0.08em", color: "rgba(255,255,255,0.32)", border: "1px solid rgba(255,255,255,0.1)", padding: "5px 12px", borderRadius: 4 }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+
           </motion.div>
         </div>
       </section>
