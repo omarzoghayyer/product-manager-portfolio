@@ -102,7 +102,7 @@ export default function Layout({ children }) {
         )}
       </nav>
 
-      <main className="pt-20">{children}</main>
+      <main className={isDark ? "" : "pt-20"}>{children}</main>
 
       <footer className={`border-t ${isDark ? "border-white/10 mt-0" : "bg-white border-gray-100 mt-32"}`} style={isDark ? { backgroundColor: "#0a0a0a" } : {}}>
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
