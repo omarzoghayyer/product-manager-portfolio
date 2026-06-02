@@ -11,7 +11,7 @@ function StatusBar({ time = "12:55" }) {
   return (
     <div className="flex items-center justify-between px-3 pt-1.5 pb-1 flex-shrink-0">
       <span className="font-mono font-semibold text-white/50" style={{ fontSize: 9 }}>
-        ● Starlink · <span style={{ color: "#3b82f6" }}>47ms</span>
+        ● Satellite · <span style={{ color: "#3b82f6" }}>47ms</span>
       </span>
       <div className="flex items-center gap-1.5">
         <span className="text-white font-medium" style={{ fontSize: 10 }}>{time}</span>
@@ -284,7 +284,7 @@ function MessagesScreen({ onBack, onNavigate }) {
       <div className="mx-3 mb-3 px-3 py-2 rounded-lg flex-shrink-0"
         style={{ background: "rgba(30,58,138,0.25)", border: "1px solid rgba(59,130,246,0.2)" }}>
         <p className="text-xs font-mono" style={{ color: "#60a5fa" }}>
-          Opening messages. ChaCha20-Poly1305 encrypted, routed over Starlink DHT.
+          Opening messages. ChaCha20-Poly1305 encrypted, routed over satellite DHT.
         </p>
       </div>
       <div className="flex-1 overflow-hidden px-3 space-y-1">
@@ -332,7 +332,7 @@ function ChatScreen({ onBack }) {
           style={{ background: "#7c3aed" }}>SC</div>
         <div className="flex-1 min-w-0">
           <p className="text-white text-xs font-semibold">Sarah Chen</p>
-          <p className="text-xs font-mono text-white/40" style={{ fontSize: 9 }}>E2E encrypted · Starlink · ChaCha20</p>
+          <p className="text-xs font-mono text-white/40" style={{ fontSize: 9 }}>E2E encrypted · Satellite · ChaCha20</p>
         </div>
         <Phone className="w-3.5 h-3.5 text-gray-400" />
         <Video className="w-3.5 h-3.5 text-gray-400" />
@@ -365,7 +365,7 @@ function ChatScreen({ onBack }) {
         <div className="flex justify-end">
           <div className="px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[78%]"
             style={{ background: "linear-gradient(135deg, #1e40af, #2563eb)" }}>
-            <p className="text-white text-xs">Starlink beam switch. RE-INVITE worked perfectly.</p>
+            <p className="text-white text-xs">Satellite beam switch. RE-INVITE worked perfectly.</p>
             <p className="text-blue-300 mt-0.5" style={{ fontSize: 9 }}>9:44 ✓✓</p>
           </div>
         </div>
@@ -441,7 +441,7 @@ function BrowserScreen({ onBack }) {
 function NotificationsScreen({ onBack }) {
   const notifs = [
     { initials: "SC", color: "#7c3aed", name: "Sarah Chen", body: "Sent you a message", meta: "2 min · DHT · ad25519 signed", tag: "message", tagColor: "#3b82f6" },
-    { initials: "MW", color: "#b45309", name: "Marcus Webb", body: "Incoming call", meta: "14 min · ChaCha20 · Starlink", tag: "call", tagColor: "#10b981" },
+    { initials: "MW", color: "#b45309", name: "Marcus Webb", body: "Incoming call", meta: "14 min · ChaCha20 · Satellite", tag: "call", tagColor: "#10b981" },
     { initials: "LH", color: "#0e7490", name: "Leila Hassan", body: "Contact request", meta: "1 hr · ad25519 signed", tag: "request", tagColor: "#8b5cf6" },
   ];
   return (
@@ -590,7 +590,7 @@ function XScreen({ onBack }) {
 
 const DEMOS = [
   { id: "orb", backTo: null, command: null, label: "AI Orb", icon: User, description: "Voice-first. No buttons. No home screen.", screen: (l, cb, onBack) => <OrbScreen listening={l} onChipClick={cb} /> },
-  { id: "msgs", backTo: "orb", command: "Hey OS, messages", label: "Messages", icon: MessageSquare, description: "ChaCha20 encrypted. Routed over Starlink DHT.", screen: (l, cb, onBack, onNav) => <MessagesScreen onBack={onBack} onNavigate={onNav} /> },
+  { id: "msgs", backTo: "orb", command: "Hey OS, messages", label: "Messages", icon: MessageSquare, description: "ChaCha20 encrypted. Routed over satellite DHT.", screen: (l, cb, onBack, onNav) => <MessagesScreen onBack={onBack} onNavigate={onNav} /> },
   { id: "chat", backTo: "msgs", command: "Hey OS, message Sarah", label: "Encrypted Chat", icon: MessageSquare, description: "E2E encrypted. ed25519 signed. No server copy.", screen: (l, cb, onBack) => <ChatScreen onBack={onBack} /> },
   { id: "web", backTo: "orb", command: "Hey OS, open Instagram", label: "Web Rendering", icon: Globe, description: "60+ trackers blocked. No fingerprinting.", screen: (l, cb, onBack) => <BrowserScreen onBack={onBack} /> },
   { id: "notif", backTo: "orb", command: "Hey OS, notifications", label: "Notifications", icon: Bell, description: "DHT push only. No FCM. No Apple APNs.", screen: (l, cb, onBack) => <NotificationsScreen onBack={onBack} /> },
@@ -769,7 +769,7 @@ export default function TheOS() {
               </p>
               <p className="text-gray-500 text-sm leading-relaxed">
                 theOS starts over. Your identity is an Ed25519 keypair. Generated on your device. Controlled by no one else. Mathematically impossible to forge.
-                Calls route over Starlink. Encryption isn't a feature you enable. It's the only mode that exists.
+                Calls route over satellite. Encryption isn't a feature you enable. It's the only mode that exists.
               </p>
             </div>
           </motion.div>
@@ -822,7 +822,7 @@ export default function TheOS() {
                 { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair. Generated on device. Owned by you. No username. No account. No one can revoke it, reassign it, or take it from you." },
                 { label: "Signal-grade session crypto", body: "X3DH establishes every session. The Double Ratchet advances with every message. ChaCha20-Poly1305 encrypts every payload. 547 tests. All green." },
                 { label: "Decentralized peer discovery", body: "A custom DHT resolves identities to peer addresses. Live. Verified. No directory server. No single point of failure or control." },
-                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink. No cellular modem. No SIM. No carrier. No towers. Coverage wherever Starlink reaches, which is most of Earth." },
+                { label: "Satellite-native connectivity", body: "Traffic routes over satellite. No cellular modem. No SIM. No carrier. No towers. Global coverage without a single ground-based tower." },
                 { label: "Bare-metal Rust kernel", body: "Written in Rust. No operating system underneath. No assumptions. No shortcuts. The kernel runs. Real silicon is next." },
               ].map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
