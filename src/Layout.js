@@ -34,12 +34,12 @@ export default function Layout({ children }) {
   // Update document title on route change
   useEffect(() => {
     const titles = {
-      [createPageUrl("Home")]:         "Omar Zoghayyer",
-      [createPageUrl("About")]:        "About | Omar Zoghayyer",
-      [createPageUrl("CaseStudies")]:  "Problem Solving | Omar Zoghayyer",
-      [createPageUrl("CaseStudyDetail")]: "Case Study | Omar Zoghayyer",
-      [createPageUrl("TheOS")]:        "theOS | Omar Zoghayyer",
-      [createPageUrl("Contact")]:      "Contact | Omar Zoghayyer",
+      [createPageUrl("Home")]:            "Omar Zoghayyer",
+      [createPageUrl("About")]:           "About",
+      [createPageUrl("CaseStudies")]:     "Problem Solving",
+      [createPageUrl("CaseStudyDetail")]: "Case Study",
+      [createPageUrl("TheOS")]:           "theOS",
+      [createPageUrl("Contact")]:         "Contact",
     };
     document.title = titles[location.pathname] ?? "Omar Zoghayyer";
   }, [location.pathname]);
