@@ -58,7 +58,7 @@ const demoCases = [
     problem_statement:
       "Autopilot incidents, confusing 'self-driving' messaging, and opaque safety data widened the trust gap between public perception and Autopilot’s actual capabilities.",
     problem_description:
-      "Drivers, regulators, and media lacked shared baselines. Safety debates were shaped by anecdotes, lawsuits, and headlines—not consistent telemetry. Without transparency into near-misses, intervention rates, or model uncertainty, trust continued to fall.",
+      "Drivers, regulators, and media lacked shared baselines. Safety debates were shaped by anecdotes, lawsuits, and headlines, not consistent telemetry. Without transparency into near-misses, intervention rates, or model uncertainty, trust continued to fall.",
     root_cause_analysis:
       "Marketing frames Autopilot like autonomy while the real system is still driver assistance. Telemetry is siloed, near-miss taxonomies vary across teams, and there is no publicly accessible dashboard showing performance trends or failure context. This mismatch between perception and reality fuels the Trust Gap.",
     proposed_solution:

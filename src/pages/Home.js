@@ -207,7 +207,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-2">theOS</h3>
                   <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
-                    A from-scratch bare-metal Rust OS for mobile — no Android, no SIM, no phone number.
+                    A from-scratch bare-metal Rust OS for mobile. No Android. No SIM. No phone number.
                     Identity is Ed25519 keys. Comms route over a custom Kademlia DHT. Networking is WiFi-to-Starlink.
                     <span className="text-gray-300"> 547 tests green.</span>
                   </p>

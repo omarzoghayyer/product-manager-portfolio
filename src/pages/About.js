@@ -18,7 +18,7 @@ const TIMELINE = [
     title: "Maxis (The Sims Lab)",
     organization: "Electronic Arts",
     description:
-      "I own the tech and tools for my team and lead the development of performance systems, telemetry pipelines, and automation tooling that engineers across Maxis and other EA studios depend on. Beyond delivery, I drive R&D into how AI — including LLMs — can be responsibly integrated to increase team productivity, accelerating workflows without compromising quality or safety. My work spans tool ownership, cross-studio adoption, and pushing the boundary of what's possible when AI is embedded directly into how teams build and ship.",
+      "I own the tech and tools for my team and lead the development of performance systems, telemetry pipelines, and automation tooling that engineers across Maxis and other EA studios depend on. Beyond delivery, I drive R&D into how AI, including LLMs, can be responsibly integrated to increase team productivity, accelerating workflows without compromising quality or safety. My work spans tool ownership, cross-studio adoption, and pushing the boundary of what's possible when AI is embedded directly into how teams build and ship.",
     icon: simsIcon,
   },
   {
@@ -59,12 +59,12 @@ const PILLARS = [
   {
     icon: Cpu,
     label: "Performance",
-    body: "Crash rates, thread stalls, ANRs, and device heat-profiles — automatically baselined, regressed, and surfaced before they reach players.",
+    body: "Crash rates, thread stalls, ANRs, and device heat-profiles. Automatically baselined, regressed, and surfaced before they reach players.",
   },
   {
     icon: Activity,
     label: "Telemetry",
-    body: "Unified signal across logs, metrics, and visual diffs. Actionable dashboards that teams trust — not raw firehoses they ignore.",
+    body: "Unified signal across logs, metrics, and visual diffs. Actionable dashboards that teams trust, not raw firehoses they ignore.",
   },
   {
     icon: Award,
@@ -88,7 +88,7 @@ const SKILLS = [
   },
   {
     title: "AI & Analytics",
-    items: ["LLM tooling — design to deployment", "ML-driven anomaly detection & forecasting", "S&P 500 price prediction (custom LLM)", "BigQuery / SQL pipelines", "MBA Data Science, SCU"],
+    items: ["LLM tooling, from design to deployment", "ML-driven anomaly detection & forecasting", "S&P 500 price prediction (custom LLM)", "BigQuery / SQL pipelines", "MBA Data Science, SCU"],
   },
 ];
 
@@ -206,10 +206,10 @@ export default function About() {
 
             <p className="text-xl text-gray-600 leading-relaxed">
               I lead performance tooling, telemetry systems, and AI-powered automation that engineering teams
-              across EA depend on to ship stable, high-quality games. My work connects signal to action —
+              across EA depend on to ship stable, high-quality games. My work connects signal to action:
               from crash diagnostics and regression detection to LLM tooling deployed at the studio level.
               I partner with engineering, infra, and product leadership to turn complex data into decisions that move fast.
-              Currently at EA; MBA in Data Science (SCU).
+              Currently at EA. MBA in Data Science, SCU.
             </p>
           </motion.div>
         </div>
@@ -224,10 +224,10 @@ export default function About() {
             <div className="bg-white rounded-2xl border border-gray-100 p-8 md:p-12">
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 Define the outcome, then build backward. I focus on getting the right signals into the right
-                hands — wired into CI/CD, surfaced in dashboards engineers actually open, enforced at the
+                hands: wired into CI/CD, surfaced in dashboards engineers actually open, enforced at the
                 gates that matter. At EA, I drive the AI tooling strategy that extends this across studios.
                 I also run independent research applying LLMs to financial markets, including a custom model
-                for S&P 500 price forecasting — it sharpens my judgment on model behavior, signal quality,
+                for S&P 500 price forecasting. It sharpens my judgment on model behavior, signal quality,
                 and the limits of prediction under real-world conditions.
               </p>
 

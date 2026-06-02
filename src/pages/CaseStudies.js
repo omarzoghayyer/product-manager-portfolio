@@ -47,7 +47,7 @@ const demoCases = [
     industry: "Automotive",
     sector: "Safety & Compliance",
     problem_statement:
-      "High-profile Autopilot incidents and opaque safety data widened the trust gap between what people think Autopilot is and what it actually does. I designed an Open Safety Program—open telemetry, near-miss taxonomy, and public dashboards—to start closing that gap.",
+      "High-profile Autopilot incidents and opaque safety data widened the trust gap between what people think Autopilot is and what it actually does. I designed an Open Safety Program: open telemetry, near-miss taxonomy, and public dashboards to start closing that gap.",
 
     // 🔽 add these, copied from CaseStudyDetail.js
     problem_description:
@@ -110,9 +110,9 @@ const demoCases = [
     proposed_solution:
       "A Python-based pipeline that ingests live Starlink TLEs from Celestrak, propagates orbits with Skyfield, and renders a global map with Cartopy + Matplotlib. Each dot represents a real satellite position at a specific timestamp, making it obvious how many vehicles are overhead and how quickly coverage sweeps across the planet.",
     expected_impact:
-      "Give non-specialists—product folks, policy makers, and curious people on X—a concrete mental model for modern LEO constellations. Make it easier to talk about coverage, congestion, and night-sky impact with a single artifact instead of abstract numbers.",
+      "Give non-specialists, product folks, policy makers, and curious people on X, a concrete mental model for modern LEO constellations. Make it easier to talk about coverage, congestion, and night-sky impact with a single artifact instead of abstract numbers.",
     key_learnings:
-      "Open data plus a small, well-structured pipeline can turn something abstract (thousands of satellites in LEO) into an intuitive picture. Good visuals do more than decorate a post—they compress a lot of orbital mechanics into one glance.",
+      "Open data plus a small, well-structured pipeline can turn something abstract (thousands of satellites in LEO) into an intuitive picture. Good visuals do more than decorate a post. They compress a lot of orbital mechanics into one glance.",
     thumbnail_url: starlinkThumb,
     figure_url:
       "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle",

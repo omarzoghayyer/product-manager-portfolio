@@ -176,7 +176,7 @@ export default function Contact() {
                     <CheckCircle className="w-8 h-8 text-green-600" />
                   </div>
                   <h3 className="text-xl font-semibold mb-2">
-                    Message sent—thanks!
+                    Message sent. Thank you!
                   </h3>
                   <Button variant="outline" onClick={() => setSubmitted(false)}>
                     Send Another

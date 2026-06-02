@@ -96,13 +96,13 @@ function OrbSparkles() {
 }
 
 const ICON_ACTIONS = [
-  { id: "msg",   Icon: MessageSquare, label: "Message",   demo: "chat",  bg: "#1d6fe8",                                                                                   iconColor: "#fff" },
-  { id: "call",  Icon: Phone,         label: "Call",      demo: "msgs",  bg: "#30d158",                                                                                   iconColor: "#fff" },
-  { id: "ig",    Icon: Instagram,     label: "Instagram", demo: "web",   bg: "linear-gradient(135deg, #f9a825 0%, #e8384d 40%, #c92b8a 70%, #8e24cc 100%)",               iconColor: "#fff" },
-  { id: "notif", Icon: Bell,          label: "Alerts",    demo: "notif", bg: "#ff453a",                                                                                   iconColor: "#fff" },
-  { id: "x",     Icon: XIcon,         label: "X",         demo: "x",     bg: "#e7e9ea",                                                                                   iconColor: "#0f1419" },
-  { id: "sat",   Icon: Satellite,     label: "Satellite", demo: null,    bg: "rgba(255,255,255,0.09)",                                                                    iconColor: "rgba(255,255,255,0.55)" },
-  { id: "cam",   Icon: Camera,        label: "Camera",    demo: null,    bg: "rgba(255,255,255,0.09)",                                                                    iconColor: "rgba(255,255,255,0.55)" },
+  { id: "msg", Icon: MessageSquare, label: "Message", demo: "chat", bg: "#1d6fe8", iconColor: "#fff" },
+  { id: "call", Icon: Phone, label: "Call", demo: "msgs", bg: "#30d158", iconColor: "#fff" },
+  { id: "ig", Icon: Instagram, label: "Instagram", demo: "web", bg: "linear-gradient(135deg, #f9a825 0%, #e8384d 40%, #c92b8a 70%, #8e24cc 100%)", iconColor: "#fff" },
+  { id: "notif", Icon: Bell, label: "Alerts", demo: "notif", bg: "#ff453a", iconColor: "#fff" },
+  { id: "x", Icon: XIcon, label: "X", demo: "x", bg: "#e7e9ea", iconColor: "#0f1419" },
+  { id: "sat", Icon: Satellite, label: "Satellite", demo: null, bg: "rgba(255,255,255,0.09)", iconColor: "rgba(255,255,255,0.55)" },
+  { id: "cam", Icon: Camera, label: "Camera", demo: null, bg: "rgba(255,255,255,0.09)", iconColor: "rgba(255,255,255,0.55)" },
 ];
 
 function OrbScreen({ listening, onChipClick }) {
@@ -284,7 +284,7 @@ function MessagesScreen({ onBack, onNavigate }) {
       <div className="mx-3 mb-3 px-3 py-2 rounded-lg flex-shrink-0"
         style={{ background: "rgba(30,58,138,0.25)", border: "1px solid rgba(59,130,246,0.2)" }}>
         <p className="text-xs font-mono" style={{ color: "#60a5fa" }}>
-          Opening messages — ChaCha20-Poly1305 encrypted, routed over Starlink DHT.
+          Opening messages. ChaCha20-Poly1305 encrypted, routed over Starlink DHT.
         </p>
       </div>
       <div className="flex-1 overflow-hidden px-3 space-y-1">
@@ -365,7 +365,7 @@ function ChatScreen({ onBack }) {
         <div className="flex justify-end">
           <div className="px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[78%]"
             style={{ background: "linear-gradient(135deg, #1e40af, #2563eb)" }}>
-            <p className="text-white text-xs">Starlink beam switch — RE-INVITE worked perfectly</p>
+            <p className="text-white text-xs">Starlink beam switch. RE-INVITE worked perfectly.</p>
             <p className="text-blue-300 mt-0.5" style={{ fontSize: 9 }}>9:44 ✓✓</p>
           </div>
         </div>
@@ -394,7 +394,7 @@ function BrowserScreen({ onBack }) {
       </div>
       <div className="mx-3 mb-2 px-3 py-1.5 rounded-lg flex-shrink-0"
         style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)" }}>
-        <p className="text-xs" style={{ color: "#a78bfa" }}>Privacy sandbox — 60+ trackers blocked, no fingerprinting.</p>
+        <p className="text-xs" style={{ color: "#a78bfa" }}>Privacy sandbox. 60+ trackers blocked. No fingerprinting.</p>
       </div>
       <div className="mx-3 mb-3 px-3 py-1.5 rounded-lg flex items-center gap-2 flex-shrink-0"
         style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
@@ -482,7 +482,7 @@ function NotificationsScreen({ onBack }) {
           </div>
           <div className="flex-1">
             <p className="text-white text-xs font-medium">3 trackers blocked</p>
-            <p className="text-gray-400 text-xs">Meta Pixel, GA, Hotjar — Instagram</p>
+            <p className="text-gray-400 text-xs">Meta Pixel, GA, Hotjar (Instagram)</p>
             <p className="text-gray-600 font-mono mt-0.5" style={{ fontSize: 9 }}>Just now · web proxy</p>
           </div>
         </div>
@@ -589,20 +589,20 @@ function XScreen({ onBack }) {
 // ─── Demo config ──────────────────────────────────────────────────────────────
 
 const DEMOS = [
-  { id: "orb",   backTo: null,   command: null,                    label: "AI Orb",        icon: User,          description: "Voice-first. No buttons. No home screen.", screen: (l, cb, onBack) => <OrbScreen listening={l} onChipClick={cb} /> },
-  { id: "msgs",  backTo: "orb",  command: "Hey OS, messages",      label: "Messages",      icon: MessageSquare, description: "ChaCha20 encrypted. Routed over Starlink DHT.", screen: (l, cb, onBack, onNav) => <MessagesScreen onBack={onBack} onNavigate={onNav} /> },
-  { id: "chat",  backTo: "msgs", command: "Hey OS, message Sarah", label: "Encrypted Chat",icon: MessageSquare, description: "E2E encrypted. ed25519 signed. No server copy.", screen: (l, cb, onBack) => <ChatScreen onBack={onBack} /> },
-  { id: "web",   backTo: "orb",  command: "Hey OS, open Instagram",label: "Web Rendering", icon: Globe,         description: "60+ trackers blocked. No fingerprinting.", screen: (l, cb, onBack) => <BrowserScreen onBack={onBack} /> },
-  { id: "notif", backTo: "orb",  command: "Hey OS, notifications", label: "Notifications", icon: Bell,          description: "DHT push only. No FCM. No Apple APNs.", screen: (l, cb, onBack) => <NotificationsScreen onBack={onBack} /> },
-  { id: "x",     backTo: "orb",  command: "Hey OS, open X",        label: "X / Twitter",   icon: XIcon,         description: "Rendered natively. No tracking. No ads.", screen: (l, cb, onBack) => <XScreen onBack={onBack} /> },
+  { id: "orb", backTo: null, command: null, label: "AI Orb", icon: User, description: "Voice-first. No buttons. No home screen.", screen: (l, cb, onBack) => <OrbScreen listening={l} onChipClick={cb} /> },
+  { id: "msgs", backTo: "orb", command: "Hey OS, messages", label: "Messages", icon: MessageSquare, description: "ChaCha20 encrypted. Routed over Starlink DHT.", screen: (l, cb, onBack, onNav) => <MessagesScreen onBack={onBack} onNavigate={onNav} /> },
+  { id: "chat", backTo: "msgs", command: "Hey OS, message Sarah", label: "Encrypted Chat", icon: MessageSquare, description: "E2E encrypted. ed25519 signed. No server copy.", screen: (l, cb, onBack) => <ChatScreen onBack={onBack} /> },
+  { id: "web", backTo: "orb", command: "Hey OS, open Instagram", label: "Web Rendering", icon: Globe, description: "60+ trackers blocked. No fingerprinting.", screen: (l, cb, onBack) => <BrowserScreen onBack={onBack} /> },
+  { id: "notif", backTo: "orb", command: "Hey OS, notifications", label: "Notifications", icon: Bell, description: "DHT push only. No FCM. No Apple APNs.", screen: (l, cb, onBack) => <NotificationsScreen onBack={onBack} /> },
+  { id: "x", backTo: "orb", command: "Hey OS, open X", label: "X / Twitter", icon: XIcon, description: "Rendered natively. No tracking. No ads.", screen: (l, cb, onBack) => <XScreen onBack={onBack} /> },
 ];
 
 const COMPARISONS = [
-  { name: "GrapheneOS",  noNumber: false, noCarrier: false, noStore: false, noTracking: true,  aiFirst: false },
-  { name: "Signal",      noNumber: false, noCarrier: false, noStore: false, noTracking: true,  aiFirst: false },
-  { name: "Nothing OS",  noNumber: false, noCarrier: false, noStore: false, noTracking: false, aiFirst: false },
+  { name: "GrapheneOS", noNumber: false, noCarrier: false, noStore: false, noTracking: true, aiFirst: false },
+  { name: "Signal", noNumber: false, noCarrier: false, noStore: false, noTracking: true, aiFirst: false },
+  { name: "Nothing OS", noNumber: false, noCarrier: false, noStore: false, noTracking: false, aiFirst: false },
   { name: "Apple (iOS)", noNumber: false, noCarrier: false, noStore: false, noTracking: false, aiFirst: false },
-  { name: "theOS",       noNumber: true,  noCarrier: true,  noStore: true,  noTracking: true,  aiFirst: true  },
+  { name: "theOS", noNumber: true, noCarrier: true, noStore: true, noTracking: true, aiFirst: true },
 ];
 
 const MODULES = [
@@ -668,7 +668,7 @@ export default function TheOS() {
               No phone number. No SIM. No carrier. Identity is cryptographic. Connectivity is satellite. The interface is AI. Everything else is noise.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mb-8">
-              {[{ v: "Rust", l: "Language" }, { v: "AArch64", l: "Architecture" }, { v: "EL1", l: "Privilege level" }, { v: "547", l: "Tests green" }].map((s) => (
+              {[{ v: "Rust", l: "Language" }, { v: "AArch64", l: "Architecture" }, { v: "Bare metal", l: "Execution" }, { v: "547", l: "Tests green" }].map((s) => (
                 <div key={s.l} className="text-center">
                   <p className="text-2xl font-bold text-white">{s.v}</p>
                   <p className="text-gray-500 text-xs mt-0.5">{s.l}</p>
@@ -763,11 +763,11 @@ export default function TheOS() {
             <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Built on a different premise.</h2>
             <div className="rounded-xl p-6 md:p-8" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                The phone number is 150 years old. It was designed for copper wire — not cryptography. For switching stations — not privacy. Every call you make. Every message you send. Through infrastructure{" "}
+                The phone number is 150 years old. Designed for copper wire, not cryptography. For switching stations, not privacy. Every call you make. Every message you send. Through infrastructure{" "}
                 <span className="text-white font-medium">someone else owns, on terms someone else wrote.</span>
               </p>
               <p className="text-gray-500 text-sm leading-relaxed">
-                theOS starts over. Your identity is an Ed25519 keypair — generated on your device, controlled by no one else, mathematically impossible to forge.
+                theOS starts over. Your identity is an Ed25519 keypair. Generated on your device. Controlled by no one else. Mathematically impossible to forge.
                 Calls route over Starlink. Encryption isn't a feature you enable. It's the only mode that exists.
               </p>
             </div>
@@ -785,7 +785,7 @@ export default function TheOS() {
               <thead>
                 <tr style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                   <th className="text-left py-2.5 pr-6 text-gray-500 font-medium text-xs">System</th>
-                  {["No phone #", "No carrier", "No app store", "No tracking", "AI-first"].map((h) => (
+                  {["No phone number", "No carrier", "No app store", "No tracking", "AI-first"].map((h) => (
                     <th key={h} className="text-center py-2.5 px-3 text-gray-500 font-medium text-xs whitespace-nowrap">{h}</th>
                   ))}
                 </tr>
@@ -818,11 +818,11 @@ export default function TheOS() {
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Engineered differently.</h2>
             <div className="space-y-3">
               {[
-                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair — generated on device, owned by you. No username. No account. No one can revoke it, reassign it, or take it from you." },
+                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair. Generated on device. Owned by you. No username. No account. No one can revoke it, reassign it, or take it from you." },
                 { label: "Signal-grade session crypto", body: "X3DH establishes every session. The Double Ratchet advances with every message. ChaCha20-Poly1305 encrypts every payload. 547 tests. All green." },
-                { label: "Decentralised peer discovery", body: "A custom Kademlia DHT resolves @handles to cryptographic keys to peer addresses — live, verified, decentralised. No directory server. No single point of failure or control." },
-                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink. No cellular modem. No SIM. No carrier. No towers. Coverage wherever Starlink reaches — which is most of Earth." },
-                { label: "Bare-metal Rust kernel", body: "Written in Rust. #![no_std]. AArch64 EL1. No operating system underneath — no assumptions, no shortcuts. theos-kernel boots in QEMU today. Real silicon is next." },
+                { label: "Decentralised peer discovery", body: "A custom Kademlia DHT resolves @handles to cryptographic keys to peer addresses. Live. Verified. Decentralised. No directory server. No single point of failure or control." },
+                { label: "Satellite-native connectivity", body: "Traffic routes over Starlink. No cellular modem. No SIM. No carrier. No towers. Coverage wherever Starlink reaches, which is most of Earth." },
+                { label: "Bare-metal Rust kernel", body: "Written in Rust. No operating system underneath. No assumptions. No shortcuts. The kernel runs. Real silicon is next." },
               ].map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }} viewport={{ once: true }}
@@ -859,11 +859,11 @@ export default function TheOS() {
                     "X3DH session establishment",
                     "Double Ratchet + ChaCha20-Poly1305 + HKDF",
                     "Skipped-message keys with cross-rotation stashing",
-                    "Kademlia DHT — @handle → key → peer address",
+                    "Kademlia DHT: @handle to key to peer address",
                     "Bootstrap server (live), NTP sync in daemon",
                     "Identity-based CallSurface (28 tests, full lifecycle)",
-                    "theos-kernel boots in QEMU (Phase 2 complete)",
-                    "theos-compositor compiles (Smithay / Wayland)",
+                    "Kernel boots on virtual hardware",
+                    "Compositor compiles and runs",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="text-emerald-400 mt-0.5 flex-shrink-0" style={{ fontSize: 11 }}>✓</span>
@@ -881,10 +881,10 @@ export default function TheOS() {
                 </div>
                 <ul className="space-y-2.5 mb-6">
                   {[
-                    "UART, GIC, clocks, PMIC, IOMMU — not yet wired",
+                    "UART, GIC, clocks, PMIC, IOMMU: not yet wired",
                     "Display, touch, audio (Tensor + Cirrus CS35L41)",
                     "WiFi (Broadcom BCM4389), UFS, Mali-G710 GPU",
-                    "Live call path — logic complete, final integration pending",
+                    "Live call path: logic complete, final integration pending",
                     "Orb UI shell + cloud LLM client",
                     "std-providing layer on theos-kernel",
                   ].map((item) => (
@@ -932,16 +932,14 @@ export default function TheOS() {
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Built in the open.</h2>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto mb-8">
-              theOS is open source. If you work in systems programming, kernel development, cryptography, or distributed networking —
-              or you simply believe that communication infrastructure should belong to no one —
-              start with the README.
+              theOS is open source. If you work in systems programming, kernel development, cryptography, or distributed networking, or you simply believe that communication infrastructure should belong to no one, start with the README.
             </p>
 
             <div className="rounded-xl p-5 mb-8 text-left"
               style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <p className="text-white/60 text-xs font-mono mb-1">Access</p>
               <p className="text-gray-300 text-sm">
-                The repository is private. Send an email — tell us who you are and what you'd bring.
+                The repository is private. Send an email. Tell us who you are and what you'd bring.
               </p>
               <Link to={createPageUrl("Contact")} className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mt-3">
                 Get in touch <ChevronRight className="w-3.5 h-3.5" />
