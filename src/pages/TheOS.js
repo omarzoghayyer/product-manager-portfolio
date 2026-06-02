@@ -682,13 +682,18 @@ export default function TheOS() {
                   See the Demo <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </a>
-              <Link to={createPageUrl("Contact")}>
-                <Button className="text-white/70 px-6 py-2 text-sm"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                  <Lock className="w-3.5 h-3.5 mr-1.5 opacity-60" />
-                  Request access <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
+              <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                style={{ background: "#161b22", border: "1px solid #30363d", color: "rgba(255,255,255,0.75)" }}
+                onMouseEnter={e => e.currentTarget.style.background = "#21262d"}
+                onMouseLeave={e => e.currentTarget.style.background = "#161b22"}>
+                <Lock className="w-3.5 h-3.5" style={{ color: "rgba(255,255,255,0.4)" }} />
+                View on GitHub
+                <span className="px-1.5 py-0.5 rounded text-xs font-bold tracking-wide"
+                  style={{ background: "rgba(245,158,11,0.12)", color: "#f59e0b", border: "1px solid rgba(245,158,11,0.3)" }}>
+                  INVITE ONLY
+                </span>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -946,26 +951,31 @@ export default function TheOS() {
               </Link>
             </div>
 
-            <div className="rounded-xl p-5 text-left max-w-sm mx-auto"
-              style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.1)" }}>
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <Lock className="w-3.5 h-3.5 text-white/30" />
-                  <span className="text-white text-xs font-mono">omarzoghayyer / theOS</span>
-                </div>
-                <span className="px-2 py-0.5 rounded-full text-xs font-medium"
-                  style={{ background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.08)" }}>
-                  invite only
-                </span>
-              </div>
-              <p className="text-gray-600 text-xs leading-relaxed mb-4">
-                Source is private during Phase 3 bring-up. Access granted by invite.
-              </p>
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-3">
+              {/* Request access — primary */}
               <Link to={createPageUrl("Contact")}
-                className="inline-flex items-center gap-1 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors">
-                Request access <ChevronRight className="w-3.5 h-3.5" />
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-85"
+                style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
+                Request access <ChevronRight className="w-4 h-4" />
               </Link>
+
+              {/* View on GitHub — secondary with INVITE ONLY badge */}
+              <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all"
+                style={{ background: "#161b22", border: "1px solid #30363d", color: "rgba(255,255,255,0.75)" }}
+                onMouseEnter={e => e.currentTarget.style.background = "#21262d"}
+                onMouseLeave={e => e.currentTarget.style.background = "#161b22"}>
+                <Lock className="w-3.5 h-3.5" style={{ color: "rgba(255,255,255,0.4)" }} />
+                View on GitHub
+                <span className="px-1.5 py-0.5 rounded text-xs font-bold tracking-wide"
+                  style={{ background: "rgba(245,158,11,0.12)", color: "#f59e0b", border: "1px solid rgba(245,158,11,0.3)" }}>
+                  INVITE ONLY
+                </span>
+              </a>
             </div>
+            <p className="text-gray-600 text-xs text-center">
+              Source is private during Phase 3 bring-up. Access granted by invite.
+            </p>
           </motion.div>
         </div>
       </section>
