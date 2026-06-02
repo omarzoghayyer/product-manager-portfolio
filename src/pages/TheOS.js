@@ -820,7 +820,7 @@ export default function TheOS() {
               {[
                 { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair. Generated on device. Owned by you. No username. No account. No one can revoke it, reassign it, or take it from you." },
                 { label: "Signal-grade session crypto", body: "X3DH establishes every session. The Double Ratchet advances with every message. ChaCha20-Poly1305 encrypts every payload. 547 tests. All green." },
-                { label: "Decentralised peer discovery", body: "A custom Kademlia DHT resolves @handles to cryptographic keys to peer addresses. Live. Verified. Decentralised. No directory server. No single point of failure or control." },
+                { label: "Decentralized peer discovery", body: "A custom DHT resolves identities to peer addresses. Live. Verified. No directory server. No single point of failure or control." },
                 { label: "Satellite-native connectivity", body: "Traffic routes over Starlink. No cellular modem. No SIM. No carrier. No towers. Coverage wherever Starlink reaches, which is most of Earth." },
                 { label: "Bare-metal Rust kernel", body: "Written in Rust. No operating system underneath. No assumptions. No shortcuts. The kernel runs. Real silicon is next." },
               ].map((item, i) => (
@@ -856,14 +856,13 @@ export default function TheOS() {
                 </div>
                 <ul className="space-y-2.5">
                   {[
-                    "X3DH session establishment",
-                    "Double Ratchet + ChaCha20-Poly1305 + HKDF",
-                    "Skipped-message keys with cross-rotation stashing",
-                    "Kademlia DHT: @handle to key to peer address",
-                    "Bootstrap server (live), NTP sync in daemon",
-                    "Identity-based CallSurface (28 tests, full lifecycle)",
+                    "Signal-grade key exchange and session establishment",
+                    "Forward-secret, end-to-end encrypted messaging",
+                    "Decentralized contact resolution, running live",
+                    "Network infrastructure running in production",
+                    "Voice call session layer, fully tested",
                     "Kernel boots on virtual hardware",
-                    "Compositor compiles and runs",
+                    "Compositor compiles and renders",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="text-emerald-400 mt-0.5 flex-shrink-0" style={{ fontSize: 11 }}>✓</span>
@@ -881,12 +880,12 @@ export default function TheOS() {
                 </div>
                 <ul className="space-y-2.5 mb-6">
                   {[
-                    "UART, GIC, clocks, PMIC, IOMMU: not yet wired",
-                    "Display, touch, audio (Tensor + Cirrus CS35L41)",
-                    "WiFi (Broadcom BCM4389), UFS, Mali-G710 GPU",
-                    "Live call path: logic complete, final integration pending",
-                    "Orb UI shell + cloud LLM client",
-                    "std-providing layer on theos-kernel",
+                    "Low-level hardware drivers: power, clocks, interrupts",
+                    "Display, touch, and audio bring-up",
+                    "Wireless, storage, and GPU drivers",
+                    "Live call path: logic complete, wiring in progress",
+                    "Orb UI shell and AI client",
+                    "Runtime bridge between protocol layer and kernel",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="text-amber-400 mt-0.5 flex-shrink-0" style={{ fontSize: 11 }}>○</span>
@@ -910,10 +909,10 @@ export default function TheOS() {
               </div>
               <div className="grid sm:grid-cols-4 gap-3">
                 {[
-                  { n: "01", label: "60-second two-device encrypted call demo" },
-                  { n: "02", label: "Show HN post" },
-                  { n: "03", label: "NLnet grant application" },
-                  { n: "04", label: "YC application" },
+                  { n: "01", label: "Live encrypted call demo, two devices" },
+                  { n: "02", label: "NLnet Foundation grant" },
+                  { n: "03", label: "Y Combinator application" },
+                  { n: "04", label: "Hardware bring-up on real silicon" },
                 ].map((t) => (
                   <div key={t.n} className="flex gap-2.5 items-start">
                     <span className="font-mono text-blue-400/40 text-xs flex-shrink-0 mt-0.5">{t.n}</span>
@@ -932,14 +931,14 @@ export default function TheOS() {
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Built in the open.</h2>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto mb-8">
-              theOS is open source. If you work in systems programming, kernel development, cryptography, or distributed networking, or you simply believe that communication infrastructure should belong to no one, start with the README.
+              theOS is open source. If you work in systems programming, kernel development, cryptography, or distributed networking, and you believe communication infrastructure should belong to no one, reach out.
             </p>
 
             <div className="rounded-xl p-5 mb-8 text-left"
               style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <p className="text-white/60 text-xs font-mono mb-1">Access</p>
               <p className="text-gray-300 text-sm">
-                The repository is private. Send an email. Tell us who you are and what you'd bring.
+                The repository is private. Introduce yourself and tell us what you'd bring.
               </p>
               <Link to={createPageUrl("Contact")} className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mt-3">
                 Get in touch <ChevronRight className="w-3.5 h-3.5" />
@@ -951,12 +950,6 @@ export default function TheOS() {
                 <Button className="text-white px-6 py-2 text-sm border-0"
                   style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
                   View on GitHub <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </a>
-              <a href="https://github.com/omarzoghayyer/theOS/blob/main/README.md" target="_blank" rel="noopener noreferrer">
-                <Button className="text-white/70 px-6 py-2 text-sm"
-                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                  Read the README <ChevronRight className="w-4 h-4 ml-1" />
                 </Button>
               </a>
             </div>
