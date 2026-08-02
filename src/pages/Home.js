@@ -43,7 +43,7 @@ export default function Home() {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-700 mb-4 max-w-3xl mx-auto font-light">
-              Technical Product Leader for platform tools, telemetry, and game infrastructure at EA.
+              Technical Program Manager building quality engineering, platform tools, and telemetry for Monopoly GO! at Scopely.
             </p>
 
             <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">

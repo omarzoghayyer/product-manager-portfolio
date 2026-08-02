@@ -11,10 +11,19 @@ import scuIcon from "../assets/Santa_Clara_U_Seal.svg.png";
 import bf6Icon from "../assets/Battlefield-6.jpg";
 import bfMobileIcon from "../assets/Battlefield_Mobile_Play_Store_App_Icon.PNG";
 import zooxIcon from "../assets/zoox.png";
+import monopolyGoIcon from "../assets/monopoly-go.PNG";
 
 const TIMELINE = [
   {
-    year: "2024 - Present",
+    year: "July 2026 - Present",
+    title: "Technical Program Manager, Quality Engineering",
+    organization: "Scopely (Monopoly GO!)",
+    description:
+      "Hired to build a quality engineering department that doesn't exist yet at Scopely, starting with Monopoly GO!, the company's top-grossing title. Currently a two-person team (self + Director of Quality Assurance), with a plan to grow to 4 engineers and a technical director by end of fiscal year. Building the automation framework for Monopoly GO! from scratch, working directly with technical directors and principal engineers. Proposing a new BigQuery-based telemetry collection system to bring governance to technical telemetry underutilized by teams relying solely on Datadog, and designing an org-wide release readiness tool that surfaces build/date, risk, scope, and test coverage as a clear story rather than a data dump.",
+    icon: monopolyGoIcon,
+  },
+  {
+    year: "2024 - 2026",
     title: "Maxis (The Sims Lab)",
     organization: "Electronic Arts",
     description:
@@ -205,11 +214,11 @@ export default function About() {
             <h1 className="text-4xl md:text-5xl font-bold mb-6">About Me</h1>
 
             <p className="text-xl text-gray-600 leading-relaxed">
-              I lead performance tooling, telemetry systems, and AI-powered automation that engineering teams
-              across EA depend on to ship stable, high-quality games. My work connects signal to action:
-              from crash diagnostics and regression detection to LLM tooling deployed at the studio level.
-              I partner with engineering, infra, and product leadership to turn complex data into decisions that move fast.
-              Currently at EA. MBA in Data Science, SCU.
+              I build quality engineering functions, performance tooling, telemetry systems, and AI-powered
+              automation that engineering teams depend on to ship stable, high-quality games. My work connects
+              signal to action: from crash diagnostics and regression detection to LLM tooling deployed at the
+              studio level. I partner with engineering, infra, and product leadership to turn complex data into
+              decisions that move fast. Currently at Scopely (Monopoly GO!). MBA in Data Science, SCU.
             </p>
           </motion.div>
         </div>
