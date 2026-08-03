@@ -19,7 +19,7 @@ const TIMELINE = [
     title: "Technical Program Manager, Quality Engineering",
     organization: "Scopely (Monopoly GO!)",
     description:
-      "Building Quality Engineering foundations and teams at Scopely, starting with Monopoly GO!, the company's top-grossing title. Building the automation framework for Monopoly GO! from scratch, working directly with technical directors and principal engineers. Proposing a new BigQuery-based telemetry collection system to bring governance to technical telemetry underutilized by teams relying solely on Datadog, and designing an org-wide release readiness tool that surfaces build/date, risk, scope, and test coverage as a clear story rather than a data dump.",
+      "Building Quality Engineering foundations at Scopely. Monopoly Go",
     icon: monopolyGoIcon,
   },
   {
