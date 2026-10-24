@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Globe, MessageSquare, Phone, User, ChevronRight, ChevronUp, Bell, ChevronLeft, Video, Mic, Instagram, Satellite, Camera, Clock, X as XIcon, Search, Lock } from "lucide-react";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "../utils";
-import { Button } from "../components/ui/button";
+import { usePageMeta } from "../lib/usePageMeta";
+import { site } from "../content/site";
+
+const ACCESS_MAILTO = `mailto:${site.email}?subject=${encodeURIComponent("theOS access")}`;
 
 // ─── Shared status bar ────────────────────────────────────────────────────────
 
@@ -358,14 +359,14 @@ function ChatScreen({ onBack }) {
         </div>
         <div className="flex justify-start">
           <div className="px-3 py-1.5 rounded-2xl rounded-tl-sm max-w-[78%]" style={{ background: "rgba(255,255,255,0.08)" }}>
-            <p className="text-white text-xs">Call quality over satellite is incredible</p>
+            <p className="text-white text-xs">The satellite call is clear</p>
             <p className="text-gray-500 mt-0.5" style={{ fontSize: 9 }}>9:43</p>
           </div>
         </div>
         <div className="flex justify-end">
           <div className="px-3 py-1.5 rounded-2xl rounded-tr-sm max-w-[78%]"
             style={{ background: "linear-gradient(135deg, #1e40af, #2563eb)" }}>
-            <p className="text-white text-xs">Satellite beam switch. RE-INVITE worked perfectly.</p>
+            <p className="text-white text-xs">The call switched satellite links without disconnecting.</p>
             <p className="text-blue-300 mt-0.5" style={{ fontSize: 9 }}>9:44 ✓✓</p>
           </div>
         </div>
@@ -394,7 +395,7 @@ function BrowserScreen({ onBack }) {
       </div>
       <div className="mx-3 mb-2 px-3 py-1.5 rounded-lg flex-shrink-0"
         style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(124,58,237,0.3)" }}>
-        <p className="text-xs" style={{ color: "#a78bfa" }}>Privacy sandbox. 60+ trackers blocked. No fingerprinting.</p>
+        <p className="text-xs" style={{ color: "#a78bfa" }}>Private browsing. Blocks more than 60 trackers and limits browser fingerprinting.</p>
       </div>
       <div className="mx-3 mb-3 px-3 py-1.5 rounded-lg flex items-center gap-2 flex-shrink-0"
         style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
@@ -589,12 +590,12 @@ function XScreen({ onBack }) {
 // ─── Demo config ──────────────────────────────────────────────────────────────
 
 const DEMOS = [
-  { id: "orb", backTo: null, command: null, label: "AI Orb", icon: User, description: "Voice-first. No buttons. No home screen.", screen: (l, cb, onBack) => <OrbScreen listening={l} onChipClick={cb} /> },
-  { id: "msgs", backTo: "orb", command: "Hey OS, messages", label: "Messages", icon: MessageSquare, description: "ChaCha20 encrypted. Routed over satellite DHT.", screen: (l, cb, onBack, onNav) => <MessagesScreen onBack={onBack} onNavigate={onNav} /> },
-  { id: "chat", backTo: "msgs", command: "Hey OS, message Sarah", label: "Encrypted Chat", icon: MessageSquare, description: "E2E encrypted. ed25519 signed. No server copy.", screen: (l, cb, onBack) => <ChatScreen onBack={onBack} /> },
-  { id: "web", backTo: "orb", command: "Hey OS, open Instagram", label: "Web Rendering", icon: Globe, description: "60+ trackers blocked. No fingerprinting.", screen: (l, cb, onBack) => <BrowserScreen onBack={onBack} /> },
-  { id: "notif", backTo: "orb", command: "Hey OS, notifications", label: "Notifications", icon: Bell, description: "DHT push only. No FCM. No Apple APNs.", screen: (l, cb, onBack) => <NotificationsScreen onBack={onBack} /> },
-  { id: "x", backTo: "orb", command: "Hey OS, open X", label: "X / Twitter", icon: XIcon, description: "Rendered natively. No tracking. No ads.", screen: (l, cb, onBack) => <XScreen onBack={onBack} /> },
+  { id: "orb", backTo: null, command: null, label: "AI Orb", icon: User, description: "Use your voice to open features and make requests.", screen: (l, cb, onBack) => <OrbScreen listening={l} onChipClick={cb} /> },
+  { id: "msgs", backTo: "orb", command: "Hey OS, messages", label: "Messages", icon: MessageSquare, description: "Messages are encrypted and use a distributed network.", screen: (l, cb, onBack, onNav) => <MessagesScreen onBack={onBack} onNavigate={onNav} /> },
+  { id: "chat", backTo: "msgs", command: "Hey OS, message Sarah", label: "Encrypted Chat", icon: MessageSquare, description: "Messages are encrypted and signed. They are not stored on a central server.", screen: (l, cb, onBack) => <ChatScreen onBack={onBack} /> },
+  { id: "web", backTo: "orb", command: "Hey OS, open Instagram", label: "Web Rendering", icon: Globe, description: "Blocks more than 60 trackers and limits browser fingerprinting.", screen: (l, cb, onBack) => <BrowserScreen onBack={onBack} /> },
+  { id: "notif", backTo: "orb", command: "Hey OS, notifications", label: "Notifications", icon: Bell, description: "Notifications use a distributed network instead of Google or Apple push services.", screen: (l, cb, onBack) => <NotificationsScreen onBack={onBack} /> },
+  { id: "x", backTo: "orb", command: "Hey OS, open X", label: "X / Twitter", icon: XIcon, description: "Displays posts without ads or tracking.", screen: (l, cb, onBack) => <XScreen onBack={onBack} /> },
 ];
 
 const COMPARISONS = [
@@ -606,7 +607,7 @@ const COMPARISONS = [
 ];
 
 const MODULES = [
-  "Cryptographic identity (Ed25519)", "DHT peer discovery", "Encrypted messenger",
+  "Device key identity (Ed25519)", "DHT peer discovery", "Encrypted messenger",
   "Signal bridge", "Camera + photo signing", "AI wake engine", "Power manager",
   "Web proxy + tracker blocking", "Encrypted message store", "Speech-to-text pipeline",
   "Push notification system", "VoIP (ChaCha20-Poly1305)", "DHT bootstrap server",
@@ -615,6 +616,10 @@ const MODULES = [
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function TheOS() {
+  usePageMeta({
+    title: "theOS",
+    description: "theOS is a phone operating system written in Rust. It is designed to work without a SIM card, phone number, or mobile carrier.",
+  });
   const [activeDemo, setActiveDemo] = useState("orb");
   const [isListening, setIsListening] = useState(false);
 
@@ -678,13 +683,13 @@ export default function TheOS() {
 
             {/* Serif subtitle */}
             <p className="mb-6" style={{ fontFamily: "Georgia, 'Times New Roman', serif", fontSize: "clamp(1.6rem, 4vw, 2.1rem)", lineHeight: 1.4, color: "rgba(255,255,255,0.88)" }}>
-              A phone with no number, no SIM,<br />
-              no <em style={{ color: "#2dd4bf", fontStyle: "italic" }}>carrier</em>.
+              A phone with no number,<br />
+              SIM, or carrier.
             </p>
 
             {/* Monospace description */}
             <p className="mb-8 mx-auto max-w-md leading-loose" style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "0.75rem", color: "rgba(255,255,255,0.38)" }}>
-              Identity is a cryptographic key, not a phone number. Calls and messages route over satellite, end-to-end encrypted. A bare-metal OS written from scratch in Rust.
+              Your identity is a key stored on your phone. Calls and messages are encrypted. I am building a Rust operating system, from the kernel up.
             </p>
 
             {/* Status badge */}
@@ -693,17 +698,17 @@ export default function TheOS() {
               <span style={{ fontFamily: "monospace", fontSize: "0.67rem", letterSpacing: "0.06em", whiteSpace: "nowrap" }}>
                 <span style={{ color: "rgba(255,255,255,0.38)" }}>STATUS: </span>
                 <span style={{ color: "#fff", fontWeight: 700 }}>PHASE 2 COMPLETE</span>
-                <span style={{ color: "rgba(255,255,255,0.28)" }}> · PHASE 3 HARDWARE BRING-UP IN PROGRESS</span>
+                <span style={{ color: "rgba(255,255,255,0.28)" }}> · PHASE 3: PHONE HARDWARE SUPPORT IN PROGRESS</span>
               </span>
             </div>
 
             {/* Buttons */}
             <div className="flex flex-wrap justify-center gap-3 mb-3">
-              <Link to={createPageUrl("Contact")}
+              <a href={ACCESS_MAILTO}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-85"
                 style={{ background: "#2dd4bf", color: "#042f2e" }}>
-                Request access <ChevronRight className="w-4 h-4" />
-              </Link>
+                Ask for access <ChevronRight className="w-4 h-4" />
+              </a>
               <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all"
                 style={{ background: "#161b22", border: "1px solid #30363d", color: "rgba(255,255,255,0.75)" }}
@@ -720,7 +725,7 @@ export default function TheOS() {
 
             {/* Source note */}
             <p className="mb-10" style={{ fontFamily: "monospace", fontSize: "0.68rem", color: "rgba(255,255,255,0.25)" }}>
-              Source is private during Phase 3 bring-up. Access granted by invite.
+              The source code is private while I work on hardware support. Access is by invitation.
             </p>
 
             {/* Pill tags */}
@@ -740,8 +745,8 @@ export default function TheOS() {
       <section id="demo" className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold mb-2">The interface is your voice.</h2>
-            <p className="text-gray-400 text-sm max-w-md mx-auto">No app grid. No home screen. No tapping through menus. Just ask.</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2">Control the phone with your voice.</h2>
+            <p className="text-gray-400 text-sm max-w-md mx-auto">Ask for what you need instead of opening apps and tapping through menus.</p>
           </div>
           <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
             {/* Phone */}
@@ -803,15 +808,14 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Built on a different premise.</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Why remove phone numbers?</h2>
             <div className="rounded-xl p-6 md:p-8" style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <p className="text-gray-300 text-sm leading-relaxed mb-4">
-                The phone number is 150 years old. Designed for copper wire, not cryptography. For switching stations, not privacy. Every call you make. Every message you send. Through infrastructure{" "}
-                <span className="text-white font-medium">someone else owns, on terms someone else wrote.</span>
+                Most phones rely on a phone number and a mobile carrier to place calls and send messages.{" "}
+                <span className="text-white font-medium">The carrier controls the network and sets its rules.</span>
               </p>
               <p className="text-gray-500 text-sm leading-relaxed">
-                theOS starts over. Your identity is an Ed25519 keypair. Generated on your device. Controlled by no one else. Mathematically impossible to forge.
-                Calls route over satellite. Encryption isn't a feature you enable. It's the only mode that exists.
+                theOS uses an Ed25519 key pair stored on your phone as your identity. Calls are designed to use satellite links, and messages are encrypted by default.
               </p>
             </div>
           </motion.div>
@@ -821,8 +825,8 @@ export default function TheOS() {
       {/* Comparison */}
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Others secured the existing system.</h2>
-          <p className="text-gray-500 text-sm text-center mb-8">theOS is a different premise entirely.</p>
+          <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">How theOS compares</h2>
+          <p className="text-gray-500 text-sm text-center mb-8">theOS is designed to work without a phone number or mobile carrier.</p>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -858,14 +862,14 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Engineered differently.</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">How the system works</h2>
             <div className="space-y-3">
               {[
-                { label: "Cryptographic identity", body: "Your identity is an Ed25519 keypair. Generated on device. Owned by you. No username. No account. No one can revoke it, reassign it, or take it from you." },
-                { label: "Signal-grade session crypto", body: "X3DH establishes every session. The Double Ratchet advances with every message. ChaCha20-Poly1305 encrypts every payload. 547 tests. All green." },
-                { label: "Decentralized peer discovery", body: "A custom DHT resolves identities to peer addresses. Live. Verified. No directory server. No single point of failure or control." },
-                { label: "Satellite-native connectivity", body: "Traffic routes over satellite. No cellular modem. No SIM. No carrier. No towers. Global coverage without a single ground-based tower." },
-                { label: "Bare-metal Rust kernel", body: "Written in Rust. No operating system underneath. No assumptions. No shortcuts. The kernel runs. Real silicon is next." },
+                { label: "Device key identity", body: "Your phone creates an Ed25519 key pair for your identity. You do not need a username or account. The key stays on your device." },
+                { label: "Message encryption", body: "X3DH and the Double Ratchet help protect each conversation. ChaCha20-Poly1305 encrypts messages. The protocol passes 547 tests." },
+                { label: "Finding other phones", body: "A custom distributed hash table (DHT) helps phones find each other without a central directory server." },
+                { label: "Satellite connection", body: "The design uses satellite links instead of cell towers, a SIM card, or a mobile carrier. Satellite coverage depends on compatible hardware and service." },
+                { label: "Rust operating system", body: "The kernel is written in Rust and boots on virtual hardware. Running it on a real phone is the next step." },
               ].map((item, i) => (
                 <motion.div key={item.label} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.07 }} viewport={{ once: true }}
@@ -888,7 +892,7 @@ export default function TheOS() {
         <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-2 text-center">Where it stands.</h2>
-            <p className="text-gray-500 text-sm text-center mb-10">The protocol layer is built and tested. The kernel runs. Hardware bring-up on real silicon is next.</p>
+            <p className="text-gray-500 text-sm text-center mb-10">The network protocols pass tests, and the kernel boots in a virtual device. Next, I need to get it running on a real phone.</p>
 
             <div className="grid md:grid-cols-2 gap-4 mb-4">
               {/* Built & tested */}
@@ -899,13 +903,13 @@ export default function TheOS() {
                 </div>
                 <ul className="space-y-2.5">
                   {[
-                    "Signal-grade key exchange and session establishment",
-                    "Forward-secret, end-to-end encrypted messaging",
-                    "Decentralized contact resolution, running live",
+                    "Key exchange and secure sessions",
+                    "Messages stay protected, even if a key is exposed later",
+                    "Finding contacts across the network",
                     "Network infrastructure running in production",
                     "Voice call session layer, fully tested",
                     "Kernel boots on virtual hardware",
-                    "Compositor compiles and renders",
+                    "Screen interface builds and draws graphics",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="text-emerald-400 mt-0.5 flex-shrink-0" style={{ fontSize: 11 }}>✓</span>
@@ -938,7 +942,7 @@ export default function TheOS() {
                 </ul>
                 <div className="rounded-lg px-3 py-2.5" style={{ background: "rgba(251,191,36,0.05)", border: "1px solid rgba(251,191,36,0.12)" }}>
                   <p className="text-xs text-amber-400/70 leading-relaxed">
-                    Bring-up starts with an OEM-unlocked Pixel 7 Pro. UART first. Then display. Then touch. Then everything else. The ladder is long. The foundation is real.
+                    I plan to start hardware tests on an unlocked Pixel 7 Pro. First I will check the serial connection, then the screen and touch input, followed by the other phone hardware.
                   </p>
                 </div>
               </div>
@@ -972,29 +976,29 @@ export default function TheOS() {
       <section className="py-16" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }}>
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Built in the open.</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Help with the project</h2>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xl mx-auto mb-8">
-              theOS is open source. If you work in systems programming, kernel development, cryptography, or distributed networking, and you believe communication infrastructure should belong to no one, reach out.
+              I am looking for people with experience in operating systems, cryptography, or distributed networks. If you would like to help, get in touch.
             </p>
 
             <div className="rounded-xl p-5 mb-8 text-left"
               style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)" }}>
               <p className="text-white/60 text-xs font-mono mb-1">Access</p>
               <p className="text-gray-300 text-sm">
-                The repository is private. Introduce yourself and tell us what you'd bring.
+                The repository is private for now. Send me a note about your experience and how you would like to help.
               </p>
-              <Link to={createPageUrl("Contact")} className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mt-3">
+              <a href={ACCESS_MAILTO} className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors mt-3">
                 Get in touch <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
+              </a>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-3 mb-3">
-              {/* Request access — primary */}
-              <Link to={createPageUrl("Contact")}
+              {/* Ask for access — primary */}
+              <a href={ACCESS_MAILTO}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-85"
                 style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
-                Request access <ChevronRight className="w-4 h-4" />
-              </Link>
+                Ask for access <ChevronRight className="w-4 h-4" />
+              </a>
 
               {/* View on GitHub — secondary with INVITE ONLY badge */}
               <a href="https://github.com/omarzoghayyer/theOS" target="_blank" rel="noopener noreferrer"
@@ -1011,7 +1015,7 @@ export default function TheOS() {
               </a>
             </div>
             <p className="text-gray-600 text-xs text-center">
-              Source is private during Phase 3 bring-up. Access granted by invite.
+              The source code is private while I work on hardware support. Access is by invitation.
             </p>
           </motion.div>
         </div>

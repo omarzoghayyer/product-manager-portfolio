@@ -1,146 +1,135 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { createPageUrl } from "./utils";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { analytics, logEvent } from "./firebase";
-import './style/index.css';
+import { createPageUrl } from "./utils";
+import { site } from "./content/site";
+import SocialLinks from "./components/site/SocialLinks";
 
 const navigationItems = [
-  { title: "Home", url: createPageUrl("Home") },
+  { title: "Projects", url: createPageUrl("Projects") },
+  { title: "Writing", url: createPageUrl("Writing") },
   { title: "About", url: createPageUrl("About") },
-  { title: "Problem Solving", url: createPageUrl("CaseStudies") },
-  { title: "theOS", url: createPageUrl("TheOS") },
-  { title: "Contact Me", url: createPageUrl("Contact") },
 ];
 
 export default function Layout({ children }) {
   const location = useLocation();
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
 
+  // theOS keeps its own dark design; the header and footer follow it there.
   const isDark = location.pathname === createPageUrl("TheOS");
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileMenuOpen(false);
+    setMenuOpen(false);
   }, [location.pathname]);
 
-  // Update document title on route change
   useEffect(() => {
-    const titles = {
-      [createPageUrl("Home")]:            "Omar Zoghayyer",
-      [createPageUrl("About")]:           "About",
-      [createPageUrl("CaseStudies")]:     "Problem Solving",
-      [createPageUrl("CaseStudyDetail")]: "Case Study",
-      [createPageUrl("TheOS")]:           "theOS",
-      [createPageUrl("Contact")]:         "Contact",
+    if (!menuOpen) return undefined;
+    const onKey = (e) => {
+      if (e.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
     };
-    document.title = titles[location.pathname] ?? "Omar Zoghayyer";
-  }, [location.pathname]);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
 
-  // Fire a page_view event on every route change
-  useEffect(() => {
-    logEvent(analytics, "page_view", {
-      page_path: location.pathname,
-      page_title: document.title,
-    });
-  }, [location.pathname]);
-
-  const navScrolledBg = isDark ? "backdrop-blur-md shadow-sm shadow-black/60" : "bg-white/95 backdrop-blur-md shadow-sm";
-  const navLinkActive = isDark ? "text-white" : "text-[var(--primary)]";
-  const navLinkDefault = isDark ? "text-white/50 hover:text-white" : "text-[var(--text-secondary)] hover:text-[var(--primary)]";
-  const logoColor = isDark ? "text-white" : "text-gray-900";
+  const theme = isDark
+    ? { shell: "bg-[#0a0a0a] text-white", header: "bg-[#0a0a0a]", text: "text-white", footer: "border-white/10 text-white/60" }
+    : { shell: "bg-paper text-ink-2", header: "bg-paper/95 backdrop-blur", text: "text-ink", footer: "border-line text-ink-2" };
 
   return (
-    <div className={`min-h-screen ${isDark ? "bg-[#0a0a0a]" : "bg-[#FAFAF9]"}`} style={isDark ? { "--nav-scrolled-bg": "#0a0a0a" } : {}}>
-      {/* Navbar */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? navScrolledBg : "bg-transparent"}`}
-        style={scrolled && isDark ? { backgroundColor: "#0a0a0a" } : {}}
+    <div className={`min-h-screen flex flex-col ${theme.shell}`}>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-white"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <Link to={createPageUrl("Home")} className={`text-xl font-semibold tracking-tight hover:opacity-70 transition-opacity ${logoColor}`}>
-              Zoghayyer
-            </Link>
-            <div className="hidden md:flex items-center gap-8">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.title}
-                  to={item.url}
-                  className={`text-sm font-medium transition-colors relative ${location.pathname === item.url ? navLinkActive : navLinkDefault}`}
-                >
-                  {item.title}
-                  {item.title === "theOS" && (
-                    <span
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full"
-                      style={{ background: "linear-gradient(90deg, #f59e0b, #f97316)" }}
-                    />
-                  )}
-                </Link>
-              ))}
-            </div>
+        Skip to content
+      </a>
 
-            <button
-              className={`md:hidden p-2 transition-colors ${isDark ? "text-white/60 hover:text-white" : "text-gray-600 hover:text-gray-900"}`}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+      <header className={`sticky top-0 z-50 ${theme.header}`}>
+        <div className="mx-auto flex h-20 max-w-[72rem] items-center justify-between px-5 md:h-24 md:px-10">
+          <Link
+            to={createPageUrl("Home")}
+            className={`logo-script text-[1.9rem] sm:text-[2.4rem] md:text-[2.75rem] ${theme.text}`}
+            aria-label={`${site.name}, home`}
+          >
+            {site.name}
+          </Link>
+
+          <nav aria-label="Main" className="hidden md:block">
+            <ul className="flex items-center gap-8">
+              {navigationItems.map((item) => (
+                <li key={item.url}>
+                  <NavLink
+                    to={item.url}
+                    className={({ isActive }) =>
+                      `border-b-2 pb-1 text-[1rem] font-semibold transition-colors ${theme.text} ${
+                        isActive ? "border-[#2dd4bf]" : "border-transparent opacity-70 hover:opacity-100"
+                      }`
+                    }
+                  >
+                    {item.title}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className={`-mr-2 rounded p-2 md:hidden ${theme.text}`}
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            {menuOpen ? <X className="h-7 w-7" aria-hidden="true" /> : <Menu className="h-7 w-7" aria-hidden="true" />}
+          </button>
         </div>
 
-        {mobileMenuOpen && (
-          <div className={`md:hidden border-t ${isDark ? "border-white/10" : "bg-white border-gray-100"}`} style={isDark ? { backgroundColor: "#0a0a0a" } : {}}>
-            <div className="px-6 py-4 space-y-3">
-              {navigationItems.map((item) => (
-                <Link
-                  key={item.title}
-                  to={item.url}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block py-2 text-base font-medium ${location.pathname === item.url ? navLinkActive : isDark ? "text-white/50" : "text-gray-600"}`}
-                >
-                  {item.title}
-                </Link>
+        {menuOpen && (
+          <nav id="mobile-menu" aria-label="Main" className={`border-t md:hidden ${isDark ? "border-white/10" : "border-line"}`}>
+            <ul className="px-5 py-4">
+              {[{ title: "Home", url: createPageUrl("Home") }, ...navigationItems].map((item) => (
+                <li key={item.url} className="py-2">
+                  <NavLink
+                    to={item.url}
+                    end={item.url === "/"}
+                    className={({ isActive }) => `border-l-2 pl-3 text-xl font-semibold ${theme.text} ${isActive ? "border-[#2dd4bf]" : "border-transparent"}`}
+                  >
+                    {item.title}
+                  </NavLink>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </nav>
         )}
-      </nav>
+      </header>
 
-      <main className={isDark ? "" : "pt-20"}>{children}</main>
+      <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
+        {children}
+      </main>
 
-      <footer className={`border-t ${isDark ? "border-white/10 mt-0" : "bg-white border-gray-100 mt-32"}`} style={isDark ? { backgroundColor: "#0a0a0a" } : {}}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-center md:text-left">
-              <p className={`text-sm font-medium ${isDark ? "text-white" : "text-gray-900"}`}>Omar Zoghayyer</p>
-              <p className={`text-sm mt-1 ${isDark ? "text-white/40" : "text-gray-500"}`}>Technical Product Leader</p>
-            </div>
-            <div className="flex gap-6">
-              <a
-                href="https://www.linkedin.com/in/omarjzoghayyer/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`text-sm transition-colors ${isDark ? "text-white/40 hover:text-white" : "text-gray-500 hover:text-[var(--primary)]"}`}
-              >
-                LinkedIn
-              </a>
-              <Link to={createPageUrl("Contact")} className={`text-sm transition-colors ${isDark ? "text-white/40 hover:text-white" : "text-gray-500 hover:text-[var(--primary)]"}`}>
-                Contact
-              </Link>
-            </div>
+      <footer className={`mt-20 border-t ${theme.footer}`}>
+        <div className="mx-auto grid max-w-[72rem] gap-8 px-5 py-12 md:grid-cols-[1fr_auto] md:items-center md:px-10">
+          <div>
+            <Link to={createPageUrl("Home")} className={`logo-script text-[1.6rem] ${theme.text}`}>
+              {site.name}
+            </Link>
+            <p className="mt-2 text-sm">
+              {site.role}. I build software and automation, and explore hardware and AI.
+            </p>
           </div>
-          <div className={`mt-8 pt-8 border-t text-center ${isDark ? "border-white/10" : "border-gray-100"}`}>
-            <p className={`text-xs ${isDark ? "text-white/25" : "text-gray-400"}`}>© {new Date().getFullYear()} Omar Zoghayyer. All rights reserved.</p>
-          </div>
+          <SocialLinks className={isDark ? "text-white/70" : "text-ink"} />
+          <p className="text-xs md:col-span-2">
+            © {new Date().getFullYear()} {site.name}. Built with React and Vite.
+          </p>
+          <p className="text-xs md:col-span-2">
+            Design inspired by Greg Isenberg.
+          </p>
         </div>
       </footer>
     </div>

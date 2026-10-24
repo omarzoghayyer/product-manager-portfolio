@@ -1,346 +1,232 @@
-// src/pages/Home.js
-import React, { useMemo } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Sparkles, Cpu, Activity } from "lucide-react";
-import { motion } from "framer-motion";
-
 import { createPageUrl } from "../utils";
-import { Button } from "../components/ui/button";
+import { site } from "../content/site";
+import { featuredProjects, workProjects, projectHref } from "../content/projects";
+import { education } from "../content/about";
+import { posts, formatDate } from "../content/writing";
+import EntryCard from "../components/site/EntryCard";
+import ProjectImage from "../components/site/ProjectImage";
+import SocialLinks from "../components/site/SocialLinks";
+import { usePageMeta } from "../lib/usePageMeta";
+import avatarImg from "../assets/profile.jpeg";
 
-// ⬇️ local hard-coded content
-import { caseStudies } from "../data/caseStudies";
+function Section({ id, label, title, action, children }) {
+  return (
+    <section aria-labelledby={id} className="border-t border-line py-14 md:py-16">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p className="eyebrow">{label}</p>
+          <h2 id={id} className="mt-2 text-2xl md:text-3xl">
+            {title}
+          </h2>
+        </div>
+        {action}
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function ProjectTile({ project }) {
+  return (
+    <Link to={projectHref(project)} className="card group h-full overflow-hidden">
+      <div className="border-b border-line">
+        <ProjectImage src={project.image} alt={project.imageAlt} fit={project.imageFit} bg={project.imageBg} />
+      </div>
+      <div className="p-5 md:p-6">
+        <p className="text-sm text-muted">
+          {project.org} · {project.period}
+        </p>
+        <h3 className="mt-1.5 text-[1.2rem] leading-snug group-hover:text-accent transition-colors">
+          {project.title}
+        </h3>
+        <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-2">{project.summary}</p>
+      </div>
+    </Link>
+  );
+}
 
 export default function Home() {
-  // featured case studies (max 4). If fewer than 4 are explicitly featured,
-  // fill the remainder with other case studies so the UI shows more items.
-  const featuredCases = useMemo(() => {
-    const featured = caseStudies.filter((c) => c.featured);
-    if (featured.length >= 4) return featured.slice(0, 4);
-    const needed = 4 - featured.length;
-    const others = caseStudies.filter((c) => !c.featured).slice(0, needed);
-    return [...featured, ...others];
-  }, []);
+  usePageMeta();
+
+  const showcase = featuredProjects.filter((p) => p.slug !== "theos" && p.image);
+  const recentPosts = posts.slice(0, 3);
+  const mba = education[0];
+
+  const now = [
+    { label: "Working on", body: "Quality engineering for Monopoly GO! at Scopely.", to: null },
+    { label: "Studying", body: `${mba.title} at ${mba.org}.`, to: null },
+  ];
 
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 geometric-pattern opacity-20" />
-
-        <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full text-sm text-[var(--primary)] font-medium mb-8">
-              <Sparkles className="w-4 h-4" />
-              Platform · Telemetry · Automation
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-              Omar Zoghayyer
-            </h1>
-
-            <p className="text-xl md:text-2xl text-gray-700 mb-4 max-w-3xl mx-auto font-light">
-              Technical Program Manager building quality engineering, platform tools, and telemetry for Monopoly GO! at Scopely.
-            </p>
-
-            <p className="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
-              I partner with engineering and QA across studios to design and scale the tooling, data pipelines, and automation that keep our games performant and stable.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to={createPageUrl("CaseStudies")}>
-                <Button
-                  size="lg"
-                  className="bg-[var(--primary)] hover:bg-[var(--primary-light)] text-white px-8 py-6 text-base"
-                >
-                  View My Work
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </Link>
-              <Link to={createPageUrl("About")}>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-gray-300 px-8 py-6 text-base"
-                >
-                  About & Timeline
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Floating Accents */}
-        <motion.div
-          className="absolute top-1/4 left-10 w-16 h-16 bg-blue-100 rounded-2xl opacity-50"
-          animate={{ y: [0, -15, 0], rotate: [0, 8, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-10 w-14 h-14 bg-blue-200 rounded-full opacity-40"
-          animate={{ y: [0, 15, 0], scale: [1, 1.08, 1] }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </section>
-
-      {/* What I Do Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">What I Do</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              I focus on systems that give teams the right signals, kill noise, and turn quality and performance into something automatic inside the pipeline.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Platform Tools */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="group"
+    <div className="mx-auto max-w-[72rem] px-5 md:px-10">
+      {/* Hero */}
+      <section className="grid items-center gap-10 pt-10 pb-14 md:grid-cols-[1fr_auto] md:gap-16 md:pt-16 md:pb-20">
+        <div>
+          <p className="eyebrow">{site.role}</p>
+          <h1 className="mt-4 max-w-3xl text-[2.4rem] font-extrabold leading-[1.1] sm:text-[3rem] lg:text-[3.6rem]">
+            I build software, explore hardware, and use AI to test bold ideas.
+          </h1>
+          <p className="mt-6 max-w-2xl text-[1.15rem] leading-relaxed text-ink-2">
+            I've worked on Battlefield, The Sims, and self-driving cars. I now lead quality engineering for Monopoly GO! at Scopely.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <Link
+              to={createPageUrl("Projects")}
+              className="inline-flex h-11 items-center rounded-full bg-ink px-6 text-[0.95rem] font-semibold text-white transition-colors hover:bg-accent"
             >
-              <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 bg-[var(--primary)] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Cpu className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Platform Tools</h3>
-                <p className="text-gray-600">
-                  Developer tooling that accelerates workflows - logging, profiling, validation, and the infrastructure that supports them.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Telemetry & Observability */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="group"
-            >
-              <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 bg-[var(--primary)] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Activity className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">
-                  Telemetry & Observability
-                </h3>
-                <p className="text-gray-600">
-                  Unified telemetry pipelines and dashboards that surface performance, stability, and user-impact signals earlybefore they hit players.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Automation & ML */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="group"
-            >
-              <div className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300">
-                <div className="w-12 h-12 bg-[var(--primary)] rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <Sparkles className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Automation & ML</h3>
-                <p className="text-gray-600">
-                  Pipeline guardrails, not manuals. ML detects crashes, ANRs, and visual issues so QA scales without headcount.                </p>
-              </div>
-            </motion.div>
+              View projects
+            </Link>
+            <Link to={createPageUrl("About")} className="link font-semibold">
+              More about me
+            </Link>
           </div>
         </div>
+        <figure className="order-first md:order-none">
+          <img
+            src={avatarImg}
+            alt="Portrait of Omar Zoghayyer"
+            width={208}
+            height={208}
+            fetchpriority="high"
+            className="h-28 w-28 rounded-2xl object-cover ring-4 ring-highlight md:h-52 md:w-52 md:rotate-2"
+          />
+        </figure>
       </section>
 
-      {/* Currently Building — theOS */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <div className="relative rounded-2xl overflow-hidden"
-              style={{ background: "linear-gradient(135deg, #0a0f1e 0%, #0f1a35 50%, #0a0f1e 100%)" }}>
-              {/* Stars */}
-              <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(24)].map((_, i) => (
-                  <div key={i} className="absolute rounded-full bg-white"
-                    style={{
-                      left: `${(i * 37 + 11) % 100}%`,
-                      top: `${(i * 53 + 7) % 100}%`,
-                      width: i % 4 === 0 ? 2 : 1,
-                      height: i % 4 === 0 ? 2 : 1,
-                      opacity: 0.15 + (i % 5) * 0.06,
-                    }} />
-                ))}
-              </div>
-
-              <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 px-8 py-10">
-                {/* Orb */}
-                <div className="flex-shrink-0">
-                  <motion.div
-                    animate={{ scale: [1, 1.06, 1], boxShadow: ["0 0 30px rgba(59,130,246,0.4)", "0 0 60px rgba(59,130,246,0.7)", "0 0 30px rgba(59,130,246,0.4)"] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-16 h-16 rounded-full"
-                    style={{ background: "radial-gradient(circle at 38% 32%, #93c5fd 0%, #3b82f6 35%, #1e3a8a 75%, #060e3a 100%)" }}
-                  >
-                    <div className="w-full h-full rounded-full flex items-center justify-center">
-                      <div className="w-5 h-3 rounded-full bg-white/25" style={{ filter: "blur(3px)", transform: "translate(-4px,-6px)" }} />
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Text */}
-                <div className="flex-1 text-center md:text-left">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-3"
-                    style={{ background: "rgba(59,130,246,0.1)", border: "1px solid rgba(59,130,246,0.25)", color: "#93c5fd" }}>
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-                    Currently Building
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">theOS</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed max-w-xl">
-                    A from-scratch bare-metal Rust OS for mobile. No Android. No SIM. No phone number.
-                    Identity is Ed25519 keys. Comms route over a custom Kademlia DHT. Networking is WiFi-to-satellite.
-                    <span className="text-gray-300"> 547 tests green.</span>
-                  </p>
-                </div>
-
-                {/* CTA */}
-                <div className="flex-shrink-0">
-                  <Link to={createPageUrl("TheOS")}>
-                    <Button className="text-white px-6 py-2 text-sm border-0 whitespace-nowrap"
-                      style={{ background: "linear-gradient(135deg, #1e3a8a, #3b82f6)" }}>
-                      See theOS
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+      {/* Now */}
+      <section aria-labelledby="now-heading" className="mb-14 md:mb-16">
+        <h2 id="now-heading" className="sr-only">
+          What I'm doing now
+        </h2>
+        <ul className="grid gap-px overflow-hidden rounded-lg border border-line bg-line md:grid-cols-2">
+          {now.map((item) => (
+            <li key={item.label} className="bg-surface p-5 md:p-6">
+              <p className="eyebrow">{item.label}</p>
+              <p className="mt-2 text-[0.98rem] leading-relaxed text-ink">
+                {item.to ? (
+                  <Link to={item.to} className="link">
+                    {item.body}
                   </Link>
-                </div>
-              </div>
-
-              {/* Bottom gradient accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-px"
-                style={{ background: "linear-gradient(90deg, transparent, rgba(59,130,246,0.4), transparent)" }} />
-            </div>
-          </motion.div>
-        </div>
+                ) : (
+                  item.body
+                )}
+              </p>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      {/* Featured Case Studies */}
-      {featuredCases.length > 0 && (
-        <section className="py-24">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
-            <div className="flex justify-between items-end mb-12">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                  Featured Work
-                </h2>
-                <p className="text-lg text-gray-600">
-                  Real problems solved across gaming and platform tools
-                </p>
-              </div>
-              <Link to={createPageUrl("CaseStudies")}>
-                <Button variant="outline" className="hidden md:flex items-center gap-2">
-                  View All Cases
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
+      {/* Selected projects */}
+      <Section
+        id="projects-heading"
+        label="Projects"
+        title="Selected projects"
+        action={
+          <Link to={createPageUrl("Projects")} className="link text-[0.95rem] font-semibold">
+            All projects
+          </Link>
+        }
+      >
+        <ul className="grid gap-6 md:grid-cols-2">
+          {showcase.map((p) => (
+            <li key={p.slug}>
+              <ProjectTile project={p} />
+            </li>
+          ))}
+        </ul>
+      </Section>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredCases.map((caseStudy, index) => (
-                <motion.div
-                  key={caseStudy.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Link
-                    to={`${createPageUrl("CaseStudyDetail")}?id=${caseStudy.id}`}
-                    state={{ caseStudy }}
-                    className="block group"
-                  >
-                    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300">
-                      {caseStudy.thumbnail_url && (
-                        <div className="aspect-video bg-gradient-to-br from-blue-100 to-blue-50 overflow-hidden">
-                          <img
-                            src={caseStudy.thumbnail_url}
-                            alt={caseStudy.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                            width={640}
-                            height={360}
-                          />
-                        </div>
-                      )}
-                      <div className="p-6">
-                        <div className="flex items-center gap-2 mb-3">
-                          <span className="text-xs font-medium text-[var(--primary)] bg-blue-50 px-3 py-1 rounded-full">
-                            {caseStudy.industry}
-                          </span>
-                          <span className="text-xs text-gray-500">
-                            {caseStudy.company}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-semibold mb-2 group-hover:text-[var(--primary)] transition-colors">
-                          {caseStudy.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm line-clamp-2">
-                          {caseStudy.problem_statement}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="text-center mt-12 md:hidden">
-              <Link to={createPageUrl("CaseStudies")}>
-                <Button variant="outline" className="w-full sm:w-auto">
-                  View All Cases
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
+      {/* Writing, only once something is published */}
+      {recentPosts.length > 0 && (
+        <Section
+          id="writing-heading"
+          label="Writing"
+          title="Recent essays"
+          action={
+            <Link to={createPageUrl("Writing")} className="link text-[0.95rem] font-semibold">
+              All writing
+            </Link>
+          }
+        >
+          <ul className="space-y-4">
+            {recentPosts.map((post) => (
+              <li key={post.slug}>
+                <EntryCard
+                  to={`/writing/${post.slug}`}
+                  title={post.title}
+                  description={post.description}
+                  meta={formatDate(post.date)}
+                  badge={post.draft ? "Draft" : undefined}
+                />
+              </li>
+            ))}
+          </ul>
+        </Section>
       )}
 
-      {/* Contact CTA (neutral) */}
-      <section className="py-24 bg-gradient-to-br from-[var(--primary)] to-[var(--primary-light)] text-white">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Contact Me</h2>
-            <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-              Have a question, want to compare notes, or just say hi? I try to
-              respond within a day or two.
-            </p>
-            <Link to={createPageUrl("Contact")}>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-white text-[var(--primary)] hover:bg-gray-50 border-0 px-8 py-6 text-base"
-              >
-                Say Hello
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </Link>
-          </motion.div>
+      {/* Experience */}
+      <Section
+        id="experience-heading"
+        label="Work"
+        title="Where I've worked"
+        action={
+          <Link to={createPageUrl("About")} className="link text-[0.95rem] font-semibold">
+            More about me
+          </Link>
+        }
+      >
+        <ol className="divide-y divide-line border-y border-line">
+          {workProjects.map((p) => {
+            const href = projectHref(p);
+            const row = (
+              <div className="grid gap-1 py-5 sm:grid-cols-[10rem_1fr_auto] sm:items-baseline sm:gap-6">
+                <span className="text-sm text-muted">{p.period}</span>
+                <span>
+                  <span className="font-semibold text-ink">{p.company || p.org}</span>
+                  <span className="text-ink-2"> · {p.title === p.company ? p.role || p.org : p.title}</span>
+                </span>
+                {href && (
+                  <span className="hidden text-sm font-semibold text-accent sm:inline" aria-hidden="true">
+                    Read →
+                  </span>
+                )}
+              </div>
+            );
+            return (
+              <li key={p.slug}>
+                {href ? (
+                  <Link to={href} className="block hover:bg-accent-soft transition-colors sm:-mx-3 sm:px-3">
+                    {row}
+                  </Link>
+                ) : (
+                  <div className="sm:-mx-3 sm:px-3">{row}</div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </Section>
+
+      {/* Contact */}
+      <section
+        aria-labelledby="contact-heading"
+        className="mb-4 grid gap-6 rounded-2xl bg-ink p-8 text-white md:grid-cols-[1fr_auto] md:items-center md:p-10"
+      >
+        <div>
+          <h2 id="contact-heading" className="text-2xl text-white md:text-3xl">
+            Say hi.
+          </h2>
+          <p className="mt-2 text-white/70">
+            Want to talk about software, hardware, AI, or games? Email me at{" "}
+            <a href={`mailto:${site.email}`} className="text-white underline decoration-[#2dd4bf] underline-offset-[3px]">
+              {site.email}
+            </a>
+            .
+          </p>
         </div>
+        <SocialLinks className="text-white [&_svg]:h-5 [&_svg]:w-5" />
       </section>
     </div>
   );
